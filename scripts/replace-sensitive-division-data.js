@@ -39,6 +39,7 @@ const modified = divisions.map((div) => {
   let i = 0
   for (const email of div.emails) {
     let name = div.shortName.toLowerCase().replace(/\s+/g, '_')
+    name = replaceUmlauts(name)
     if (i) {
       name += '_' + i
     }
@@ -74,5 +75,19 @@ const modified = divisions.map((div) => {
 
   return div
 })
+
+function replaceUmlauts(str) {
+  const umlautMap = {
+    'ä': 'ae',
+    'ö': 'oe',
+    'ü': 'ue',
+    'ß': 'ss',
+    'Ä': 'Ae',
+    'Ö': 'Oe',
+    'Ü': 'Ue'
+  };
+
+  return str.replace(/[äöüßÄÖÜ]/g, match => umlautMap[match]);
+}
 
 await writeJsonFile(OUTPUT_FILE, modified)

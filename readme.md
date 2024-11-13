@@ -58,11 +58,11 @@ GET /any/v1/roles
 ### SAML API
 
 ```
-POST/ saml/party/newusers
+POST /saml/party/newusers
 ```
 
 ```
-POST/ saml/party/list
+POST /saml/party/list
 ```
 
 ---
