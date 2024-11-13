@@ -1,0 +1,42 @@
+name: Build and Push Docker Image to GHCR
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger only on tags that start with 'v'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Log in to GitHub Container Registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # GitHub token is automatically provided
+
+      # Extract version from tag (remove leading 'v')
+      - name: Extract version
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}:${{ env.VERSION }} -t ghcr.io/${{ github.repository }}:latest .
+
+      # Push the Docker image to GitHub Container Registry
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository }}:${{ env.VERSION }}
+
+      - name: Push Docker image with 'latest' tag
+        run: |
+          docker push ghcr.io/${{ github.repository }}:latest
