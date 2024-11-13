@@ -7,11 +7,15 @@ export const anyV1Router = express.Router()
 anyV1Router.get(
   '/divisions',
   ash(async (req, res) => {
-    const divisions = await getDivisions()
+    const divisions = await readDataFile('divisions.json')
     res.send(divisions)
   })
 )
 
-function getDivisions() {
-  return readDataFile('divisions.json')
-}
+anyV1Router.get(
+  '/roles',
+  ash(async (req, res) => {
+    const roles = await readDataFile('roles.json')
+    res.send(roles)
+  })
+)

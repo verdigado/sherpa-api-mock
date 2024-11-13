@@ -7,7 +7,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
  * @param {String} path - relative path
  */
 export function readDataFile(path) {
-  const fullPath = `${__dirname}/../data/${path}`
+  const fullPath = `${__dirname}../data/${path}`
   return fs
     .readFile(fullPath, { encoding: 'utf-8' })
     .then((text) => JSON.parse(text))
