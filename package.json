@@ -1,0 +1,26 @@
+{
+  "name": "sherpa-api-mock",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Mock implementation of the Sherpa API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon --watch src src/main.js",
+    "format": "prettier --write src",
+    "docker:build": "docker build . -t verdigado/sherpa-api-mock:latest",
+    "docker:run": "docker run --env-file ./.env -d -p 5000:5000 verdigado/sherpa-api-mock:latest",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
