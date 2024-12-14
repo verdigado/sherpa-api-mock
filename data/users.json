@@ -1,31 +1,59 @@
 [
   {
-      "toType": "SamlSynchronizationPartyTO",
-      "id": "100000",
-      "ownerIdentifier": "10903700",
-      "ownerId": "9373",
-      "createdOn": "2015-04-01T12:00:00+0200",
-      "lastModifiedOn": "2024-11-01T13:00:00+0100",
-      "memberships": [
-          {
-              "toType": "SamlSynchronizationMembershipTO",
-              "id": "5600812",
-              "ownerIdentifier": "10903700",
-              "memberOfStructureIdentifier": "10903700"
-          }
+    "toType": "SamlSynchronizationPartyTO",
+    "id": "100000",
+    "personalId": "100",
+    "ownerIdentifier": "10903700",
+    "ownerId": "9373",
+    "createdOn": "2015-04-01T12:00:00+0200",
+    "lastModifiedOn": "2024-11-01T13:00:00+0100",
+    "memberships": [
+      {
+        "toType": "SamlSynchronizationMembershipTO",
+        "id": "5600812",
+        "ownerIdentifier": "10903700",
+        "memberOfStructureIdentifier": "10903700",
+        "joinedAt": "2024-01-01T12:33:41.123Z",
+        "exitedAt": null
+      }
+    ],
+    "roles": [
+      {
+        "toType": "SamlSynchronizationRoleAssignmentTO",
+        "id": "21980056",
+        "ownerIdentifier": "10903700",
+        "tags": null,
+        "roleId": "585153",
+        "delegatedByOrganizationIdentifier": null
+      }
+    ],
+    "name1": "John",
+    "name2": "Doe",
+    "email": "john.doe@example.com",
+    "achievements": ["Silberne Sonnenblume"],
+    "formValues": {
+      "emails": ["john.doe@example.com"],
+      "phoneNumbers": [
+        {
+          "id": "12345",
+          "country": "+49",
+          "number": "17712341234"
+        }
       ],
-      "roles": [
-          {
-              "toType": "SamlSynchronizationRoleAssignmentTO",
-              "id": "21980056",
-              "ownerIdentifier": "10903700",
-              "tags": null,
-              "roleId": "585153",
-              "delegatedByOrganizationIdentifier": null
-          }
+      "messengers": [
+        {
+          "id": "123456",
+          "type": "threema",
+          "externalId": "GAvh15G12512125H"
+        }
       ],
-      "name1": "John",
-      "name2": "Doe",
-      "email": "john.doe@example.com"
+      "socialMedia": [
+        {
+          "id": "123457",
+          "type": "facebook",
+          "url": "https://twitter.com/johndoe"
+        }
+      ]
+    }
   }
 ]

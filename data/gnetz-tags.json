@@ -1,0 +1,818 @@
+[
+  {
+      "id": "97",
+      "externalId": "14013847",
+      "type": "interest",
+      "tag": "Arbeit & Beschäftigung"
+  },
+  {
+      "id": "102",
+      "externalId": "2680262",
+      "type": "interest",
+      "tag": "Bundesarbeitsgemeinschaften"
+  },
+  {
+      "id": "110",
+      "externalId": "14013864",
+      "type": "interest",
+      "tag": "Bund & Länder"
+  },
+  {
+      "id": "117",
+      "externalId": "88761",
+      "type": "interest",
+      "tag": "Bürger*innenrechte"
+  },
+  {
+      "id": "120",
+      "externalId": "88763",
+      "type": "interest",
+      "tag": "Demokratie & Gesellschaft"
+  },
+  {
+      "id": "127",
+      "externalId": "88766",
+      "type": "interest",
+      "tag": "Einwanderungspolitik"
+  },
+  {
+      "id": "140",
+      "externalId": "14013842",
+      "type": "interest",
+      "tag": "Flucht, Migration & Integration"
+  },
+  {
+      "id": "143",
+      "externalId": "14013867",
+      "type": "interest",
+      "tag": "Fraktion & Koalition"
+  },
+  {
+      "id": "144",
+      "externalId": "14013840",
+      "type": "interest",
+      "tag": "Frauen & Männer"
+  },
+  {
+      "id": "149",
+      "externalId": "14013861",
+      "type": "interest",
+      "tag": "Gesundheit & Ernährung"
+  },
+  {
+      "id": "157",
+      "externalId": "14013845",
+      "type": "interest",
+      "tag": "Haushalt & Finanzen"
+  },
+  {
+      "id": "170",
+      "externalId": "14013841",
+      "type": "interest",
+      "tag": "Jung & Alt"
+  },
+  {
+      "id": "184",
+      "externalId": "14013858",
+      "type": "interest",
+      "tag": "Kultur & Freizeit"
+  },
+  {
+      "id": "185",
+      "externalId": "2680266",
+      "type": "interest",
+      "tag": "Landesarbeitsgemeinschaften"
+  },
+  {
+      "id": "190",
+      "externalId": "14013863",
+      "type": "interest",
+      "tag": "Ländlicher Raum & Region"
+  },
+  {
+      "id": "214",
+      "externalId": "2680222",
+      "type": "interest",
+      "tag": "Organisatorisches"
+  },
+  {
+      "id": "221",
+      "externalId": "14013848",
+      "type": "interest",
+      "tag": "Planen & Bauen"
+  },
+  {
+      "id": "226",
+      "externalId": "14013866",
+      "type": "interest",
+      "tag": "Rat & Rathaus"
+  },
+  {
+      "id": "237",
+      "externalId": "2680224",
+      "type": "interest",
+      "tag": "Schulungen & Weiterbildungen"
+  },
+  {
+      "id": "238",
+      "externalId": "12804520",
+      "type": "interest",
+      "tag": "Senior*innenpolitik"
+  },
+  {
+      "id": "243",
+      "externalId": "14013843",
+      "type": "interest",
+      "tag": "Sicherheit, Recht & Ordnung"
+  },
+  {
+      "id": "70",
+      "externalId": "500",
+      "type": "skill",
+      "tag": "Grafikdesign"
+  },
+  {
+      "id": "71",
+      "externalId": "501",
+      "type": "skill",
+      "tag": "Handwerkliche Arbeiten erledigen"
+  },
+  {
+      "id": "72",
+      "externalId": "502",
+      "type": "skill",
+      "tag": "Journalist*in"
+  },
+  {
+      "id": "73",
+      "externalId": "503",
+      "type": "skill",
+      "tag": "Kinderbetreuung anbieten"
+  },
+  {
+      "id": "74",
+      "externalId": "504",
+      "type": "skill",
+      "tag": "Kochen & Backen"
+  },
+  {
+      "id": "75",
+      "externalId": "505",
+      "type": "skill",
+      "tag": "Lasten transportieren"
+  },
+  {
+      "id": "76",
+      "externalId": "506",
+      "type": "skill",
+      "tag": "Professionell photographieren"
+  },
+  {
+      "id": "77",
+      "externalId": "507",
+      "type": "skill",
+      "tag": "Programmieren"
+  },
+  {
+      "id": "78",
+      "externalId": "508",
+      "type": "skill",
+      "tag": "Soziale Medien betreuen"
+  },
+  {
+      "id": "79",
+      "externalId": "509",
+      "type": "skill",
+      "tag": "Trainings / Coaching anbieten"
+  },
+  {
+      "id": "80",
+      "externalId": "510",
+      "type": "skill",
+      "tag": "Veranstaltungen moderieren"
+  },
+  {
+      "id": "81",
+      "externalId": "511",
+      "type": "skill",
+      "tag": "Veranstaltungen organisieren"
+  },
+  {
+      "id": "82",
+      "externalId": "512",
+      "type": "skill",
+      "tag": "Videos schneiden und bearbeiten"
+  },
+  {
+      "id": "83",
+      "externalId": "513",
+      "type": "skill",
+      "tag": "Videostreaming durchführen"
+  },
+  {
+      "id": "84",
+      "externalId": "514",
+      "type": "skill",
+      "tag": "Wahlkampfstände machen"
+  },
+  {
+      "id": "85",
+      "externalId": "515",
+      "type": "skill",
+      "tag": "Webseite erstellen & betreuen"
+  },
+  {
+      "id": "86",
+      "externalId": "14013854",
+      "type": "interest",
+      "tag": "Abfall"
+  },
+  {
+      "id": "88",
+      "externalId": "14003317",
+      "type": "interest",
+      "tag": "AKP-Zeitschriften"
+  },
+  {
+      "id": "90",
+      "externalId": "2680272",
+      "type": "interest",
+      "tag": "Aktionen"
+  },
+  {
+      "id": "98",
+      "externalId": "603",
+      "type": "interest",
+      "tag": "Argumentationshilfen"
+  },
+  {
+      "id": "99",
+      "externalId": "88754",
+      "type": "interest",
+      "tag": "Asylpolitik"
+  },
+  {
+      "id": "100",
+      "externalId": "88755",
+      "type": "interest",
+      "tag": "Atomausstieg"
+  },
+  {
+      "id": "101",
+      "externalId": "88756",
+      "type": "interest",
+      "tag": "Außenpolitik"
+  },
+  {
+      "id": "105",
+      "externalId": "88758",
+      "type": "interest",
+      "tag": "Behindertenpolitik"
+  },
+  {
+      "id": "106",
+      "externalId": "2680234",
+      "type": "interest",
+      "tag": "Beiträge & Spenden"
+  },
+  {
+      "id": "107",
+      "externalId": "88734",
+      "type": "interest",
+      "tag": "Beteiligung"
+  },
+  {
+      "id": "108",
+      "externalId": "88759",
+      "type": "interest",
+      "tag": "Bildung"
+  },
+  {
+      "id": "111",
+      "externalId": "2680246",
+      "type": "interest",
+      "tag": "Bundesebene"
+  },
+  {
+      "id": "112",
+      "externalId": "2680261",
+      "type": "interest",
+      "tag": "Bundesfrauenrat"
+  },
+  {
+      "id": "113",
+      "externalId": "2680258",
+      "type": "interest",
+      "tag": "Bundesparteitag"
+  },
+  {
+      "id": "114",
+      "externalId": "16051290",
+      "type": "interest",
+      "tag": "Bundesschiedsgericht"
+  },
+  {
+      "id": "115",
+      "externalId": "2643459",
+      "type": "interest",
+      "tag": "Bundestagswahlen"
+  },
+  {
+      "id": "116",
+      "externalId": "2680259",
+      "type": "interest",
+      "tag": "Bundesvorstand"
+  },
+  {
+      "id": "119",
+      "externalId": "2680229",
+      "type": "interest",
+      "tag": "Datenschutz"
+  },
+  {
+      "id": "123",
+      "externalId": "88764",
+      "type": "interest",
+      "tag": "Digitalisierung"
+  },
+  {
+      "id": "125",
+      "externalId": "610",
+      "type": "interest",
+      "tag": "Direktkandidierende"
+  },
+  {
+      "id": "126",
+      "externalId": "88765",
+      "type": "interest",
+      "tag": "Drogenpolitik"
+  },
+  {
+      "id": "128",
+      "externalId": "88767",
+      "type": "interest",
+      "tag": "Elektromobilität"
+  },
+  {
+      "id": "129",
+      "externalId": "14013856",
+      "type": "interest",
+      "tag": "Energie"
+  },
+  {
+      "id": "130",
+      "externalId": "88769",
+      "type": "interest",
+      "tag": "Entwicklungspolitik"
+  },
+  {
+      "id": "132",
+      "externalId": "88771",
+      "type": "interest",
+      "tag": "Europa"
+  },
+  {
+      "id": "134",
+      "externalId": "2680244",
+      "type": "interest",
+      "tag": "Europäische Ebene"
+  },
+  {
+      "id": "135",
+      "externalId": "2643458",
+      "type": "interest",
+      "tag": "Europawahlen"
+  },
+  {
+      "id": "136",
+      "externalId": "88772",
+      "type": "interest",
+      "tag": "Familie"
+  },
+  {
+      "id": "142",
+      "externalId": "15182836",
+      "type": "interest",
+      "tag": "Forstwirtschaft"
+  },
+  {
+      "id": "145",
+      "externalId": "88775",
+      "type": "interest",
+      "tag": "Frauenpolitik"
+  },
+  {
+      "id": "146",
+      "externalId": "88776",
+      "type": "interest",
+      "tag": "Friedenspolitik"
+  },
+  {
+      "id": "147",
+      "externalId": "14013839",
+      "type": "interest",
+      "tag": "Gegen Rechts"
+  },
+  {
+      "id": "148",
+      "externalId": "88777",
+      "type": "interest",
+      "tag": "Geschlechtergerechtigkeit"
+  },
+  {
+      "id": "150",
+      "externalId": "88779",
+      "type": "interest",
+      "tag": "Globalisierung"
+  },
+  {
+      "id": "152",
+      "externalId": "60390",
+      "type": "interest",
+      "tag": "Grafik & Design"
+  },
+  {
+      "id": "158",
+      "externalId": "14013834",
+      "type": "interest",
+      "tag": "Hilfe"
+  },
+  {
+      "id": "160",
+      "externalId": "2680268",
+      "type": "interest",
+      "tag": "Informationen"
+  },
+  {
+      "id": "164",
+      "externalId": "14013849",
+      "type": "interest",
+      "tag": "Infrastruktur"
+  },
+  {
+      "id": "165",
+      "externalId": "96658",
+      "type": "interest",
+      "tag": "Inhalte & Positionen"
+  },
+  {
+      "id": "166",
+      "externalId": "88782",
+      "type": "interest",
+      "tag": "Innenpolitik"
+  },
+  {
+      "id": "169",
+      "externalId": "88785",
+      "type": "interest",
+      "tag": "Jugendpolitik"
+  },
+  {
+      "id": "171",
+      "externalId": "2643465",
+      "type": "interest",
+      "tag": "Kampagne & Material"
+  },
+  {
+      "id": "173",
+      "externalId": "2680235",
+      "type": "interest",
+      "tag": "Kassenführung & Rechenschaftsbericht"
+  },
+  {
+      "id": "174",
+      "externalId": "88786",
+      "type": "interest",
+      "tag": "Kinder"
+  },
+  {
+      "id": "175",
+      "externalId": "14013857",
+      "type": "interest",
+      "tag": "Klima"
+  },
+  {
+      "id": "176",
+      "externalId": "88787",
+      "type": "interest",
+      "tag": "Klimaschutz"
+  },
+  {
+      "id": "178",
+      "externalId": "2680250",
+      "type": "interest",
+      "tag": "Kommunales"
+  },
+  {
+      "id": "179",
+      "externalId": "2643463",
+      "type": "interest",
+      "tag": "Kommunalwahlen"
+  },
+  {
+      "id": "181",
+      "externalId": "88736",
+      "type": "interest",
+      "tag": "Kommunikation"
+  },
+  {
+      "id": "182",
+      "externalId": "622",
+      "type": "interest",
+      "tag": "Kreisverbände"
+  },
+  {
+      "id": "186",
+      "externalId": "2680260",
+      "type": "interest",
+      "tag": "Länderrat"
+  },
+  {
+      "id": "187",
+      "externalId": "2680249",
+      "type": "interest",
+      "tag": "Landesebene"
+  },
+  {
+      "id": "188",
+      "externalId": "2680264",
+      "type": "interest",
+      "tag": "Landesparteitag"
+  },
+  {
+      "id": "189",
+      "externalId": "2680265",
+      "type": "interest",
+      "tag": "Landesvorstand"
+  },
+  {
+      "id": "191",
+      "externalId": "2643460",
+      "type": "interest",
+      "tag": "Landtagswahlen"
+  },
+  {
+      "id": "192",
+      "externalId": "88790",
+      "type": "interest",
+      "tag": "Landwirtschaft"
+  },
+  {
+      "id": "193",
+      "externalId": "88809",
+      "type": "interest",
+      "tag": "LGBTQI*"
+  },
+  {
+      "id": "197",
+      "externalId": "88792",
+      "type": "interest",
+      "tag": "Menschenrechte"
+  },
+  {
+      "id": "201",
+      "externalId": "60387",
+      "type": "interest",
+      "tag": "Mitgliedermanagement"
+  },
+  {
+      "id": "203",
+      "externalId": "88794",
+      "type": "interest",
+      "tag": "Mobilität"
+  },
+  {
+      "id": "206",
+      "externalId": "4665818",
+      "type": "interest",
+      "tag": "Nachhaltigkeit"
+  },
+  {
+      "id": "207",
+      "externalId": "88795",
+      "type": "interest",
+      "tag": "Naturschutz"
+  },
+  {
+      "id": "208",
+      "externalId": "88796",
+      "type": "interest",
+      "tag": "Netzpolitik"
+  },
+  {
+      "id": "210",
+      "externalId": "2680277",
+      "type": "interest",
+      "tag": "Neumitglieder"
+  },
+  {
+      "id": "213",
+      "externalId": "2680352",
+      "type": "interest",
+      "tag": "Onlinemedien"
+  },
+  {
+      "id": "216",
+      "externalId": "634",
+      "type": "interest",
+      "tag": "Ortsverbände"
+  },
+  {
+      "id": "217",
+      "externalId": "635",
+      "type": "interest",
+      "tag": "Parteitag"
+  },
+  {
+      "id": "218",
+      "externalId": "2680236",
+      "type": "interest",
+      "tag": "Personal"
+  },
+  {
+      "id": "220",
+      "externalId": "88798",
+      "type": "interest",
+      "tag": "Pflege"
+  },
+  {
+      "id": "222",
+      "externalId": "2645010",
+      "type": "interest",
+      "tag": "Presse & Öffentlichkeitsarbeit"
+  },
+  {
+      "id": "224",
+      "externalId": "638",
+      "type": "interest",
+      "tag": "Programm"
+  },
+  {
+      "id": "227",
+      "externalId": "88799",
+      "type": "interest",
+      "tag": "Rechtsextremismus"
+  },
+  {
+      "id": "230",
+      "externalId": "88801",
+      "type": "interest",
+      "tag": "Religion"
+  },
+  {
+      "id": "231",
+      "externalId": "88802",
+      "type": "interest",
+      "tag": "Rente"
+  },
+  {
+      "id": "234",
+      "externalId": "2680221",
+      "type": "interest",
+      "tag": "Satzungen & Strukturen"
+  },
+  {
+      "id": "235",
+      "externalId": "640",
+      "type": "interest",
+      "tag": "Schiedsgericht"
+  },
+  {
+      "id": "241",
+      "externalId": "2680232",
+      "type": "interest",
+      "tag": "Sherpa"
+  },
+  {
+      "id": "248",
+      "externalId": "2680359",
+      "type": "interest",
+      "tag": "Soziale Medien"
+  },
+  {
+      "id": "251",
+      "externalId": "88804",
+      "type": "interest",
+      "tag": "Sport"
+  },
+  {
+      "id": "252",
+      "externalId": "88805",
+      "type": "interest",
+      "tag": "Stadtentwicklung"
+  },
+  {
+      "id": "253",
+      "externalId": "88806",
+      "type": "interest",
+      "tag": "Steuerpolitik"
+  },
+  {
+      "id": "257",
+      "externalId": "88808",
+      "type": "interest",
+      "tag": "Tierschutz"
+  },
+  {
+      "id": "258",
+      "externalId": "88810",
+      "type": "interest",
+      "tag": "Umwelt"
+  },
+  {
+      "id": "259",
+      "externalId": "648",
+      "type": "interest",
+      "tag": "Veranstaltungen"
+  },
+  {
+      "id": "262",
+      "externalId": "14013851",
+      "type": "interest",
+      "tag": "Verkehr"
+  },
+  {
+      "id": "263",
+      "externalId": "2932798",
+      "type": "interest",
+      "tag": "Verleih"
+  },
+  {
+      "id": "265",
+      "externalId": "15182834",
+      "type": "interest",
+      "tag": "Vielfalt"
+  },
+  {
+      "id": "274",
+      "externalId": "88813",
+      "type": "interest",
+      "tag": "Wirtschaft"
+  },
+  {
+      "id": "275",
+      "externalId": "88814",
+      "type": "interest",
+      "tag": "Wissenschaft"
+  },
+  {
+      "id": "276",
+      "externalId": "14013850",
+      "type": "interest",
+      "tag": "Wohnen"
+  },
+  {
+      "id": "277",
+      "externalId": "88816",
+      "type": "interest",
+      "tag": "Zeitpolitik"
+  },
+  {
+      "id": "250",
+      "externalId": "14013860",
+      "type": "interest",
+      "tag": "Sozialpolitik"
+  },
+  {
+      "id": "255",
+      "externalId": "2680228",
+      "type": "interest",
+      "tag": "Gremien"
+  },
+  {
+      "id": "261",
+      "externalId": "88811",
+      "type": "interest",
+      "tag": "Verbraucher*innenschutz"
+  },
+  {
+      "id": "266",
+      "externalId": "2680350",
+      "type": "interest",
+      "tag": "Vorlagen & Muster"
+  },
+  {
+      "id": "267",
+      "externalId": "653",
+      "type": "interest",
+      "tag": "Wahlen & Wahlkampf"
+  },
+  {
+      "id": "270",
+      "externalId": "14013855",
+      "type": "interest",
+      "tag": "Wasser & Abwasser"
+  },
+  {
+      "id": "271",
+      "externalId": "15182837",
+      "type": "interest",
+      "tag": "Wasser- & Hafenwirtschaft"
+  },
+  {
+      "id": "278",
+      "externalId": "88737",
+      "type": "interest",
+      "tag": "Zusammenarbeit & Netzwerke"
+  }
+]
