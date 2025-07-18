@@ -1,0 +1,39 @@
+{
+  "id": "100002",
+  "personalId": "102",
+  "name1": "Jan",
+  "name2": "Beck",
+  "email": "jan.beck@example.com",
+  "ownerId": "5919",
+  "ownerIdentifier": "10300100",
+  "createdOn": "2020-01-01T12:00:00+0200",
+  "lastModifiedOn": "2024-11-01T13:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "2",
+      "ownerIdentifier": "10300100",
+      "memberOfStructureIdentifier": "10300100",
+      "joinedAt": "2024-01-01T12:00:00.000Z",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "2",
+      "ownerIdentifier": "10300100",
+      "tags": null,
+      "roleId": "7555238",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "100005",
+  "personalId": "105",
+  "name1": "Luz",
+  "name2": "May",
+  "email": "luz.may@example.com",
+  "ownerId": "5919",
+  "ownerIdentifier": "10300100",
+  "createdOn": "2020-01-01T12:00:00+0200",
+  "lastModifiedOn": "2024-11-01T13:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "5",
+      "ownerIdentifier": "10000000",
+      "tags": [
+        {
+          "toType": "SamlGenericTagTO",
+          "id": "8957542",
+          "tagId": "8957541",
+          "name": "netz.gruene-Zugang o. Mitgliedschaft"
+        }
+      ],
+      "roleId": "8903198",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "100004",
+  "personalId": "104",
+  "name1": "Tom",
+  "name2": "Graf",
+  "email": "tom.graf@example.com",
+  "ownerId": "5919",
+  "ownerIdentifier": "10300100",
+  "createdOn": "2020-01-01T12:00:00+0200",
+  "lastModifiedOn": "2024-11-01T13:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "4",
+      "ownerIdentifier": "10300100",
+      "memberOfStructureIdentifier": "10300100",
+      "joinedAt": "2020-01-01T12:00:00+0200",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "4",
+      "ownerIdentifier": "10000000",
+      "tags": null,
+      "roleId": "7555236",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}
