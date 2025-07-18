@@ -1,7 +1,7 @@
 import express from 'express'
 import ash from 'express-async-handler'
 import lodash from 'lodash'
-import { readDataFile, writeDataFile } from '../utils.js'
+import { readDataFile, readDataDir, writeDataFile } from '../utils.js'
 
 export const gnetzV2Router = express.Router()
 
@@ -26,7 +26,7 @@ gnetzV2Router.post(
       profiles = profiles.filter((p) => userIds.includes(p.userId))
     }
 
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const roles = await readDataFile('roles.json')
     res.send(buildProfilesResponse(profiles, users, roles))
   })
@@ -37,7 +37,7 @@ gnetzV2Router.post(
   '/profiles',
   ash(async (req, res) => {
     const { id, userId, username, email, privacy } = req.body
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const profiles = await readDataFile('profiles.json')
 
     const user = users.find((u) => u.id === userId)
@@ -96,7 +96,7 @@ gnetzV2Router.put(
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const user = users.find((u) => u.id === profile.userId)
     if (!user) {
       return res
@@ -133,7 +133,7 @@ gnetzV2Router.put(
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const user = users.find((u) => u.id === profile.userId)
     if (!user) {
       return res
@@ -159,7 +159,7 @@ gnetzV2Router.get(
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const user = users.find((u) => u.id === profile.userId)
     if (!user) {
       return res
@@ -185,7 +185,7 @@ gnetzV2Router.get(
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataFile('users.json')
+    const users = await readDataDir('users')
     const user = users.find((u) => u.id === profile.userId)
     if (!user) {
       return res

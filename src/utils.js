@@ -14,6 +14,23 @@ export function readDataFile(path) {
 }
 
 /**
+ * Read a file from {projectRoot}/data and parse it as json
+ * @param {String} path - relative path
+ */
+export function readDataDir(path) {
+  const fullPath = `${__dirname}../data/${path}`
+  return fs.readdir(fullPath).then(async (files) => {
+    const jsonFiles = files.filter((file) => file.endsWith('.json'))
+    const results = await Promise.all(
+      jsonFiles.map((file) =>
+        fs.readFile(`${fullPath}/${file}`, { encoding: 'utf-8' }).then(JSON.parse)
+      )
+    )
+    return results
+  })
+}
+
+/**
  * Encode given data as json and write it to {projectRoot}/data
  * @param {String} path - relative path
  */

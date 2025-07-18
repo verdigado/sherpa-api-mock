@@ -1,7 +1,7 @@
 import express from 'express'
 import lodash from 'lodash'
 import ash from 'express-async-handler'
-import { readDataFile } from '../utils.js'
+import { readDataDir } from '../utils.js'
 
 export const samlRouter = express.Router()
 
@@ -38,7 +38,7 @@ samlRouter.post(
 )
 
 function getUsers() {
-  return readDataFile('users.json')
+  return readDataDir('users')
 }
 
 /**
