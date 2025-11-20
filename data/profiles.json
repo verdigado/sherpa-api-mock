@@ -1,1 +1,82 @@
-[]
+[
+    {
+        "id": "89015b5a-a4e9-435e-a137-6a21bff4b3e6",
+        "userId": "100001",
+        "username": "doejohn",
+        "email": "john.doe@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "8d9f4aae-c952-4ab5-94c7-2592e7ad2a79",
+        "userId": "100002",
+        "username": "beckjan",
+        "email": "jan.beck@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "1b894c50-bdcb-40bb-b8c1-a1b264124f4d",
+        "userId": "100003",
+        "username": "rotheva",
+        "email": "eva.roth@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "cea17ecb-b5cd-4187-b036-a06b6e9a4f6b",
+        "userId": "100004",
+        "username": "graftom",
+        "email": "tom.graf@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "a65ebe94-7ba2-4da6-bf1f-d035532af41c",
+        "userId": "100005",
+        "username": "mayluz",
+        "email": "luz.may@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    }
+]
