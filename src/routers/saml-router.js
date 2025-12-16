@@ -19,7 +19,7 @@ samlRouter.post(
         name1,
         name2,
         email,
-      })).slice(0, 10)
+      }))
 
 
     res.send(newUsers)
