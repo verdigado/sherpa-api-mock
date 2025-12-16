@@ -78,5 +78,197 @@
         "messengers": [],
         "socialMedia": [],
         "tags": []
+    },
+    {
+        "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "userId": "100006",
+        "username": "mullanna",
+        "email": "anna.mueller@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100007",
+        "username": "schmthom",
+        "email": "thomas.schmidt@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100008",
+        "username": "webemari",
+        "email": "maria.weber@example.com",
+        "privacy": {
+            "chatbegruenung": "kv_wide",
+            "email": "kv_wide",
+            "overall": "kv_wide"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b812-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100009",
+        "username": "fiscpete",
+        "email": "peter.fischer@example.com",
+        "privacy": {
+            "chatbegruenung": "private",
+            "email": "private",
+            "overall": "private"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b813-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100010",
+        "username": "wagnsar",
+        "email": "sarah.wagner@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b814-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100011",
+        "username": "beckmic",
+        "email": "michael.becker@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b815-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100012",
+        "username": "schuljul",
+        "email": "julia.schulz@example.com",
+        "privacy": {
+            "chatbegruenung": "kv_wide",
+            "email": "kv_wide",
+            "overall": "kv_wide"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b816-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100013",
+        "username": "hoffstef",
+        "email": "stefan.hoffmann@example.com",
+        "privacy": {
+            "chatbegruenung": "private",
+            "email": "private",
+            "overall": "private"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b817-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100014",
+        "username": "kochlisa",
+        "email": "lisa.koch@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b818-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100015",
+        "username": "richdavi",
+        "email": "david.richter@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b819-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100016",
+        "username": "kleinina",
+        "email": "nina.klein@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "6ba7b81a-9dad-11d1-80b4-00c04fd430c8",
+        "userId": "100017",
+        "username": "wolfmart",
+        "email": "martin.wolf@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
     }
 ]

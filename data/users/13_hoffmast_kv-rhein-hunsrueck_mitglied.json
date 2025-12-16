@@ -1,0 +1,30 @@
+{
+  "id": "100013",
+  "personalId": "113",
+  "name1": "Stefan",
+  "name2": "Hoffmann",
+  "email": "stefan.hoffmann@example.com",
+  "ownerId": "13081",
+  "ownerIdentifier": "11102700",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "13",
+      "ownerIdentifier": "11102700",
+      "memberOfStructureIdentifier": "11102700",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

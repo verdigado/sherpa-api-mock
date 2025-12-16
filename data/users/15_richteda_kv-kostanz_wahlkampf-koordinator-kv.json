@@ -1,0 +1,39 @@
+{
+  "id": "100015",
+  "personalId": "115",
+  "name1": "David",
+  "name2": "Richter",
+  "email": "david.richter@example.com",
+  "ownerId": "2828",
+  "ownerIdentifier": "10102100",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "15",
+      "ownerIdentifier": "10102100",
+      "memberOfStructureIdentifier": "10102100",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "15",
+      "ownerIdentifier": "10102100",
+      "tags": null,
+      "roleId": "7555238",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}
