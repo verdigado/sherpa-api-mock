@@ -270,5 +270,37 @@
         "messengers": [],
         "socialMedia": [],
         "tags": []
+    },
+    {
+        "id": "c079d244-9a69-4eee-81cd-40cd59778f84",
+        "userId": "100018",
+        "username": "webernad",
+        "email": "nadine.weber@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
+    },
+    {
+        "id": "b9c73052-aae0-4713-a646-987bb2117c4f",
+        "userId": "100019",
+        "username": "nussbami",
+        "email": "michael.nussbaum@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
     }
 ]

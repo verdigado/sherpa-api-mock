@@ -1,0 +1,39 @@
+{
+  "id": "100019",
+  "personalId": "119",
+  "name1": "Michael",
+  "name2": "Nussbaum",
+  "email": "michael.nussbaum@example.com",
+  "ownerId": "5919",
+  "ownerIdentifier": "10300100",
+  "createdOn": "2026-01-05T12:00:00+0100",
+  "lastModifiedOn": "2026-01-05T12:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "19",
+      "ownerIdentifier": "10300100",
+      "memberOfStructureIdentifier": "10300100",
+      "joinedAt": "2026-01-05T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "19",
+      "ownerIdentifier": "10300000",
+      "tags": null,
+      "roleId": "5891385",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

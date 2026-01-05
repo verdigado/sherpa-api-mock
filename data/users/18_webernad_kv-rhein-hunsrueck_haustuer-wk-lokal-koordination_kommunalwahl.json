@@ -1,0 +1,39 @@
+{
+  "id": "100018",
+  "personalId": "118",
+  "name1": "Nadine",
+  "name2": "Weber",
+  "email": "nadine.weber@example.com",
+  "ownerId": "13081",
+  "ownerIdentifier": "11102700",
+  "createdOn": "2026-01-05T12:00:00+0100",
+  "lastModifiedOn": "2026-01-05T12:00:00+0100",
+  "toType": "SamlSynchronizationPartyTO",
+  "memberships": [
+    {
+      "toType": "SamlSynchronizationMembershipTO",
+      "id": "18",
+      "ownerIdentifier": "11102700",
+      "memberOfStructureIdentifier": "11102700",
+      "joinedAt": "2026-01-05T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "toType": "SamlSynchronizationRoleAssignmentTO",
+      "id": "18",
+      "ownerIdentifier": "11102700",
+      "tags": null,
+      "roleId": "11798677",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}
