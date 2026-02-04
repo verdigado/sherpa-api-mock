@@ -302,5 +302,21 @@
         "messengers": [],
         "socialMedia": [],
         "tags": []
+    },
+    {
+        "id": "7594dd4a-bb56-466c-9ea6-02015ba81bfb",
+        "userId": "100020",
+        "username": "schneima",
+        "email": "maximilian.schneider@example.com",
+        "privacy": {
+            "chatbegruenung": "public",
+            "email": "public",
+            "overall": "public"
+        },
+        "image": {},
+        "phoneNumbers": [],
+        "messengers": [],
+        "socialMedia": [],
+        "tags": []
     }
 ]
