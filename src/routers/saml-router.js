@@ -1,26 +1,23 @@
 import express from 'express'
 import lodash from 'lodash'
 import ash from 'express-async-handler'
-import { readDataDir } from '../utils.js'
+import { users } from '../db.js'
 
 export const samlRouter = express.Router()
-
 
 samlRouter.post(
   '/newusers',
   ash(async (req, res) => {
     const { from, to } = req.body
 
-    const users = await getUsers()
-    const newUsers = users
-      .map(({ id, name1, name2, email }) => ({
-        toType: 'SamlOnboardingPartyTO',
-        id,
-        name1,
-        name2,
-        email,
-      }))
-
+    const allUsers = getUsers()
+    const newUsers = allUsers.map(({ id, name1, name2, email }) => ({
+      toType: 'SamlOnboardingPartyTO',
+      id,
+      name1,
+      name2,
+      email,
+    }))
 
     res.send(newUsers)
   })
@@ -31,14 +28,14 @@ samlRouter.post(
   ash(async (req, res) => {
     const { partyIdList } = req.body
 
-    const users = await getUsers()
-    const _users = users.filter((user) => partyIdList.includes(user.id))
+    const allUsers = getUsers()
+    const _users = allUsers.filter((user) => partyIdList.includes(user.id))
     res.send(buildUsersResponse(_users))
   })
 )
 
 function getUsers() {
-  return readDataDir('users')
+  return users.all()
 }
 
 /**
@@ -62,14 +59,16 @@ function buildUsersResponse(users) {
       // 'achievements',
       // 'formValues',
     ])
-    _user.memberships = user.memberships.map((m) => lodash.pick(m, [
-      'toType',
-      'id',
-      'ownerIdentifier',
-      'memberOfStructureIdentifier',
-      // 'joinedAt',
-      // 'exitedAt',
-    ]))
+    _user.memberships = user.memberships.map((m) =>
+      lodash.pick(m, [
+        'toType',
+        'id',
+        'ownerIdentifier',
+        'memberOfStructureIdentifier',
+        // 'joinedAt',
+        // 'exitedAt',
+      ])
+    )
     return _user
   })
 }

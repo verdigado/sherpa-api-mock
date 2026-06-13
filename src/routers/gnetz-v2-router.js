@@ -1,16 +1,14 @@
 import express from 'express'
 import ash from 'express-async-handler'
-import lodash from 'lodash'
-import { readDataFile, readDataDir, writeDataFile } from '../utils.js'
+import { readDataFile } from '../utils.js'
+import { profiles, users } from '../db.js'
 
 export const gnetzV2Router = express.Router()
 
 gnetzV2Router.get(
   '/profiles/ids',
   ash(async (req, res) => {
-    const profiles = await readDataFile('profiles.json')
-    const profileIds = profiles.map((p) => p.id)
-    res.send(profileIds)
+    res.send(profiles.allIds())
   })
 )
 
@@ -18,58 +16,36 @@ gnetzV2Router.post(
   '/profiles/list',
   ash(async (req, res) => {
     const { profileIds, userIds } = req.body
-    let profiles = await readDataFile('profiles.json')
-    if (profileIds?.length) {
-      profiles = profiles.filter((p) => profileIds.includes(p.id))
-    }
-    if (userIds?.length) {
-      profiles = profiles.filter((p) => userIds.includes(p.userId))
-    }
+    const matched = profiles.byFilters({ profileIds, userIds })
 
-    const users = await readDataDir('users')
+    const allUsers = users.all()
     const roles = await readDataFile('roles.json')
-    res.send(buildProfilesResponse(profiles, users, roles))
+    res.send(buildProfilesResponse(matched, allUsers, roles))
   })
 )
-
 
 gnetzV2Router.post(
   '/profiles',
   ash(async (req, res) => {
     const { id, userId, username, email, privacy } = req.body
-    const users = await readDataDir('users')
-    const profiles = await readDataFile('profiles.json')
 
-    const user = users.find((u) => u.id === userId)
+    const user = users.byId(userId)
     if (!user) {
       return res
         .status(400)
         .send({ message: 'cannot create profile, user does not exist' })
     }
 
-    const existing = profiles.find((p) => p.userId === userId)
-    if (existing) {
-      return res
-        .status(400)
-        .send({ message: 'user already has profile' })
+    let profile
+    try {
+      profile = profiles.insert({ id, userId, username, email, privacy })
+    } catch (err) {
+      if (err.code === 'PROFILE_EXISTS') {
+        return res.status(400).send({ message: 'user already has profile' })
+      }
+      throw err
     }
 
-    const profile = {
-      id,
-      userId,
-      username,
-      email,
-      privacy,
-      image: {},
-      phoneNumbers: [],
-      messengers: [],
-      socialMedia: [],
-      tags: [],
-    }
-
-    profiles.push(profile)
-
-    await writeDataFile('profiles.json', profiles)
     const roles = await readDataFile('roles.json')
     res.send(mapProfileDto(profile, user, roles))
   })
@@ -79,10 +55,8 @@ gnetzV2Router.post(
   '/profiles/delete',
   ash(async (req, res) => {
     const { profileIds, userIds } = req.body
-    let profiles = await readDataFile('profiles.json')
-    const [deleted, remaining] = lodash.partition(profiles, (p) => profileIds?.includes(p.id) || userIds?.includes(p.userId))
-    await writeDataFile('profiles.json', remaining)
-    res.send(deleted.map(({ id, userId }) => ({ id, userId })))
+    const deleted = profiles.deleteByIdsOrUserIds(profileIds, userIds)
+    res.send(deleted)
   })
 )
 
@@ -90,36 +64,22 @@ gnetzV2Router.put(
   '/profiles/:profileId',
   ash(async (req, res) => {
     const profileId = req.params.profileId
-    let profiles = await readDataFile('profiles.json')
-    const profile = profiles.find((p) => p.id === profileId)
+    const profile = profiles.byId(profileId)
     if (!profile) {
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataDir('users')
-    const user = users.find((u) => u.id === profile.userId)
+    const user = users.byId(profile.userId)
     if (!user) {
       return res
         .status(500)
         .send({ message: 'user for profile does not exist' })
     }
 
-    const dto = req.body
-
-    // profile.userId = dto.userId,
-    // profile.username = dto.username,
-    profile.email = dto.email
-    profile.phoneNumbers = dto.phoneNumbers
-    profile.messengers = dto.messengers
-    profile.socialMedia = dto.socialMedia
-    profile.tags = dto.tags
-    profile.privacy = dto.privacy
-
-    await writeDataFile('profiles.json', profiles)
+    const updated = profiles.update(profileId, req.body)
 
     const roles = await readDataFile('roles.json')
-
-    res.send(mapProfileDto(profile, user, roles))
+    res.send(mapProfileDto(updated, user, roles))
   })
 )
 
@@ -127,25 +87,22 @@ gnetzV2Router.put(
   '/profiles/:profileId/image',
   ash(async (req, res) => {
     const profileId = req.params.profileId
-    let profiles = await readDataFile('profiles.json')
-    const profile = profiles.find((p) => p.id === profileId)
+    const profile = profiles.byId(profileId)
     if (!profile) {
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataDir('users')
-    const user = users.find((u) => u.id === profile.userId)
+    const user = users.byId(profile.userId)
     if (!user) {
       return res
         .status(500)
         .send({ message: 'user for profile does not exist' })
     }
 
-    profile.image = req.body
+    const updated = profiles.setImage(profileId, req.body)
 
-    await writeDataFile('profiles.json', profiles)
     const roles = await readDataFile('roles.json')
-    res.send(mapProfileDto(profile, user, roles))
+    res.send(mapProfileDto(updated, user, roles))
   })
 )
 
@@ -153,25 +110,22 @@ gnetzV2Router.get(
   '/profiles/:profileId/delete-image',
   ash(async (req, res) => {
     const profileId = req.params.profileId
-    let profiles = await readDataFile('profiles.json')
-    const profile = profiles.find((p) => p.id === profileId)
+    const profile = profiles.byId(profileId)
     if (!profile) {
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataDir('users')
-    const user = users.find((u) => u.id === profile.userId)
+    const user = users.byId(profile.userId)
     if (!user) {
       return res
         .status(500)
         .send({ message: 'user for profile does not exist' })
     }
 
-    profile.image = {}
+    const updated = profiles.setImage(profileId, {})
 
-    await writeDataFile('profiles.json', profiles)
     const roles = await readDataFile('roles.json')
-    res.send(mapProfileDto(profile, user, roles))
+    res.send(mapProfileDto(updated, user, roles))
   })
 )
 
@@ -179,20 +133,17 @@ gnetzV2Router.get(
   '/profiles/:profileId/form-values',
   ash(async (req, res) => {
     const profileId = req.params.profileId
-    let profiles = await readDataFile('profiles.json')
-    const profile = profiles.find((p) => p.id === profileId)
+    const profile = profiles.byId(profileId)
     if (!profile) {
       return res.status(404).send({ message: 'profile not found' })
     }
 
-    const users = await readDataDir('users')
-    const user = users.find((u) => u.id === profile.userId)
+    const user = users.byId(profile.userId)
     if (!user) {
       return res
         .status(500)
         .send({ message: 'user for profile does not exist' })
     }
-
 
     res.send(user.formValues)
   })
@@ -211,7 +162,9 @@ function buildProfilesResponse(profiles, users, roles) {
   for (const profile of profiles) {
     const user = users.find((u) => u.id === profile.userId)
     if (!user) {
-      throw new Error(`no user ${profile.userId} exist for profile ${profile.id}`)
+      throw new Error(
+        `no user ${profile.userId} exist for profile ${profile.id}`
+      )
     }
     items.push(mapProfileDto(profile, user, roles))
   }
@@ -242,11 +195,11 @@ function mapProfileDto(profile, user, roles) {
       continue
     }
     const rolyTypeMapping = {
-      'A': 'office',
-      'B': 'relation',
-      'M': 'mandate',
-      'R': 'role',
-      'S': 'system',
+      A: 'office',
+      B: 'relation',
+      M: 'mandate',
+      R: 'role',
+      S: 'system',
     }
     mappedRoles.push({
       // is is supposed to be the m:n mapping id, but we don't have one
@@ -255,7 +208,7 @@ function mapProfileDto(profile, user, roles) {
       roleId: parseInt(role.id, 10),
       name: role.label,
       type: rolyTypeMapping[role.type] ?? 'office',
-      alias: (role.aliases.at(0)?.label) ?? 'no alias'
+      alias: role.aliases.at(0)?.label ?? 'no alias',
     })
   }
 

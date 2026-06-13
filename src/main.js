@@ -1,8 +1,13 @@
 import 'dotenv/config'
 import express from 'express'
 import { initializeRoutes } from './router.js'
+import { seed } from './db.js'
 
 const APP_PORT = process.env.APP_PORT ?? 5000
+
+// seed the database from the repo json (only fills empty tables; set
+// DB_RESET=true to drop and reseed, clearing any live edits)
+seed({ reset: process.env.DB_RESET === 'true' })
 
 const app = express()
 
