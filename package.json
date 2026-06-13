@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node src/main.js",
     "dev": "nodemon --watch src src/main.js",
+    "db:seed": "node scripts/seed.js",
+    "db:reset": "node scripts/seed.js --reset",
     "format": "prettier --write src",
     "docker:build": "docker build . -t verdigado/sherpa-api-mock:latest",
     "docker:run": "docker run --env-file ./.env -d -p 5000:5000 verdigado/sherpa-api-mock:latest",
@@ -16,12 +18,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^12.10.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "prettier": "^3.8.4"
   }
 }
