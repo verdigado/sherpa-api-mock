@@ -78,16 +78,16 @@ const modified = divisions.map((div) => {
 
 function replaceUmlauts(str) {
   const umlautMap = {
-    'ä': 'ae',
-    'ö': 'oe',
-    'ü': 'ue',
-    'ß': 'ss',
-    'Ä': 'Ae',
-    'Ö': 'Oe',
-    'Ü': 'Ue'
-  };
+    ä: 'ae',
+    ö: 'oe',
+    ü: 'ue',
+    ß: 'ss',
+    Ä: 'Ae',
+    Ö: 'Oe',
+    Ü: 'Ue',
+  }
 
-  return str.replace(/[äöüßÄÖÜ]/g, match => umlautMap[match]);
+  return str.replace(/[äöüßÄÖÜ]/g, (match) => umlautMap[match])
 }
 
 await writeJsonFile(OUTPUT_FILE, modified)
