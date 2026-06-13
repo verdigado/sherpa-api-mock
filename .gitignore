@@ -1,2 +1,7 @@
 node_modules
 .env
+
+# generated sqlite database (working copy; seeded from the repo json)
+data/*.db
+data/*.db-wal
+data/*.db-shm
