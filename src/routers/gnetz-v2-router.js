@@ -114,6 +114,7 @@ gnetzV2Router.put(
     profile.socialMedia = dto.socialMedia
     profile.tags = dto.tags
     profile.privacy = dto.privacy
+    profile.image = dto.image
 
     await writeDataFile('profiles.json', profiles)
 
