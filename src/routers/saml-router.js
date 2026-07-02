@@ -33,9 +33,32 @@ samlRouter.post(
 
     const users = await getUsers()
     const _users = users.filter((user) => partyIdList.includes(user.id))
-    res.send(buildUsersResponse(_users))
+    res.send(buildSamlUsers(_users))
   })
 )
+
+
+export const samlV1Router = express.Router()
+
+
+samlV1Router.get(
+  '/users',
+  ash(async (req, res) => {
+    const { from, to } = req.body
+
+    const users = await getUsers()
+    const samlUsers = buildSamlUsers(users)
+
+
+    res.send({
+      data: samlUsers,
+      meta: {
+        hasNext: false
+      }
+    })
+  })
+)
+
 
 function getUsers() {
   return readDataDir('users')
@@ -44,7 +67,7 @@ function getUsers() {
 /**
  * remove all properties that are not returned by the user endpoints
  */
-function buildUsersResponse(users) {
+function buildSamlUsers(users) {
   return users.map((user) => {
     const _user = lodash.pick(user, [
       'toType',
