@@ -100,6 +100,11 @@ describe('saml', () => {
       ])
     })
 
+    it('rejects an after that is not a user id', async () => {
+      const res = await api.get('/saml/v1/users?after=abc')
+      expect(res.status).toBe(400)
+    })
+
     it('rejects a limit out of range', async () => {
       const res = await api.get('/saml/v1/users?limit=1001')
       expect(res.status).toBe(400)

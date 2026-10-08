@@ -57,6 +57,10 @@ export function samlRouter(db: DatabaseSync) {
         .json(samlError(400, 'limit must be an integer from 1 to 1000'))
       return
     }
+    if (after !== undefined && !/^\d+$/.test(String(after))) {
+      res.status(400).json(samlError(400, 'after must be a user id'))
+      return
+    }
     const modifiedAfter = parseDate(modified_after)
     const modifiedBefore = parseDate(modified_before)
     if (
