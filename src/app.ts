@@ -23,11 +23,9 @@ export function createApp(db: DatabaseSync) {
   app.use(BASE_PATH, anyRouter(), samlRouter(db), gnetzRouter(db))
 
   app.use(BASE_PATH, (req, res) => {
-    res
-      .status(501)
-      .json({
-        message: `${req.method} ${req.path} is not implemented by the mock`,
-      })
+    res.status(501).json({
+      message: `${req.method} ${req.path} is not implemented by the mock`,
+    })
   })
   app.use((_req, res) => {
     res.status(404).json({ message: 'not found' })

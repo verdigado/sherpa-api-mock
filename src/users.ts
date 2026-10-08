@@ -1,4 +1,5 @@
 import type { DatabaseSync, SQLInputValue } from 'node:sqlite'
+import { placeholders } from './db.ts'
 import type { Schemas } from './types.ts'
 
 export type UserRow = {
@@ -42,8 +43,6 @@ export type UserFilter = {
   createdTo?: string
   limit?: number
 }
-
-const placeholders = (values: unknown[]) => values.map(() => '?').join(', ')
 
 export function findUsers(db: DatabaseSync, filter: UserFilter): UserRow[] {
   const where: string[] = []

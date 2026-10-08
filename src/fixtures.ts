@@ -1,4 +1,5 @@
 import { readdirSync, readFileSync } from 'node:fs'
+import type { NewProfile } from './profiles.ts'
 import type { Schemas } from './types.ts'
 
 const dir = new URL('../fixtures/', import.meta.url)
@@ -17,22 +18,6 @@ export type UserFixture = Omit<Schemas['SamlUser'], 'memberships'> & {
   formValues: Schemas['GnProfileFormValues']
 }
 
-export type ProfileFixture = Pick<
-  Schemas['GnProfile'],
-  | 'id'
-  | 'userId'
-  | 'username'
-  | 'email'
-  | 'privacy'
-  | 'phoneNumbers'
-  | 'messengers'
-  | 'socialMedia'
-  | 'tags'
-> & {
-  loginEmail?: string | null
-  image: Partial<Schemas['GnProfileImage']>
-}
-
 export const divisions: Schemas['AnyDivision'][] = readJson('divisions.json')
 export const roles: Schemas['AnyRole'][] = readJson('roles.json')
 export const gnetzTags: Schemas['GnTag'][] = readJson('gnetz-tags.json')
@@ -44,6 +29,6 @@ export function readUserFixtures(): UserFixture[] {
     .map((file) => readJson(`users/${file}`))
 }
 
-export function readProfileFixtures(): ProfileFixture[] {
+export function readProfileFixtures(): NewProfile[] {
   return readJson('profiles.json')
 }

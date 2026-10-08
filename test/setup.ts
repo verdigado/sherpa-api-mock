@@ -2,8 +2,11 @@ import type { DatabaseSync } from 'node:sqlite'
 import request from 'supertest'
 import { BASE_PATH, createApp } from '../src/app.ts'
 import { openDatabase } from '../src/db.ts'
+import { seedIfEmpty } from '../src/seed.ts'
 
-export function setup(db: DatabaseSync = openDatabase(':memory:')) {
+export function setup(
+  db: DatabaseSync = seedIfEmpty(openDatabase(':memory:'))
+) {
   const app = createApp(db)
   return {
     db,

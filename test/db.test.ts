@@ -2,7 +2,8 @@ import { mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { openDatabase, resetDatabase } from '../src/db.ts'
+import { openDatabase } from '../src/db.ts'
+import { resetDatabase, seedIfEmpty } from '../src/seed.ts'
 import { setup } from './setup.ts'
 
 describe('database', () => {
@@ -12,11 +13,11 @@ describe('database', () => {
   )
 
   it('keeps changes across restarts and resets to the fixtures', async () => {
-    const before = setup(openDatabase(path))
+    const before = setup(seedIfEmpty(openDatabase(path)))
     await before.post('/gnetz/v2/profiles/delete', { userIds: ['100001'] })
     before.db.close()
 
-    const after = setup(openDatabase(path))
+    const after = setup(seedIfEmpty(openDatabase(path)))
     const res = await after.post('/gnetz/v2/profiles/list', {
       userIds: ['100001'],
     })
