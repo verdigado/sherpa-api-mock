@@ -1,8 +1,9 @@
 import type { DatabaseSync } from 'node:sqlite'
 import request from 'supertest'
-import { BASE_PATH, createApp } from '../src/app.ts'
-import { openDatabase } from '../src/db.ts'
-import { seedIfEmpty } from '../src/seed.ts'
+import { createApp } from '../src/app.ts'
+import { BASE_PATH } from '../src/config.ts'
+import { openDatabase } from '../src/store/db.ts'
+import { seedIfEmpty } from '../src/store/seed.ts'
 
 export function setup(
   db: DatabaseSync = seedIfEmpty(openDatabase(':memory:'))

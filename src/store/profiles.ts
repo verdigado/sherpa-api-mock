@@ -1,7 +1,7 @@
 import type { DatabaseSync, SQLInputValue } from 'node:sqlite'
 import { nextId, placeholders, transaction } from './db.ts'
 import { roles } from './fixtures.ts'
-import type { Schemas } from './types.ts'
+import type { Schemas } from '../types.ts'
 import { getMemberships, getRoleAssignments, getUser } from './users.ts'
 
 type ProfileRow = {

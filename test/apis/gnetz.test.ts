@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { setup } from './setup.ts'
-import { expectMatchesSpec } from './spec.ts'
+import { setup } from '../setup.ts'
+import { expectMatchesSpec } from '../spec.ts'
 
 const JOHN = {
   userId: '100001',

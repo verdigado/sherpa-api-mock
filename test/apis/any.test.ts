@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { setup } from './setup.ts'
-import { expectMatchesSpec } from './spec.ts'
+import { setup } from '../setup.ts'
+import { expectMatchesSpec } from '../spec.ts'
 
 describe('any', () => {
   const api = setup()

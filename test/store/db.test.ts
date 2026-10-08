@@ -2,9 +2,9 @@ import { mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { openDatabase } from '../src/db.ts'
-import { resetDatabase, seedIfEmpty } from '../src/seed.ts'
-import { setup } from './setup.ts'
+import { openDatabase } from '../../src/store/db.ts'
+import { resetDatabase, seedIfEmpty } from '../../src/store/seed.ts'
+import { setup } from '../setup.ts'
 
 describe('database', () => {
   const path = join(

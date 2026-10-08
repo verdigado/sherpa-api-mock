@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { serverInfo } from '../errors.ts'
-import { divisions, roles } from '../fixtures.ts'
-import type { Schemas } from '../types.ts'
+import { serverInfo } from '../server-info.ts'
+import { divisions, roles } from '../../store/fixtures.ts'
+import type { Schemas } from '../../types.ts'
 
 export function anyRouter() {
   const router = Router()

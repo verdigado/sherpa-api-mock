@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import type { DatabaseSync } from 'node:sqlite'
-import { gnNotFound, gnValidationFailed } from '../errors.ts'
-import { gnetzTags } from '../fixtures.ts'
+import { gnNotFound, gnValidationFailed } from './errors.ts'
+import { gnetzTags } from '../../store/fixtures.ts'
 import {
   deleteProfiles,
   findProfiles,
@@ -10,10 +10,13 @@ import {
   insertProfile,
   toGnProfile,
   updateProfile,
-} from '../profiles.ts'
-import { assertValidBody, validateBody } from '../spec.ts'
-import type { Schemas } from '../types.ts'
-import { getUser } from '../users.ts'
+} from '../../store/profiles.ts'
+import {
+  assertValidBody,
+  validateBody,
+} from '../../middleware/validate-body.ts'
+import type { Schemas } from '../../types.ts'
+import { getUser } from '../../store/users.ts'
 
 export function gnetzRouter(db: DatabaseSync) {
   const router = Router()

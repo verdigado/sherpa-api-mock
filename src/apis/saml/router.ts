@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import type { DatabaseSync } from 'node:sqlite'
-import { samlError } from '../errors.ts'
-import { validateBody } from '../spec.ts'
-import type { Schemas } from '../types.ts'
-import { findUsers, toSamlUser } from '../users.ts'
+import { samlError } from './errors.ts'
+import { validateBody } from '../../middleware/validate-body.ts'
+import type { Schemas } from '../../types.ts'
+import { findUsers, toSamlUser } from '../../store/users.ts'
 
 function parseDate(value: unknown) {
   if (typeof value !== 'string') return undefined

@@ -1,6 +1,6 @@
 import type { DatabaseSync, SQLInputValue } from 'node:sqlite'
 import { placeholders } from './db.ts'
-import type { Schemas } from './types.ts'
+import type { Schemas } from '../types.ts'
 
 export type UserRow = {
   id: string

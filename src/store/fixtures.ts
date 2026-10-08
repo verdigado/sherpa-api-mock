@@ -1,8 +1,8 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import type { NewProfile } from './profiles.ts'
-import type { Schemas } from './types.ts'
+import type { Schemas } from '../types.ts'
 
-const dir = new URL('../fixtures/', import.meta.url)
+const dir = new URL('../../fixtures/', import.meta.url)
 
 function readJson(path: string) {
   return JSON.parse(readFileSync(new URL(path, dir), 'utf-8'))

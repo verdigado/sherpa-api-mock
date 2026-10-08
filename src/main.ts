@@ -1,7 +1,7 @@
 import { createApp } from './app.ts'
 import { config } from './config.ts'
-import { openDatabase } from './db.ts'
-import { seedIfEmpty } from './seed.ts'
+import { openDatabase } from './store/db.ts'
+import { seedIfEmpty } from './store/seed.ts'
 
 const db = seedIfEmpty(openDatabase(config.databasePath))
 
