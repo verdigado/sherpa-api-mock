@@ -33,7 +33,7 @@ docker exec <container> node src/reset.ts # in Docker
 
 ## Spec
 
-The mock is built against a pinned copy of the Sherpa spec. Its types come from that copy, and the tests check every response against it. To move to another version of the spec, point the update script at a ref in a local sherpa-api checkout (`../sherpa-api` by default, or set `SHERPA_API_DIR`):
+The mock is built against a pinned copy of the Sherpa spec. Its types come from that copy. It rejects request bodies that don't match it, in the error format Sherpa uses for that API. The tests check every response against it. To move to another version of the spec, point the update script at a ref in a local sherpa-api checkout (`../sherpa-api` by default, or set `SHERPA_API_DIR`):
 
 ```shell
 npm run spec:update -- <ref>
