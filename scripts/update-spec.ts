@@ -24,6 +24,10 @@ writeFileSync(
   'spec/SOURCE',
   `https://git.verdigado.com/verdigado/sherpa-api/src/commit/${commit}/openapi.yaml\n`
 )
-execFileSync('npx', ['openapi-typescript', 'spec/openapi.yaml', '-o', 'spec/openapi.d.ts'], {
-  stdio: 'inherit',
-})
+execFileSync(
+  'npx',
+  ['openapi-typescript', 'spec/openapi.yaml', '-o', 'spec/openapi.d.ts'],
+  {
+    stdio: 'inherit',
+  }
+)

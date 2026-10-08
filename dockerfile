@@ -1,10 +1,10 @@
-FROM node:20-alpine AS build
+FROM node:24-alpine
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --only=production --silent
+RUN npm ci --omit=dev
 
 COPY src ./src
-COPY data ./data
+COPY fixtures ./fixtures
 
-CMD ["node", "src/main.js"]
+CMD ["node", "src/main.ts"]
