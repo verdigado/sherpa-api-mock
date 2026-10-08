@@ -1,0 +1,49 @@
+{
+  "id": "100012",
+  "personalId": "112",
+  "name1": "Julia",
+  "name2": "Schulz",
+  "email": "julia.schulz@example.com",
+  "ownerId": "13081",
+  "ownerIdentifier": "11102700",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "memberships": [
+    {
+      "id": "12",
+      "ownerIdentifier": "11102700",
+      "memberOfStructureIdentifier": "11102700",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  },
+  "profile": {
+    "id": "6ba7b815-9dad-11d1-80b4-00c04fd430c8",
+    "username": "schuljul",
+    "email": "julia.schulz@example.com",
+    "privacy": {
+      "chatbegruenung": "kv_wide",
+      "email": "kv_wide",
+      "overall": "kv_wide"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88775",
+      "88809",
+      "14013839",
+      "88761",
+      "510"
+    ]
+  }
+}

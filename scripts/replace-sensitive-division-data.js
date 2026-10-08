@@ -6,7 +6,7 @@
 import fs from 'fs/promises'
 
 const INPUT_FILE = './local/divisions-original.json'
-const OUTPUT_FILE = './data/divisions.json'
+const OUTPUT_FILE = './fixtures/divisions.json'
 
 function readJsonFile(path) {
   return fs

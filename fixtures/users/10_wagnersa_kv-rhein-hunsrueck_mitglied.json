@@ -1,0 +1,49 @@
+{
+  "id": "100010",
+  "personalId": "110",
+  "name1": "Sarah",
+  "name2": "Wagner",
+  "email": "sarah.wagner@example.com",
+  "ownerId": "13081",
+  "ownerIdentifier": "11102700",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "memberships": [
+    {
+      "id": "10",
+      "ownerIdentifier": "11102700",
+      "memberOfStructureIdentifier": "11102700",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  },
+  "profile": {
+    "id": "6ba7b813-9dad-11d1-80b4-00c04fd430c8",
+    "username": "wagnsar",
+    "email": "sarah.wagner@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88764",
+      "88796",
+      "2643465",
+      "508",
+      "515"
+    ]
+  }
+}

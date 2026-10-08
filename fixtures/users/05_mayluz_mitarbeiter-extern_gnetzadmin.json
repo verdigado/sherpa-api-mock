@@ -1,0 +1,55 @@
+{
+  "id": "100005",
+  "personalId": "105",
+  "name1": "Luz",
+  "name2": "May",
+  "email": "luz.may@example.com",
+  "ownerId": "5919",
+  "ownerIdentifier": "10300100",
+  "createdOn": "2020-01-01T12:00:00+0200",
+  "lastModifiedOn": "2024-11-01T13:00:00+0100",
+  "memberships": [],
+  "roles": [
+    {
+      "id": "5",
+      "ownerIdentifier": "10000000",
+      "tags": [
+        {
+          "id": "8957542",
+          "tagId": "8957541",
+          "name": "netz.gruene-Zugang o. Mitgliedschaft"
+        }
+      ],
+      "roleId": "8903198",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  },
+  "profile": {
+    "id": "a65ebe94-7ba2-4da6-bf1f-d035532af41c",
+    "username": "mayluz",
+    "email": "luz.may@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88763",
+      "88761",
+      "653",
+      "510",
+      "511"
+    ]
+  }
+}

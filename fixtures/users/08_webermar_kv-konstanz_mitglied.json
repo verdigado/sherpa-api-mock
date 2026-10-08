@@ -1,0 +1,49 @@
+{
+  "id": "100008",
+  "personalId": "108",
+  "name1": "Maria",
+  "name2": "Weber",
+  "email": "maria.weber@example.com",
+  "ownerId": "2828",
+  "ownerIdentifier": "10102100",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "memberships": [
+    {
+      "id": "8",
+      "ownerIdentifier": "10102100",
+      "memberOfStructureIdentifier": "10102100",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  },
+  "profile": {
+    "id": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+    "username": "webemari",
+    "email": "maria.weber@example.com",
+    "privacy": {
+      "chatbegruenung": "kv_wide",
+      "email": "kv_wide",
+      "overall": "kv_wide"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "14013841",
+      "14013860",
+      "88786",
+      "503",
+      "504"
+    ]
+  }
+}

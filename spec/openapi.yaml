@@ -1,0 +1,2718 @@
+openapi: '3.1.0'
+info:
+  title: Sherpa Web API
+  version: '0.1.1'
+  description: |
+    Sherpa API endpoints
+
+servers:
+  - description: Sherpa Production Server
+    url: https://sherpa.gruene.de/sherpa/ws/m2m/
+
+tags:
+  - name: any
+    description: Every sherpa certificate has the permission "ANY" and should be able to access these common endpoints
+  - name: mailinglists
+    description: Sherpa Mailinglists Endpoints
+  - name: saml
+    description: Sherpa SAML Endpoints
+  - name: gnetz
+    description: Grünes Netz Endpoints
+
+security:
+  - mutualTLS: []
+
+paths:
+  # any endpoints
+  /any/v1/divisions:
+    get:
+      operationId: AnyFindDivisions
+      description: Get a list of all divisions
+      summary: find divisions
+      tags:
+        - any
+      responses:
+        '200':
+          description: List of Divisions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyDivision'
+
+  /any/v1/tags:
+    get:
+      operationId: AnyFindTags
+      description: Get a list of all tags
+      summary: find tags
+      tags:
+        - any
+      responses:
+        '200':
+          description: List of tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyTag'
+
+  /any/v1/roles:
+    get:
+      operationId: AnyFindRoles
+      description: Get a list of all roles
+      summary: find roles
+      tags:
+        - any
+      responses:
+        '200':
+          description: List of roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyRole'
+
+  /any/v1/alive:
+    get:
+      operationId: AnyGetAlive
+      description: Healthcheck endpoint
+      summary: healthcheck
+      tags:
+        - any
+      responses:
+        '200':
+          description: healthcheck response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerAliveDto'
+
+  # mailinglist endpoints
+  /mailinglists/v1/users:
+    get:
+      operationId: MlFindUsers
+      summary: find mailinglist users
+      tags:
+        - mailinglists
+      parameters:
+        - name: division
+          in: query
+          description: Filter by division id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of users. When a non-existing division id is sent, an empty array is returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlUserItem'
+        '404':
+          description: Division id contains non-parsable string value
+        '500':
+          description: Missing division id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.NullPointerException'
+                originalMessage: null
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: "java.lang.NullPointerException\n\tat ..."
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 10:43:48, 56 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+    put:
+      operationId: MlUpsertUser
+      summary: create or update mailinglist user
+      description: Create or update mailinglist-user
+      tags:
+        - mailinglists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MlUpsertUserDto'
+      responses:
+        '200':
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlUserItem'
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlUserItem'
+        '500':
+          description: Bad Request, Not found, Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              examples:
+                Bad Request:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'javax.servlet.ServletException'
+                    originalMessage: "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('}' (code 125)): was expecting double-quote to start field name\n at [Source: (org.apache.catalina.connector.CoyoteInputStream); line: 6, column: 2]"
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'javax.servlet.ServletException: '
+                    serverInfo: 'server info not available'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+                Not Found:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'java.lang.RuntimeException'
+                    originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: user not found (ext id 16.999.635)'
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'java.lang.RuntimeException: de'
+                    serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 13:44:54, 58 active users)'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+
+  /mailinglists/v1/users/{userId}:
+    get:
+      operationId: MlGetUser
+      summary: get mailinglist user
+      tags:
+        - mailinglists
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The mailinglist-user id (not sherpa user id)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlUser'
+        '400':
+          description: Parameter id contains forbidden characters (%)
+          content:
+            text/html: {}
+        '404':
+          description: Parameter id contains a non-parsable string value
+        '500':
+          description: User with given external id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: user not found (ext id 16.960.158)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException: ...'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 11:00:22, 64 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+    delete:
+      operationId: MlDeleteUser
+      summary: delete mailinglist user
+      tags:
+        - mailinglists
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted
+        '404':
+          description: User id contains non-parsable string value
+        '500':
+          description: User with given sherpa id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: unknown user (user ext id 1.820.580.123)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang....'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 12:09:45, 74 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+  /mailinglists/v1/users/sherpa-id/{sherpaId}:
+    get:
+      operationId: MlGetUserBySherpaId
+      summary: get mailinglist user by sherpa id
+      tags:
+        - mailinglists
+      parameters:
+        - name: sherpaId
+          in: path
+          description: Sherpa User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlUser'
+        '400':
+          description: Parameter id contains forbidden characters (%)
+          content:
+            text/html: {}
+        '404':
+          description: Parameter id contains a non-parsable string value
+        '500':
+          description: User with given sherpa id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: user not found (amv pk 18.205.802)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException: de.maxmomentum.ext'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 12:01:57, 74 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+  /mailinglists/v1/divisions:
+    get:
+      operationId: MlFindDivisions
+      summary: find divisions
+      tags:
+        - mailinglists
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlDivision'
+
+  /mailinglists/v1/divisions/{divisionId}:
+    get:
+      operationId: MlGetDivision
+      summary: get division
+      tags:
+        - mailinglists
+      parameters:
+        - name: divisionId
+          in: path
+          required: true
+          description: Division ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlDivision'
+        '400':
+          description: Parameter id contains forbidden characters (%)
+          content:
+            text/html: {}
+        '404':
+          description: Parameter id contains a non-parsable string value
+        '500':
+          description: Division with given id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'java.lang.IllegalStateException: structure not found (pk 8.198.000)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException: j...'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 13:17:42, 50 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+  /mailinglists/v1/subscriptions:
+    get:
+      operationId: MlFindSubscriptions
+      summary: find subscriptions
+      tags:
+        - mailinglists
+      description: Get subscriptions of users to mailinglists. At least one filter parameter is required but not all. When given user id or list id does not exist, an empty array is returned.
+      parameters:
+        - name: list
+          in: query
+          description: Filter by mailinglist id
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: Filter by mailinglist-user id (not sherpa user id)
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Filter by email. Email address has to be complete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: If given mailinglist id does not exist, an empty array is returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlSubscription'
+        '404':
+          description: parameter `list` contains non-parsable string
+        '500':
+          description: Bad Request, Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              examples:
+                Bad Request:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'java.lang.RuntimeException'
+                    originalMessage: 'java.lang.IllegalArgumentException: at least one information is needed, user id or list id or email'
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'java.lang.RuntimeException:'
+                    serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 17:26:12, 25 active users)'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+    put:
+      operationId: MlAddSubscription
+      summary: add subscription
+      tags:
+        - mailinglists
+      description:
+        Subscribe a user to a mailinglist, who is not assigned by a sherpa distributor.
+        A subscription cannot be updated with this endpoint.
+        Even though the combination of list id and user id would be assumed as unique,
+        sending a request with a (listId, userId) and a different email will not update the subscription but insert a new one.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MlAddSubscriptionDto'
+      responses:
+        '201':
+          description: The User was newly subscribed to the List
+        '500':
+          description: Not Found, Unprocessable Entity, Bad Request, Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              examples:
+                Unprocessable Entity:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'java.lang.RuntimeException'
+                    originalMessage: 'java.lang.IllegalStateException: subscription already exists (ext user id 17.000.578, ext list id 13.307.909, email john.doe@exampl.ecom)'
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'java.lang.RuntimeException: java.lang.IllegalStateException: subscripti...'
+                    serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-27 17:40:00, 9 active users)'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+                Not Found:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'java.lang.RuntimeException'
+                    originalMessage: 'java.lang.IllegalStateException: mailinglist not found (list ext id 13.307.909.123.123.123)'
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'java.lang.RuntimeException: java.lang.IllegalStateException: mailinglist not found (li...'
+                    serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-27 17:46:13, 9 active users)'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+                Bad Request:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'javax.servlet.ServletException'
+                    originalMessage: "com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `long` from String \"asd\": not a valid `long` value\n at [Source: (org.apache.catalina.connector.CoyoteInputStream); line: 3, column: 11] (through reference chain: de.maxmomentum.extern.to.verdigado.mailinglist.VerdigadoMailinglistSubscriptionTO[\"list\"])"
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'javax.servlet.ServletException: com.fasterxml.jackson.databind.ex...'
+                    serverInfo: 'server info not available'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+
+    delete:
+      operationId: MlDeleteSubscriptions
+      summary: delete subscriptions
+      tags:
+        - mailinglists
+      description: Unsubscribe users from mailinglists matching the query parameters
+      # TODO: check what happens if no query parameters are given. It could throw an error or delete subscriptions of all users from all lists
+      parameters:
+        - name: user
+          in: query
+          description: Delete subscriptions matching this user id
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          description: Delete subscriptions matching this email
+          schema:
+            type: string
+        # TODO: Clarify if parameters scope and target still exist. They are currently not used and it seems they got discarded
+        # - name: scope
+        #   in: query
+        #   required: false
+        #   schema:
+        #     type: string
+        #     enum:
+        #       - list
+        #       - division
+        #       - distributor
+        #       - global
+        #     default: list
+        # - name: target
+        #   in: query
+        #   required: false
+        #   description: List ID, Division ID, SherpaDistributor ID or null for global
+        #   schema:
+        #     type: integer
+        #     nullable: true
+      responses:
+        '204':
+          description: Subscriptions got deleted
+
+  /mailinglists/v1/unsubscriptions:
+    get:
+      operationId: MlFindUnsubscriptions
+      summary: find unsubscriptions
+      tags:
+        - mailinglists
+      description: Get a list of Unsubscriptions of a List
+      parameters:
+        - name: list
+          in: query
+          required: true
+          description: List ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: If given mailinglist id does not exist, an empty array is returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlUnsubscription'
+        '404':
+          description: parameter `list` contains non-parsable string
+    put:
+      operationId: MlAddUnsubscription
+      summary: add unsubscription
+      tags:
+        - mailinglists
+      description: Unsubscribe an email from a List
+      parameters:
+        - name: list
+          in: query
+          required: true
+          description: List ID
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: true
+          description: Email to unsubscribe from the List
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Okay
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlUnsubscription'
+        '404':
+          description: Parameter `list` contains non-parsable string
+        '500':
+          description: Not found, Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+    delete:
+      operationId: MlDeleteUnsubscription
+      summary: delete unsubscription
+      tags:
+        - mailinglists
+      description: Delete an single mailinglist unsubscription by mailing list id and email
+      parameters:
+        - name: list
+          in: query
+          required: true
+          description: List ID
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: true
+          description: Unsubscribed email in a List
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Okay
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlUnsubscription'
+        '204':
+          description: Unsubscription removed
+        '500':
+          description: Not Found, Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              examples:
+                Not Found:
+                  value:
+                    toType: 'ExceptionTO'
+                    exceptionClassName: 'java.lang.RuntimeException'
+                    originalMessage: 'java.lang.IllegalStateException: result not unique (list id 13.480.491, email john.doe@example.com)'
+                    httpStatusCode: '500'
+                    userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                    stackTrace: 'java.lang.RuntimeException: java.lang.IllegalStateException: re...'
+                    serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-27 18:45:37, 13 active users)'
+                    requestUuid: null
+                    source: 'server'
+                    type: 'SERVER_GENERAL'
+                    code: null
+
+  /mailinglists/v1/lists:
+    get:
+      operationId: MlFindMailinglists
+      summary: find mailinglists
+      tags:
+        - mailinglists
+      parameters:
+        - name: division
+          in: query
+          description: Filter by division id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: If given division id does not exist, an empty array is returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlMailinglist'
+        '404':
+          description: Parameter division id contains non-parsable string
+    put:
+      operationId: MlUpsertMailinglist
+      summary: create or update mailinglist
+      tags:
+        - mailinglists
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MlUpsertMailinglistDto'
+      responses:
+        '200':
+          description: Mailinglist successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlMailinglist'
+        '201':
+          description: Mailinglist successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlMailinglist'
+        '500':
+          description: Bad Request, Not found, Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+
+  /mailinglists/v1/lists/{mailinglistId}:
+    get:
+      operationId: MlGetMailinglist
+      summary: get mailinglist
+      tags:
+        - mailinglists
+      parameters:
+        - name: mailinglistId
+          in: path
+          required: true
+          description: Mailinglist ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlMailinglist'
+        '404':
+          description: Parameter id contains a non-parsable string value
+        '500':
+          description: Mailing list with given id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: mailinglist not found (ext id 1.368.474.800)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException: de'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 13:34:38, 51 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+    delete:
+      operationId: MlDeleteMailinglist
+      summary: delete mailinglist
+      tags:
+        - mailinglists
+      parameters:
+        - name: mailinglistId
+          in: path
+          required: true
+          description: List ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: List deleted
+        '404':
+          description: Parameter id contains a non-parsable string value
+        '500':
+          description: Mailinglist with given id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'de.maxmomentum.extern.exception.ResourceNotFoundException: unknown mailinglist (list ext id 16.999.858)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException: d'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 14:18:15, 45 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+  /mailinglists/v1/internal-subscribers:
+    get:
+      operationId: MlFindInternalSubscribers
+      summary: find internal subscribers
+      tags:
+        - mailinglists
+      parameters:
+        - name: distributor
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Okay
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MlSherpaDistributorItem'
+        '404':
+          description: Parameter distributor contains a non-parsable string value
+        '500':
+          description: distributor with given id does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlErrorDto'
+              example:
+                toType: 'ExceptionTO'
+                exceptionClassName: 'java.lang.RuntimeException'
+                originalMessage: 'java.lang.IllegalStateException: com.proximity.gp.server.common.exception.ObjectNotAccessibleException: cannot find owner (distributor id 5.163.000)'
+                httpStatusCode: '500'
+                userMessage: 'Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.'
+                stackTrace: 'java.lang.RuntimeException...'
+                serverInfo: 'Live-System (Version 1.5-31, Serverzeit 2024-04-12 14:34:58, 45 active users)'
+                requestUuid: null
+                source: 'server'
+                type: 'SERVER_GENERAL'
+                code: null
+
+  /mailinglists/v1/banned-emails:
+    get:
+      operationId: MlFindBannedEmails
+      summary: find banned emails
+      tags:
+        - mailinglists
+      description: Get a list of emails which are NOT allowed to log in. Only implemented by Sherpa!
+      responses:
+        '200':
+          description: Okay
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: email
+
+  # saml endpoints
+  /saml/party/newusers:
+    post:
+      operationId: SamlFindNewUsersByDate
+      summary: Find new users by date
+      description: Find created users by date. Response does not include memberships or roles.
+      tags:
+        - saml
+      requestBody:
+        required: true
+        description: Find new user params
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  format: date-time
+                  example: 2021-01-27T16:50:37+0100
+                to:
+                  type: string
+                  format: date-time
+                  example: 2021-01-28T16:50:37+0100
+              required:
+                - from
+                - to
+      responses:
+        '200':
+          description: List of new users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SamlNewUser'
+        '415':
+          description: Missing Request Body
+        '500':
+          $ref: '#/components/responses/SamlServerError'
+
+  /saml/party/list:
+    post:
+      operationId: SamlGetUsersById
+      summary: Get users by ids
+      description: Get detailed information about users and their memberships and roles by id.
+      tags:
+        - saml
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                partyIdList:
+                  type: array
+                  items:
+                    type: string
+                  example: ['12345678', '12345679']
+              required:
+                - partyIdList
+      responses:
+        '200':
+          description: List of new users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SamlUser'
+        '500':
+          $ref: '#/components/responses/SamlServerError'
+
+  /saml/v1/users:
+    get:
+      operationId: SamlFindUsers
+      summary: Find users
+      description: Find and filter users. Get detailed information about the user memberships and roles.
+      tags:
+        - saml
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: Max amount of users to return
+          schema:
+            type: integer
+            maximum: 1000
+            minimum: 1
+            default: 200
+        - name: after
+          in: query
+          required: false
+          description: Last user id, used for keyset pagination.
+          schema:
+            type: string
+            example: '1234567'
+        - name: modified_after
+          in: query
+          required: false
+          description: ISO8601 compliant date. Only list users modified after given date.
+          schema:
+            type: string
+            format: date-time
+            example: 2023-01-01T00:00:00+0100
+        - name: modified_before
+          in: query
+          required: false
+          description: ISO8601 compliant date. Only list users modified before given date.
+          schema:
+            type: string
+            format: date-time
+            example: 2023-02-01T00:00:00+0100
+        - name: include[]
+          in: query
+          required: false
+          description: Filter users by user ids
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Find user response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SamlFindUsersResponse'
+
+  # gnetz endpoints
+
+  /gnetz/v2/profiles/ids:
+    get:
+      operationId: GnGetProfileIds
+      description: Get a complete list of all user profile ids
+      summary: get user profile ids
+      tags:
+        - gnetz
+      responses:
+        '200':
+          description: List of user profile ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /gnetz/v2/profiles/list:
+    post:
+      operationId: GnGetProfiles
+      description: Get user profiles by profile or user ids
+      summary: Get user profiles
+      tags:
+        - gnetz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profileIds:
+                  type: array
+                  description: List of profile ids
+                  items:
+                    type: string
+                    example: 0de14cbe-221b-43a5-8222-45414066f5b6
+                userIds:
+                  type: array
+                  description: List of user ids
+                  items:
+                    type: string
+                    example: '12345678'
+      responses:
+        '200':
+          description: List of user profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GnProfile'
+        '422':
+          $ref: '#/components/responses/GnValidationFailed'
+
+  /gnetz/v2/profiles:
+    post:
+      operationId: GnCreateProfile
+      description: Create user profile
+      summary: Create user profile
+      tags:
+        - gnetz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GnCreateProfileDto'
+      responses:
+        '200':
+          description: Created user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GnProfile'
+        '422':
+          $ref: '#/components/responses/GnValidationFailed'
+
+  /gnetz/v2/profiles/delete:
+    post:
+      operationId: GnDeleteProfiles
+      description: Delete user profiles
+      summary: Delete user profiles
+      tags:
+        - gnetz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profileIds:
+                  type: array
+                  description: List of profile ids
+                  items:
+                    type: string
+                    example: 0de14cbe-221b-43a5-8222-45414066f5b6
+                userIds:
+                  type: array
+                  description: List of user ids
+                  items:
+                    type: string
+                    example: '12345678'
+      responses:
+        '200':
+          description: List of deleted user profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GnDeletedProfileDto'
+        '422':
+          $ref: '#/components/responses/GnValidationFailed'
+
+  /gnetz/v2/profiles/{profileId}:
+    put:
+      operationId: GnUpdateProfile
+      description: Update user profile
+      summary: Update user profile
+      tags:
+        - gnetz
+      parameters:
+        - $ref: '#/components/parameters/GnProfileId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GnUpdateProfileDto'
+      responses:
+        '200':
+          description: Updated user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GnProfile'
+        '422':
+          $ref: '#/components/responses/GnValidationFailed'
+
+  /gnetz/v2/profiles/{profileId}/form-values:
+    get:
+      operationId: GnGetProfileFormValues
+      description: Get profile form values
+      summary: Get profile form values
+      tags:
+        - gnetz
+      parameters:
+        - $ref: '#/components/parameters/GnProfileId'
+      responses:
+        '200':
+          description: User profile form values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GnProfileFormValues'
+        '404':
+          $ref: '#/components/responses/GnNotFound'
+
+  /gnetz/v2/divisions/{divisionKey}:
+    get:
+      operationId: GnGetDivision
+      description: Get a division by division key
+      summary: get division
+      tags:
+        - gnetz
+      parameters:
+        - name: divisionKey
+          in: path
+          required: true
+          description: Division ID
+          schema:
+            $ref: '#/components/schemas/DivisionKey'
+      responses:
+        '200':
+          description: Division
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnyDivision'
+        '404':
+          $ref: '#/components/responses/GnNotFound'
+
+  /gnetz/v2/tags:
+    get:
+      operationId: GnFindTags
+      description: Get a list of tags
+      summary: find tags
+      tags:
+        - gnetz
+      parameters: []
+        # parameter currently not implemented
+        # - name:
+        #   in: querytype
+        #   description: Filter Tags by type
+        #   schema:
+        #     $ref: '#/components/schemas/GnTagType'
+      responses:
+        '200':
+          description: List of Tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GnTag'
+
+  /gnetz/v2/interests:
+    get:
+      operationId: GnFindInterests
+      description: Get a list of tags with type `interest`
+      summary: find interest tags
+      tags:
+        - gnetz
+      responses:
+        '200':
+          description: List of Tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GnTag'
+
+  /gnetz/v2/skills:
+    get:
+      operationId: GnFindSkills
+      description: Get a list of tags with type `skill`
+      summary: find skill tags
+      tags:
+        - gnetz
+      responses:
+        '200':
+          description: List of Tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GnTag'
+
+components:
+  parameters:
+    # gnetz parameters
+    GnProfileId:
+      name: profileId
+      in: path
+      required: true
+      description: User profile id
+      schema:
+        type: string
+        format: uuid
+        example: 569f8341-087e-4c37-8c1a-ed31b246ef2a
+
+  responses:
+    # saml responses
+    SamlServerError:
+      description: Generic error response for authentication, validation and others
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SamlError'
+
+    # gnetz responses
+    GnNotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GnError'
+          example:
+            id: 17405cfc-4b50-987e
+            timestamp: '2023-11-30T13:24:25.298Z'
+            exceptionClassName: com.proximity.gp.common.exception.ResourceNotFoundException
+            message: Could not find Profile with id 569f8341-087e-4c37-8c1a-ed31b246ef2a
+            validationErrors: null
+
+    GnValidationFailed:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GnError'
+          example:
+            id: 17405cfc-4b50-987e
+            timestamp: '2023-11-30T13:24:25.298Z'
+            exceptionClassName: com.proximity.gp.common.exception.ValidationException
+            message: Invalid Request Body
+            validationErrors:
+              - path: division.level
+                constraints:
+                  - type: isEnum
+                    message: "'foobar' is not a valid division level"
+
+  schemas:
+    # general schemas shared by all api endpoints
+
+    DivisionKey:
+      type: string
+      description: >
+        External Division identifier.
+          - First digit is the index of the hierarchy
+            1. GR
+            2. GJ
+            3. KPV
+          - second and third digit is the *LV*
+          - next three is the *KV*
+          - last two is the *OV*
+        All undefined hierarchy levels are nulled.
+      example: '10000000'
+      # examples: # from OAS 3.1 on
+      #   warstein:
+      #     summary: OV Warstein
+      #     description: GR - NRW - SO - Warstein
+      #     value: "11004613"
+      #   bv:
+      #     summary: Bundesverband GJ
+      #     description: GJ - null - null - null - null
+      #     value: "20000000"
+      minLength: 8
+      maxLength: 8
+      pattern: '^[1-9][0-9]{7}$'
+
+    HierarchyType:
+      description: >
+        The root hierarchy the Division belongs to:
+          - `GR`: Division of the Green Party ("BÜNDNIS 90/DIE GRÜNEN")
+          - `GJ`: Division of the Green Youth ("Grüne Jugend")
+          - `KPV`: Local political Association ("Kommunalpolitische Vereinigung"), currently not in use
+      type: string
+      enum:
+        - GR
+        - GJ
+        - KPV
+
+    # any schemas
+    AnyDivision:
+      type: object
+      properties:
+        internalId:
+          type: string
+          example: '4086'
+          description: Global unique id. This id has no collisions with organization or user ids.
+        divisionKey:
+          $ref: '#/components/schemas/DivisionKey'
+          example: '10100101'
+        hierarchy:
+          $ref: '#/components/schemas/HierarchyType'
+          example: 'GR'
+        level:
+          type: string
+          enum:
+            - bv
+            - lv
+            - kv
+            - ov
+          example: ov
+        name1:
+          type: string
+          description: Bezeichnung der Gliederungsebene (Bundesverband/Landesverband/Kreisverband/Ortsverband | Abteilung | Regionalverband)
+          example: Ortsverband
+        name2:
+          type: string
+          description: >
+            Name der jeweiligen Abteilung.
+            Aufgelöste Gliederungen haben den Suffix `_ALT` angefügt.
+            Über diesen Suffix können Gliederungen gefiltert werden nach aktiv/inaktiv.
+          example: Aalen
+        shortName:
+          type: string
+          example: Aalen OV
+        officeZip:
+          type: [string, 'null']
+          description: zip code of office location
+          example: '25488'
+        officeStreet:
+          type: [string, 'null']
+          description: street name of office location
+          example: 'Bahnhofstr.'
+        officeHouseNumber:
+          type: [string, 'null']
+          description: house number of office location
+          example: '13'
+        officeCity:
+          type: [string, 'null']
+          description: city of office location
+          example: 'Berlin'
+        favoriteEmail:
+          type: [string, 'null']
+          description: the preferred email to contact the division
+          example: 'info@example.com'
+        urls:
+          type: array
+          description: list of internet presences
+          items:
+            type: string
+          example: ['https://example.com/']
+        emails:
+          type: array
+          items:
+            type: string
+          example: ['john.doe@example.com', 'jane.doe@example.com']
+        emailTags:
+          type: object
+          additionalProperties:
+            type: string
+          example: { 'jane.doe@example.com': 'BV-GRÜNE-Info' }
+        emailPurpose:
+          description: |
+            purposes associated with email
+            currently used values:
+              - privat
+              - grüne
+              - dienstlich
+              - Postanschrift
+              - Rechnungsanschrift
+              - Lieferanschrift
+          type: object
+          additionalProperties:
+            type: object
+            required:
+              - id
+              - label
+            properties:
+              id:
+                type: string
+                example: '12'
+              label:
+                type: string
+                example: 'grüne'
+          example: { 'jane.doe@example.com': { 'id': '2', 'label': 'grüne' } }
+      required:
+        - internalId
+        - divisionKey
+        - hierarchy
+        - level
+        - name1
+        - name2
+        - shortName
+        - officeZip
+        - officeStreet
+        - officeHouseNumber
+        - officeCity
+        - emails
+        - emailTags
+        - emailPurpose
+        - favoriteEmail
+        - urls
+
+    AnyTag:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '691378'
+        parentId:
+          type: [string, 'null']
+          example: '236'
+        name:
+          type: string
+          example: Technik Parteitag
+        aliases:
+          type: array
+          items:
+            type: object
+      required:
+        - id
+        - parentId
+        - name
+        - aliases
+
+    AnyRole:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '12272402'
+        type:
+          type: string
+          description: >
+            A: Amt
+            B: Beziehung
+            M: Mandat
+            R: Rolle
+            S: System
+          enum:
+            - A
+            - B
+            - M
+            - R
+            - S
+          example: R
+        label:
+          type: string
+          example: LAG Regionaler Strukturwandel Mitarbeitende
+        hierarchy:
+          type: [string, 'null']
+          enum:
+            - gr
+            - gj
+            - kpv
+            - null
+        level:
+          type: string
+          description: A role can be scoped to a particular hierarchy level or for all
+          enum:
+            - all
+            - bv
+            - lv
+            - kv
+            - ov
+            - bezv
+        maxAge:
+          type: integer
+          example: 99
+        minAge:
+          type: [integer, 'null']
+          example: 0
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyRoleCategory'
+        aliases:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyRoleAlias'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyRoleTag'
+      required:
+        - id
+        - type
+        - label
+        - hierarchy
+        - level
+        - maxAge
+        - minAge
+        - categories
+        - aliases
+        - tags
+
+    AnyRoleCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '308'
+        label:
+          type: string
+          example: LAG Regionaler Strukturwandel
+        aliases:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnyRoleAlias'
+      required:
+        - id
+        - label
+        - aliases
+
+    AnyRoleAlias:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '308'
+        label:
+          type: string
+          example: Parteirat
+        divisionId:
+          type: integer
+          example: 8671
+        divisionKey:
+          $ref: '#/components/schemas/DivisionKey'
+      required:
+        - id
+        - label
+        - divisionId
+        - divisionKey
+
+    AnyRoleTag:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '7023839'
+        tagId:
+          type: string
+          example: '6590132'
+        name:
+          type: string
+          example: eShop Rolle
+      required:
+        - id
+        - tagId
+        - name
+
+    ServerAliveDto:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: ServerAliveTO
+        alive:
+          type: boolean
+          example: true
+        serverInfo:
+          type: string
+          example: Live-System (Version 1.5-24, Serverzeit 2023-12-06 17:03:15, 43 active users)
+
+    # mailinglist schemas
+    MlUser:
+      type: object
+      description: A natural person, an AMVparty in Sherpa
+      required:
+        - id
+        - sherpaPartyId
+        - email
+        - name
+        - divisions
+      properties:
+        id:
+          type: integer
+          example: 12795114
+          description: Mailinglist-user id.
+        sherpaPartyId:
+          description: The sherpa user id
+          type: [integer, 'null']
+          example: 12795004
+        email:
+          type: [string, 'null']
+          format: email
+          description: A user's default e-mail
+          example: user@example.org
+        name:
+          type: [string, 'null']
+          description: Users display name. Contains the Gnetz username
+          example: johndoe1
+        divisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MlDivision'
+
+    MlUpsertUserDto:
+      type: object
+      properties:
+        id:
+          description: User id. Leave empty/null to create new user. No check for duplicates
+          type: [integer, 'null']
+        sherpaPartyId:
+          description: The sherpa user id
+          type: [integer, 'null']
+          example: 12795004
+        email:
+          type: [string, 'null']
+          format: email
+          description: A user's default e-mail
+          example: user@example.org
+        name:
+          type: [string, 'null']
+          description: username
+          example: johndoe1
+        divisions:
+          description: list of division ids
+          type: [array, 'null']
+          items:
+            type: integer
+          example:
+            - 10689
+            - 11326
+
+    MlUserItem:
+      type: object
+      description: A compact version of MlUser
+      required:
+        - id
+        - sherpaPartyId
+        - name
+        - email
+        - divisions
+      properties:
+        id:
+          type: integer
+          example: 12795004
+        sherpaPartyId:
+          description: The sherpa user id
+          type: [integer, 'null']
+          example: 1820005
+        email:
+          type: [string, 'null']
+          format: email
+          description: A user's default e-mail
+          example: user@example.org
+        name:
+          type: [string, 'null']
+          description: Display name. Contains the Gnetz username.
+          example: johndoe5
+        divisions:
+          description: list of division ids
+          type: [array, 'null']
+          items:
+            type: integer
+          example:
+            - 10689
+            - 11326
+
+    MlDivision:
+      type: object
+      description: A division (dt. Gliederung) of the party and it's associated mailing lists.
+      required:
+        - id
+        - identifier
+        - parentId
+        - name
+        - shortDescription
+        - hierarchy
+        - hierarchyLevel
+        - lists
+        - distributors
+      properties:
+        id:
+          type: integer
+          example: 10689
+        identifier:
+          $ref: '#/components/schemas/DivisionKey'
+        parentId:
+          type: [integer, 'null']
+          description: Parent division id
+          example: 9641
+        name:
+          type: string
+          description: Full name of the division
+          example: Kreisverband Herne
+        shortDescription:
+          type: string
+          description: Contains the `shortName` of the division
+          example: Herne KV
+        hierarchy:
+          $ref: '#/components/schemas/HierarchyType'
+        hierarchyLevel:
+          type: integer
+          description: >
+            The level of the Division in said hierarchy, whilst not all hierarchies have all levels:
+              - `1`: BV ("Bundesverband")
+              - `2`: LV ("Landesverband")
+              - `3`: BezV ("Bezirksverband"), not always used
+              - `4`: KV ("Kreisverband")
+              - `5`: OV ("Ortsverband")
+          minimum: 1
+          maximum: 5
+          example: 4
+        lists:
+          type: array
+          items:
+            $ref: '#/components/schemas/MlMailinglist'
+        distributors:
+          type: [array, 'null']
+          items:
+            $ref: '#/components/schemas/MlSherpaDistributor'
+
+    MlMailinglist:
+      type: object
+      description: A mailing list, as managed by Sympa/Mailman
+      required:
+        - id
+        - name
+        - description
+        - isunsubscribeable
+        - visibility
+        - divisionId
+        - subscriberSyncToken
+        - distributors
+      properties:
+        id:
+          type: integer
+          example: 12345
+        name:
+          type: string
+          example: Test Externe Mailinglisten
+        description:
+          type: [string, 'null']
+          example: Mailingliste zum Sherpa-Verteiler \"Test Externe Mailinglisten\"
+        isunsubscribeable:
+          type: boolean
+          description: A user can unsubscribe itself from the list
+        visibility:
+          type: string
+          enum:
+            - public
+            - partymember
+            - divisionmember
+            - internal
+        divisionId:
+          type: [integer, 'null']
+          example: 2084
+        subscriberSyncToken:
+          description: A static alphanumeric token, used to authenticate against the Backend to read subscriber lists
+          type: string
+          readOnly: true
+          minLength: 64
+          maxLength: 64
+          example: b7JETuh0tDWEXJjyKrA6wmPBeoqJW4RXOuGEhgn0JBuAlt59VkTaGr5FoN2H051T
+        distributors:
+          description: list of sherpa distributor ids
+          type: array
+          items:
+            type: integer
+          example: [123, 124]
+
+    MlUpsertMailinglistDto:
+      type: object
+      required:
+        - name
+        - visibility
+      properties:
+        id:
+          description: Leave empty or set to null to create a new entry
+          type: [integer, 'null']
+          example: 12345
+        name:
+          type: string
+          example: Test Externe Mailinglisten
+        description:
+          type: [string, 'null']
+          example: Mailingliste zum Sherpa-Verteiler \"Test Externe Mailinglisten\"
+        isunsubscribeable:
+          type: boolean
+          description: A user can unsubscribe itself from the list.
+          default: false
+        visibility:
+          type: string
+          enum:
+            - public
+            - partymember
+            - divisionmember
+            - internal
+        divisionId:
+          type: [integer, 'null']
+          example: 2084
+        distributors:
+          description: list of sherpa distributor ids
+          type: [array, 'null']
+          items:
+            type: integer
+          example: [123, 124]
+
+    MlSubscription:
+      type: object
+      required:
+        - user
+        - list
+        - email
+        - userGender
+        - userSurname
+        - userPrename
+      properties:
+        user:
+          description: mailinglist-user id (not sherpa user id)
+          type: integer
+        list:
+          description: mailing list id
+          type: integer
+        email:
+          type: string
+          format: email
+          example: user+list@example.org
+        # userGender, userSurname, userPrename are always null after a MlAddSubscription request.
+        # They are resolved on MlFindSubscriptions when a sherpa user is linked to the mailinglist user
+        userGender:
+          type: [string, 'null']
+          enum:
+            - m
+            - w
+            - d
+          example: m
+        userSurname:
+          type: [string, 'null']
+          example: Doe
+        userPrename:
+          type: [string, 'null']
+          example: Doe
+
+    MlAddSubscriptionDto:
+      type: object
+      required:
+        - user
+        - list
+        - email
+      properties:
+        user:
+          description: mailinglist-user id (not sherpa user id)
+          type: integer
+        list:
+          description: mailing list id
+          type: integer
+        email:
+          type: string
+          format: email
+          example: user@example.org
+
+    MlUnsubscription:
+      type: object
+      required:
+        - id
+        - list
+        - email
+      properties:
+        id:
+          type: integer
+        list:
+          type: integer
+        email:
+          type: string
+          format: email
+          example: user+list@example.org
+
+    MlSherpaDistributor:
+      type: object
+      description: Link between Sherpa-Selektionen and Mailinglists, usually of the type "E-Mail-Verteiler (distributor)"
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          example: 9489
+        name:
+          type: string
+          example: Test Externe Mailinglisten
+
+    MlSherpaDistributorItem:
+      type: object
+      description: User and associated email address in sherpa distributor
+      required:
+        - sherpaPartyId
+        - email
+      properties:
+        sherpaPartyId:
+          description: sherpa user id
+          type: integer
+          example: 14366003
+        email:
+          type: string
+          format: email
+          example: john.doe@example.com
+        userGender:
+          type: string
+          enum:
+            - m
+            - w
+            - d
+          example: m
+        userSurname:
+          type: string
+          example: Doe
+        userPrename:
+          type: string
+          example: Doe
+
+    MlErrorDto:
+      type: object
+      required:
+        - toType
+        - exceptionClassName
+        - originalMessage
+        - httpStatusCode
+        - userMessage
+        - stackTrace
+        - serverInfo
+        - requestUuid
+        - source
+        - type
+        - code
+      properties:
+        toType:
+          type: string
+          example: ExceptionTO
+        exceptionClassName:
+          type: string
+          example: java.lang.NullPointerException
+        originalMessage:
+          type: [string, 'null']
+        httpStatusCode:
+          type: string
+          example: '500'
+        userMessage:
+          type: string
+          description: Message to the user on frontend
+          example: Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.
+        stackTrace:
+          type: string
+        serverInfo:
+          type: string
+        requestUuid:
+          type: [string, 'null']
+        source:
+          type: string
+          example: server
+        type:
+          type: string
+          example: SERVER_GENERAL
+        code:
+          type: [string, 'null']
+
+    # SAML schemas
+    SamlFindUsersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlUser'
+        meta:
+          type: object
+          properties:
+            hasNext:
+              type: boolean
+              description: Whether a next page exists or not
+      required:
+        - data
+        - meta
+
+    SamlNewUser:
+      type: object
+      description: new user
+      properties:
+        toType:
+          type: string
+          example: SamlOnboardingPartyTO
+        id:
+          type: string
+          description: sherpa user id
+          example: '12345678'
+        name1:
+          type: string
+          description: Firstname
+          example: John
+        name2:
+          type: string
+          description: Lastname
+          example: Doe
+        email:
+          type: [string, 'null']
+          format: email
+          example: john.doe@example.com
+      required:
+        - toType
+        - id
+        - name1
+        - name2
+        - email
+
+    SamlUser:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: SamlSynchronizationPartyTO
+        id:
+          type: string
+          description: sherpa user id
+          example: '12345678'
+        ownerIdentifier:
+          $ref: '#/components/schemas/DivisionKey'
+        ownerId:
+          example: '11002607'
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+          example: 2020-07-22T13:38:30+0200
+        lastModifiedOn:
+          type: string
+          format: date-time
+          example: 2022-11-25T16:45:24+0100
+        name1:
+          type: string
+          example: John
+        name2:
+          type: string
+          example: Doe
+        email:
+          type: [string, 'null']
+          format: email
+          example: john.doe@example.com
+        blockingNotice:
+          description: Sperrvermerk in sherpa. Flag to indicate that user should not receive any emails.
+          type: boolean
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlUserRole'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlUserMembership'
+      required:
+        - toType
+        - id
+        - ownerIdentifier
+        - ownerId
+        - createdOn
+        - lastModifiedOn
+        - name1
+        - name2
+        - email
+        - roles
+        - memberships
+
+    SamlUserRole:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: SamlSynchronizationRoleAssignmentTO
+        id:
+          type: string
+          example: '13926537'
+        ownerIdentifier:
+          $ref: '#/components/schemas/DivisionKey'
+        roleId:
+          type: string
+          example: '7555235'
+        delegatedByOrganizationIdentifier:
+          type: [string, 'null']
+          description: can be a division key or an id for a non regular chapter starting with 5
+          example: '512345'
+        tags:
+          type: [array, 'null']
+          items:
+            $ref: '#/components/schemas/SamlUserRoleTag'
+      required:
+        - toType
+        - id
+        - ownerIdentifier
+        - roleId
+        - delegatedByOrganizationIdentifier
+        - tags
+
+    SamlUserRoleTag:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: SamlGenericTagTO
+        id:
+          type: string
+          example: '6592657'
+        tagId:
+          type: string
+          example: '6590132'
+        name:
+          type: string
+          example: eShop Rolle
+      required:
+        - toType
+        - id
+        - tagId
+        - name
+
+    SamlUserMembership:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: SamlSynchronizationMembershipTO
+        id:
+          type: string
+        ownerIdentifier:
+          $ref: '#/components/schemas/DivisionKey'
+        memberOfStructureIdentifier:
+          $ref: '#/components/schemas/DivisionKey'
+      required:
+        - toType
+        - id
+        - ownerIdentifier
+        - memberOfStructureIdentifier
+
+    SamlError:
+      type: object
+      properties:
+        toType:
+          type: string
+          example: ExceptionTO
+        exceptionClassName:
+          type: string
+          example: com.proximity.gp.common.exception.InvalidCredentialsException
+        originalMessage:
+          type: string
+          example: api endpoint needs permission for SAML, caller got only GNETZ2
+        httpStatusCode:
+          type: string
+          example: '500'
+        userMessage:
+          type: string
+          example: Bei der Verarbeitung der Anfrage ist ein Fehler aufgetreten.
+        stackTrace:
+          type: string
+        serverInfo:
+          type: string
+          example: Live-System (Version 1.4-89, Serverzeit 2023-04-09 09:21:47.519+0200)
+        requestUuid:
+          type: string
+        source:
+          type: string
+          example: server
+        type:
+          type: string
+          example: INVALID_CREDENTIALS
+        code:
+          type: string
+
+    # gnetz schemas
+
+    GnDivisionMembership:
+      type: object
+      properties:
+        divisionKey:
+          $ref: '#/components/schemas/DivisionKey'
+        joinedAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T12:33:41.123Z'
+        exitedAt:
+          type: [string, 'null']
+          format: date-time
+          example: '2024-06-01T12:00:00.000Z'
+      required:
+        - divisionKey
+        - joinedAt
+        - exitedAt
+
+    GnProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: '9677feef-0916-4ee9-bac9-36655950666a'
+        userId:
+          description: the sherpa user id
+          type: string
+          example: '12345678'
+        personalId:
+          description: personal identification number
+          type: string
+          example: '12345678'
+        username:
+          type: string
+          example: JohnDoe1
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        image:
+          $ref: '#/components/schemas/GnProfileImage'
+        email:
+          type: string
+          format: email
+          example: john.doe@example.com
+        loginEmail:
+          description: >-
+            Login email of the associated gnetz account. Mirrors that account's
+            email and, unlike `email`, is not user-editable. `null` when no
+            gnetz account is associated.
+          type: [string, 'null']
+          format: email
+          example: john.doe@example.com
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnPhoneNumber'
+        messengers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnMessenger'
+        socialMedia:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnSocialMedia'
+        tags:
+          type: [array, 'null']
+          items:
+            type: string
+          example: ['101', '102']
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnDivisionMembership'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnRole'
+        achievements:
+          type: [array, 'null']
+          items:
+            type: string
+            example: Silberne Sonnenblume
+        privacy:
+          $ref: '#/components/schemas/GnPrivacySettings'
+      required:
+        - id
+        - userId
+        - personalId
+        - username
+        - firstName
+        - lastName
+        - image
+        - email
+        - loginEmail
+        - phoneNumbers
+        - messengers
+        - socialMedia
+        - tags
+        - memberships
+        - roles
+        - achievements
+        - privacy
+
+    GnImageLink:
+      type: object
+      properties:
+        id:
+          description: This field is always returned by sherpa but must be left out when setting a new image for a profile.
+          type: string
+          example: '10'
+        url:
+          type: string
+          description: Image url
+          example: >-
+            https://static.example.com/profiles/10b4be70-9e3d-40a5-a46a-b0668bdf7e03.jpg
+        mimetype:
+          type: string
+          description: Image mimetype
+          example: image/jpeg
+        width:
+          type: integer
+          description: Width in pixels
+          example: 150
+        height:
+          type: integer
+          description: Height in pixels
+          example: 150
+      required:
+        - url
+        - mimetype
+        - width
+        - height
+
+    GnProfileImage:
+      type: object
+      properties:
+        thumbnail:
+          oneOf:
+            - $ref: '#/components/schemas/GnImageLink'
+            - type: 'null'
+        large:
+          oneOf:
+            - $ref: '#/components/schemas/GnImageLink'
+            - type: 'null'
+      required:
+        - thumbnail
+        - large
+
+    GnSocialMediaType:
+      type: string
+      enum:
+        - facebook
+        - instagram
+        - mastodon
+        - twitter
+        - chatbegruenung
+
+    GnSocialMedia:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GnSocialMediaType'
+          example: twitter
+        url:
+          type: string
+          example: https://twitter.com/johndoe
+      required:
+        - id
+        - type
+        - url
+
+    GnUpdateSocialMediaDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GnSocialMediaType'
+          example: twitter
+        url:
+          type: string
+          example: https://twitter.com/johndoe
+      required:
+        - type
+        - url
+
+    GnMessengerType:
+      type: string
+      enum:
+        - threema
+
+    GnMessenger:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GnMessengerType'
+          example: threema
+        externalId:
+          type: string
+          example: 'GAvh15G12512125H'
+      required:
+        - id
+        - type
+        - externalId
+
+    GnUpdateMessengerDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GnMessengerType'
+          example: threema
+        externalId:
+          type: string
+          example: 'GAvh15G12512125H'
+      required:
+        - type
+        - externalId
+
+    GnPhoneNumber:
+      type: object
+      properties:
+        id:
+          type: string
+        country:
+          type: string
+          example: '+49'
+        number:
+          type: string
+          example: '17712341234'
+      required:
+        - id
+        - country
+        - number
+
+    GnUpdatePhoneNumberDto:
+      type: object
+      properties:
+        id:
+          type: string
+        country:
+          type: string
+          example: '+49'
+        number:
+          type: string
+          example: '17712341234'
+      required:
+        - country
+        - number
+
+    GnVisibility:
+      type: string
+      enum:
+        - private
+        - public
+        - bv_wide
+        - lv_wide
+        - kv_wide
+        - ov_wide
+
+    GnPrivacySettings:
+      type: object
+      properties:
+        overall:
+          oneOf:
+            - $ref: '#/components/schemas/GnVisibility'
+            - type: 'null'
+          example: public
+        email:
+          oneOf:
+            - $ref: '#/components/schemas/GnVisibility'
+            - type: 'null'
+          example: public
+        chatbegruenung:
+          oneOf:
+            - $ref: '#/components/schemas/GnVisibility'
+            - type: 'null'
+          example: public
+      required:
+        - overall
+        - email
+        - chatbegruenung
+
+    GnProfileFormValues:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+            example: john.doe@example.com
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnPhoneNumber'
+        messengers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnMessenger'
+        socialMedia:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnSocialMedia'
+
+    GnCreateProfileDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A pre-generated uuid as primary id for the new profile
+          format: uuid
+        userId:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        loginEmail:
+          description: Login email pushed from the associated gnetz account. `null` when there is no associated login.
+          type: [string, 'null']
+          format: email
+        privacy:
+          oneOf:
+            - $ref: '#/components/schemas/GnPrivacySettings'
+            - type: 'null'
+      required:
+        - id
+        - userId
+        - username
+        - email
+
+    GnUpdateProfileDto:
+      type: object
+      properties:
+        userId:
+          description: This field is immutable but has to be send in payload
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        loginEmail:
+          description: Login email pushed from the associated gnetz account. `null` when there is no associated login.
+          type: [string, 'null']
+          format: email
+        image:
+          description: |
+            Always send the current image data on update. Marked required to
+            prevent accidental data loss: the field can technically be omitted,
+            but doing so loses the stored image.
+            When adding a new image the ids must not be set.
+            When updating a profile with unchanged image the ids must be sent along.
+          $ref: '#/components/schemas/GnProfileImage'
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnUpdatePhoneNumberDto'
+        messengers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnUpdateMessengerDto'
+        socialMedia:
+          type: array
+          items:
+            $ref: '#/components/schemas/GnUpdateSocialMediaDto'
+        tags:
+          type: array
+          items:
+            type: string
+          example: ['101', '102']
+        privacy:
+          $ref: '#/components/schemas/GnPrivacySettings'
+      required:
+        - userId
+        - username
+        - email
+        - image
+        - phoneNumbers
+        - messengers
+        - socialMedia
+        - tags
+        - privacy
+
+    GnDeletedProfileDto:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 0de14cbe-221b-43a5-8222-45414066f5b6
+        userId:
+          type: string
+          example: '12345678'
+      required:
+        - id
+        - userId
+
+    GnTagType:
+      type: string
+      enum:
+        - skill
+        - interest
+
+    GnTag:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        type:
+          $ref: '#/components/schemas/GnTagType'
+        externalId:
+          type: string
+          example: '101'
+          description: id for this tag by another system/cms
+        tag:
+          type: string
+          example: Zeitpolitik
+      required:
+        - id
+        - tag
+        - type
+
+    GnRoleType:
+      type: string
+      enum:
+        - role
+        - mandate
+        - office
+
+    GnRole:
+      type: object
+      properties:
+        id:
+          description: This ID refers to the m:n relation mapping
+          type: string
+          example: '12345'
+        roleId:
+          description: This ID refers to the role itself
+          type: integer
+          example: 12345
+        type:
+          $ref: '#/components/schemas/GnRoleType'
+        name:
+          type: string
+          example: LAG Verkehr Mitarbeitende
+        alias:
+          type: string
+          example: LAG Mobilität
+      required:
+        - id
+        - roleId
+        - type
+        - name
+        - alias
+
+    GnError:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 17405cfc-4b50-987e
+          description: unique error id
+        timestamp:
+          type: string
+          format: date-time
+          example: '2023-11-30T13:24:25.298Z'
+        exceptionClassName:
+          type: string
+          example: com.proximity.gp.common.exception.InvalidCredentialsException
+        message:
+          type: string
+          example: 'invalid request data'
+        validationErrors:
+          type: [array, 'null']
+          items:
+            $ref: '#/components/schemas/GnValidationError'
+      required:
+        - id
+        - timestamp
+        - exceptionClassName
+        - message
+        - validationErrors
+
+    GnValidationError:
+      type: object
+      properties:
+        path:
+          type: string
+          example: 'division.type'
+        constraints:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: 'isEnum'
+              message:
+                type: string
+                example: "'foobar' is not a valid division type'"
+            required:
+              - type
+              - message
+
+  securitySchemes:
+    mutualTLS:
+      type: mutualTLS
+      description: >-
+        The API authenticates callers solely by client certificate (mutual
+        TLS). The certificate must be signed by the `Sherpa API CA` and carries
+        the caller's permissions. mTLS is established at the transport layer, so
+        the generated client does not handle it — configure your HTTP client
+        (e.g. an axios `httpsAgent`) with the certificate and key.
