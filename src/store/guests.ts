@@ -61,8 +61,14 @@ export function createGuestAccount(
     if (!userId) {
       outcome = 'created'
       userId = insertUser(db, guest, now)
-    } else if (hasAccess(db, userId, now)) {
-      return { outcome: 'has-access' }
+    } else {
+      if (hasAccess(db, userId, now)) return { outcome: 'has-access' }
+      if (hasActiveGuestMarker(db, userId, now)) {
+        return { outcome, user: getUser(db, userId)! }
+      }
+      db.prepare(
+        'DELETE FROM role_assignments WHERE user_id = ? AND role_id = ?'
+      ).run(userId, guestRole.id)
     }
 
     db.prepare(
@@ -107,20 +113,28 @@ export function revokeGuestAccount(db: DatabaseSync, userId: string) {
   })
 }
 
+/** Membership or access role; the guest marker is checked separately. */
 function hasAccess(db: DatabaseSync, userId: string, now: Date) {
-  const iso = now.toISOString()
   const membership = db
     .prepare(
       'SELECT 1 FROM memberships WHERE user_id = ? AND (exited_at IS NULL OR exited_at > ?)'
     )
-    .get(userId, iso)
-  const roleIds = [...accessRoleIds, guestRole.id]
+    .get(userId, now.toISOString())
   const role = db
     .prepare(
-      `SELECT 1 FROM role_assignments WHERE user_id = ? AND role_id IN (${placeholders(roleIds)})`
+      `SELECT 1 FROM role_assignments WHERE user_id = ? AND role_id IN (${placeholders(accessRoleIds)})`
     )
-    .get(userId, ...roleIds)
+    .get(userId, ...accessRoleIds)
   return Boolean(membership || role)
+}
+
+function hasActiveGuestMarker(db: DatabaseSync, userId: string, now: Date) {
+  const markers = db
+    .prepare(
+      'SELECT expires_on FROM role_assignments WHERE user_id = ? AND role_id = ?'
+    )
+    .all(userId, guestRole.id) as { expires_on: string }[]
+  return markers.some((marker) => Date.parse(marker.expires_on) > now.getTime())
 }
 
 function insertUser(db: DatabaseSync, guest: NewGuestAccount, now: Date) {
