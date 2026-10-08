@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import type { DatabaseSync } from 'node:sqlite'
 import { samlError } from '../errors.ts'
+import { validateBody } from '../spec.ts'
 import type { Schemas } from '../types.ts'
 import { findUsers, toSamlUser } from '../users.ts'
 
@@ -18,42 +19,34 @@ function toStringArray(value: unknown) {
 export function samlRouter(db: DatabaseSync) {
   const router = Router()
 
-  router.post('/saml/party/newusers', (req, res) => {
-    if (!req.body) {
-      res.status(415).json(samlError(415, 'missing request body'))
-      return
+  router.post(
+    '/saml/party/newusers',
+    validateBody('post', '/saml/party/newusers'),
+    (req, res) => {
+      const from = parseDate(req.body.from)
+      const to = parseDate(req.body.to)
+      const users: Schemas['SamlNewUser'][] = findUsers(db, {
+        createdFrom: from,
+        createdTo: to,
+      }).map(({ id, name1, name2, email }) => ({
+        toType: 'SamlOnboardingPartyTO',
+        id,
+        name1,
+        name2,
+        email,
+      }))
+      res.json(users)
     }
-    const from = parseDate(req.body.from)
-    const to = parseDate(req.body.to)
-    if (!from || !to) {
-      res.status(500).json(samlError(500, 'from and to must be valid dates'))
-      return
-    }
-    const users: Schemas['SamlNewUser'][] = findUsers(db, {
-      createdFrom: from,
-      createdTo: to,
-    }).map(({ id, name1, name2, email }) => ({
-      toType: 'SamlOnboardingPartyTO',
-      id,
-      name1,
-      name2,
-      email,
-    }))
-    res.json(users)
-  })
+  )
 
-  router.post('/saml/party/list', (req, res) => {
-    const ids = req.body?.partyIdList
-    if (!Array.isArray(ids)) {
-      res.status(500).json(samlError(500, 'partyIdList must be an array'))
-      return
+  router.post(
+    '/saml/party/list',
+    validateBody('post', '/saml/party/list'),
+    (req, res) => {
+      const users = findUsers(db, { ids: req.body.partyIdList })
+      res.json(users.map((user) => toSamlUser(db, user)))
     }
-    res.json(
-      findUsers(db, { ids: ids.map(String) }).map((user) =>
-        toSamlUser(db, user)
-      )
-    )
-  })
+  )
 
   router.get('/saml/v1/users', (req, res) => {
     const { limit = '200', after, modified_after, modified_before } = req.query

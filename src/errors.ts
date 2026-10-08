@@ -41,6 +41,10 @@ export function gnValidationFailed(
   )
 }
 
+export function gnServerError(message: string): Schemas['GnError'] {
+  return gnError('java.lang.RuntimeException', message)
+}
+
 function gnError(
   exceptionClassName: string,
   message: string,
@@ -55,14 +59,17 @@ function gnError(
   }
 }
 
-/** Lists the given fields that are missing from a request body. */
-export function missingFields(body: Record<string, unknown>, fields: string[]) {
-  return fields
-    .filter((field) => body[field] === undefined)
-    .map((field) => ({
-      path: field,
-      constraints: [
-        { type: 'isDefined', message: `${field} should not be undefined` },
-      ],
-    }))
+export class InvalidRequest extends Error {
+  validationErrors: Schemas['GnValidationError'][]
+  missingBody: boolean
+
+  constructor(
+    message: string,
+    validationErrors: Schemas['GnValidationError'][] = [],
+    missingBody = false
+  ) {
+    super(message)
+    this.validationErrors = validationErrors
+    this.missingBody = missingBody
+  }
 }

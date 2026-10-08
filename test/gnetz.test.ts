@@ -134,6 +134,19 @@ describe('gnetz', () => {
       expect(res.status).toBe(422)
     })
 
+    it('rejects a body that does not match the spec', async () => {
+      const res = await api.put(`/gnetz/v2/profiles/${JOHN.profileId}`, {
+        ...update,
+        image: null,
+        phoneNumbers: '017712341234',
+      })
+      expectMatchesSpec('put', '/gnetz/v2/profiles/{profileId}', res)
+      expect(res.status).toBe(422)
+      expect(
+        res.body.validationErrors.map((e: { path: string }) => e.path)
+      ).toEqual(expect.arrayContaining(['image', 'phoneNumbers']))
+    })
+
     it('answers 404 for an unknown profile', async () => {
       // The spec documents no 404 here, but Sherpa answers unknown profiles with one
       const res = await api.put(`/gnetz/v2/profiles/${randomUUID()}`, update)

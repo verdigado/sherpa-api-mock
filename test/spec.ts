@@ -1,29 +1,5 @@
-import { Ajv2020, type ValidateFunction } from 'ajv/dist/2020.js'
-import addFormats from 'ajv-formats'
-import { readFileSync } from 'node:fs'
 import { expect } from 'vitest'
-import { parse } from 'yaml'
-
-const spec = parse(
-  readFileSync(new URL('../spec/openapi.yaml', import.meta.url), 'utf-8')
-)
-
-const ajv = new Ajv2020({
-  strict: false,
-  allErrors: true,
-  validateSchema: false,
-})
-addFormats.default(ajv)
-ajv.addSchema(spec, 'spec')
-
-const validators = new Map<string, ValidateFunction>()
-
-const pointer = (...segments: string[]) =>
-  segments
-    .map((s) =>
-      encodeURIComponent(s.replaceAll('~', '~0').replaceAll('/', '~1'))
-    )
-    .join('/')
+import { errorsText, schemaAt, spec } from '../src/spec.ts'
 
 /**
  * Asserts that a response is documented for the operation and its body matches
@@ -48,11 +24,11 @@ export function expectMatchesSpec(
   }
   if (!response.content?.['application/json']?.schema) return
 
-  const ref = `spec#/${pointer(...location, 'content', 'application/json', 'schema')}`
-  let validate = validators.get(ref)
-  if (!validate) {
-    validate = ajv.compile({ $ref: ref })
-    validators.set(ref, validate)
-  }
-  expect(validate(res.body), ajv.errorsText(validate.errors)).toBe(true)
+  const validate = schemaAt([
+    ...location,
+    'content',
+    'application/json',
+    'schema',
+  ])
+  expect(validate(res.body), errorsText(validate.errors)).toBe(true)
 }
