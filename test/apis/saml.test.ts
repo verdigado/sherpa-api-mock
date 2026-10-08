@@ -73,7 +73,7 @@ describe('saml', () => {
       const last = first.body.data.at(-1).id
       const second = await api.get(`/saml/v1/users?limit=15&after=${last}`)
       expectMatchesSpec('get', '/saml/v1/users', second)
-      expect(second.body.data).toHaveLength(5)
+      expect(second.body.data).toHaveLength(10)
       expect(second.body.meta.hasNext).toBe(false)
     })
 
