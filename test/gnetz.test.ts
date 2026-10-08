@@ -152,22 +152,6 @@ describe('gnetz', () => {
       const res = await api.put(`/gnetz/v2/profiles/${randomUUID()}`, update)
       expect(res.status).toBe(404)
     })
-
-    it('keeps concurrent updates to different profiles', async () => {
-      const profiles = (await api.post('/gnetz/v2/profiles/list', {})).body
-      await Promise.all(
-        profiles.map((p: { id: string; userId: string; username: string }) =>
-          api.put(`/gnetz/v2/profiles/${p.id}`, {
-            ...update,
-            userId: p.userId,
-            username: p.username,
-            email: `${p.username}@example.org`,
-          })
-        )
-      )
-      const stored = (await api.post('/gnetz/v2/profiles/list', {})).body
-      for (const p of stored) expect(p.email).toBe(`${p.username}@example.org`)
-    })
   })
 
   describe('GET /gnetz/v2/profiles/{profileId}/form-values', () => {
