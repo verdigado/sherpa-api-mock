@@ -1,88 +1,60 @@
 # Sherpa API Mock
 
-The **Sherpa API Mock** is a lightweight, mock implementation of the Sherpa API designed for local development. It offers the minimal set of endpoints necessary for developing features in other infrastructure components.
+A stand-in for the [Sherpa API](https://git.verdigado.com/verdigado/sherpa-api), for developing and testing the services that talk to Sherpa.
 
-The Sherpa API specification can be found at https://git.verdigado.com/verdigado/sherpa-api
+It is a fake rather than a mock: it keeps its data in SQLite, so a write shows up in later reads and survives a restart. It applies Sherpa's rules only where a caller's behaviour depends on them. It covers only the endpoints our services call. Any other path answers `501`. It speaks plain HTTP, without mTLS.
 
-## Concept
+## Running
 
-- **Simple Node.js Express App**: This mock service is built using Node.js and Express, serving data from JSON files.
-- **Realistic Data**: JSON files contain data closely mirroring production data (for divisions and roles) alongside fake user data.
-- **Dockerized Deployment**: A prebuilt Docker image is available on the GitHub Container Registry. You can pull it using:
-  ```
-  docker run -d -p 5000:5000 --name sherpa-mock ghcr.io/verdigado/sherpa-api-mock:latest
-  ```
-- **Configurable Port**: By default, the service runs on port 5000. This can be customized via the `APP_PORT` environment variable.
-
-## Modifing Example Data
-
-To modify the api responses, simply update or replace the sample JSON files located in the `data` directory.
-
-**No Type Checking**
-This mock service does not perform type checking. If the data from the data directory does not conform to the API specification you won't get any warning.
-
-
-When running inside docker you can use a volume mapping to `/app/data` to serve your example json files.
-
-**Copy Sample Files to Host**
-
-```
-docker cp <container id>:/app/data ./local/path
+```shell
+docker run -d -p 5000:5000 -v ./sherpa-data:/app/data ghcr.io/verdigado/sherpa-api-mock:latest
 ```
 
-**Docker Compose Example**
-```yaml
-services:
-  sherpa-api-mock:
-    image: ghcr.io/verdigado/sherpa-api-mock:latest
-    ports:
-      - 5000:5000
-    volumes:
-      - ./local/path:/app/data
+The API lives under `/sherpa/ws/m2m`, like Sherpa's. Mount `/app/data` to keep the data across container restarts.
+
+| Variable        | Default          | Purpose                     |
+| --------------- | ---------------- | --------------------------- |
+| `APP_PORT`      | `5000`           | Port to listen on           |
+| `DATABASE_PATH` | `data/sherpa.db` | Where the database is stored |
+
+## Data
+
+On its first start, with an empty database, the mock seeds itself from the fixtures in the repo:
+
+- divisions, roles and gnetz tags: real Sherpa data with sensitive details replaced. These are read-only.
+- 20 example users with memberships, roles and gnetz profiles
+
+To change the data, either edit the fixtures and reset, or change it through the API. A reset wipes the database and seeds it again:
+
+```shell
+npm run reset                             # locally
+docker exec <container> node src/reset.ts # in Docker
 ```
 
----
+## Spec
 
-## Implemented Endpoints
+The mock is built against a pinned copy of the Sherpa spec. Its types come from that copy, and the tests check every response against it. To move to another version of the spec, point the update script at a ref in a local sherpa-api checkout (`../sherpa-api` by default, or set `SHERPA_API_DIR`):
 
-### ANY API
-
-```
-GET /any/v1/divisions
+```shell
+npm run spec:update -- <ref>
 ```
 
-```
-GET /any/v1/roles
-```
+## Endpoints
 
-### SAML API
-
-```
-POST /saml/party/newusers
-```
-
-```
-POST /saml/party/list
-```
-
----
+- `GET /any/v1/divisions`, `/any/v1/roles`, `/any/v1/alive`
+- `POST /saml/party/newusers`, `/saml/party/list`
+- `GET /saml/v1/users`
+- `GET /gnetz/v2/profiles/ids`, `/gnetz/v2/profiles/{profileId}/form-values`, `/gnetz/v2/tags`
+- `POST /gnetz/v2/profiles`, `/gnetz/v2/profiles/list`, `/gnetz/v2/profiles/delete`
+- `PUT /gnetz/v2/profiles/{profileId}`
 
 ## Development
 
-### Install Dependencies
+Needs Node 22.18 or later, which runs the TypeScript sources directly.
 
-```
+```shell
 npm install
-```
-
-### Start App
-
-```
-npm run start
-```
-
-### Start in Development Mode
-
-```
-npm run dev
+npm run dev       # restarts on changes
+npm test
+npm run typecheck
 ```
