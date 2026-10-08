@@ -11,9 +11,7 @@ describe('any', () => {
     expect(res.body.length).toBeGreaterThan(0)
   })
 
-  // The spec allows a null hierarchy by type but leaves null out of its enum, and real roles have one.
-  // Drop `.fails` once the spec is fixed.
-  it.fails('lists roles', async () => {
+  it('lists roles', async () => {
     const res = await api.get('/any/v1/roles')
     expectMatchesSpec('get', '/any/v1/roles', res)
     expect(res.body.length).toBeGreaterThan(0)

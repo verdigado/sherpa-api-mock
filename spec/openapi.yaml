@@ -1480,6 +1480,7 @@ components:
             - gr
             - gj
             - kpv
+            - null
         level:
           type: string
           description: A role can be scoped to a particular hierarchy level or for all
