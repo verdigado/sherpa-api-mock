@@ -363,6 +363,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/saml/v1/guest-accounts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create a guest account
+         * @description Creates a guest account for a person who has no access to the Grünes Netz
+         *     yet, in a single call: create the party record (or reuse the matching
+         *     existing one), check that the person qualifies, and set the guest marker.
+         *
+         *     The guest marker must carry an expiry from the start. There must be no
+         *     point in time at which a guest account exists without one. How long that
+         *     expiry runs is Sherpa's to decide — the marker has a default and a
+         *     maximum duration — so the caller sends no duration and reads the
+         *     resulting date off the returned record.
+         *
+         *     A person who already has access — a member, or the holder of a role that
+         *     grants access without a membership — does not qualify and is rejected
+         *     with `409`.
+         *
+         *     The returned id comes from the same sequence as regular party records. It
+         *     becomes the `uidNumber` in LDAP and is the primary user id across the
+         *     Grünes Netz, so it has to be in the response body.
+         */
+        post: operations["SamlCreateGuestAccount"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/saml/v1/guest-accounts/{userId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Sherpa user id of the guest account */
+                userId: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Revoke a guest account
+         * @description Removes the guest marker from a party record. Used to end a guest's
+         *     access before its expiry, e.g. on abuse. An expired marker ends the
+         *     access on its own and needs no call.
+         *
+         *     Removing the account in LDAP alone is not enough: the marker would stay
+         *     in Sherpa and the next user sync would reactivate the guest.
+         */
+        delete: operations["SamlRevokeGuestAccount"];
+        options?: never;
+        head?: never;
+        /**
+         * Renew a guest account
+         * @description Extends the expiry of an existing guest marker and returns the updated
+         *     party record. Used while the account is still valid, e.g. for a guest
+         *     who keeps helping beyond the end of a campaign.
+         *
+         *     Repeating the creating call is not a way to renew. While the marker
+         *     holds, the person has access and no longer qualifies as a guest, so the
+         *     call would be rejected with `409`. Revoking and creating again is not
+         *     one either: it drops the existing role assignment along with its
+         *     history, restarts the deadlines towards anonymization, and lets the
+         *     maximum duration be sidestepped one default duration at a time.
+         *
+         *     The new expiry is Sherpa's to determine, the same way it is on creation,
+         *     and is read off the returned record.
+         */
+        patch: operations["SamlRenewGuestAccount"];
+        trace?: never;
+    };
     "/gnetz/v2/profiles/ids": {
         parameters: {
             query?: never;
@@ -1097,6 +1177,16 @@ export interface components {
              * @example 512345
              */
             delegatedByOrganizationIdentifier: string | null;
+            /**
+             * Format: date-time
+             * @description When the assignment runs out, `null` if it does not expire. Required
+             *     for the guest marker: a consumer has to be able to tell how long a
+             *     guest account is still valid, both from the creating call and from
+             *     the user endpoints, to warn ahead of the expiry and to prompt for a
+             *     renewal.
+             * @example 2026-12-31T23:59:59+0100
+             */
+            expiresOn: string | null;
             tags: components["schemas"]["SamlUserRoleTag"][] | null;
         };
         SamlUserRoleTag: {
@@ -1108,6 +1198,41 @@ export interface components {
             tagId: string;
             /** @example eShop Rolle */
             name: string;
+        };
+        /** @description Data collected from the invited person plus the inviting division */
+        SamlCreateGuestAccountDto: {
+            /**
+             * @description Firstname
+             * @example Jane
+             */
+            name1: string;
+            /**
+             * @description Lastname
+             * @example Doe
+             */
+            name2: string;
+            /**
+             * Format: email
+             * @example jane.doe@example.com
+             */
+            email: string;
+            /**
+             * Format: date
+             * @example 1990-04-17
+             */
+            birthDate?: string;
+            /**
+             * @description The division the guest was invited to work in. It is picked by the
+             *     inviting member and is not necessarily their own division.
+             */
+            ownerIdentifier: components["schemas"]["DivisionKey"];
+            /**
+             * @description Sherpa user id of the inviting member. Optional: the invitation is
+             *     persisted in the Grüne API anyway. Useful if Sherpa should be able to
+             *     tell whose invitation a guest account goes back to.
+             * @example 12345678
+             */
+            invitedByUserId?: string | null;
         };
         SamlUserMembership: {
             /** @example SamlSynchronizationMembershipTO */
@@ -2475,6 +2600,183 @@ export interface operations {
                     "application/json": components["schemas"]["SamlFindUsersResponse"];
                 };
             };
+        };
+    };
+    SamlCreateGuestAccount: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SamlCreateGuestAccountDto"];
+            };
+        };
+        responses: {
+            /**
+             * @description An existing party record was found and marked as a guest. It keeps
+             *     its id.
+             */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlUser"];
+                };
+            };
+            /** @description No party record existed. It was created and marked as a guest. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlUser"];
+                };
+            };
+            /**
+             * @description Invalid input: missing required fields, implausible values, unknown
+             *     division.
+             */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /** @description The calling certificate is not permitted to use this endpoint. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /**
+             * @description The person already has access to the Grünes Netz and cannot become a
+             *     guest.
+             */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /**
+             * @description Several party records match the given data and cannot be resolved
+             *     automatically. Neither one of them is picked nor a new record
+             *     created; the case needs manual clarification.
+             */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            500: components["responses"]["SamlServerError"];
+        };
+    };
+    SamlRevokeGuestAccount: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Sherpa user id of the guest account */
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The guest marker was removed. */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description The calling certificate is not permitted to use this endpoint. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /** @description No party record with a guest marker exists for the given id. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            500: components["responses"]["SamlServerError"];
+        };
+    };
+    SamlRenewGuestAccount: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Sherpa user id of the guest account */
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The guest marker was extended. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlUser"];
+                };
+            };
+            /** @description The calling certificate is not permitted to use this endpoint. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /** @description No party record with a guest marker exists for the given id. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            /**
+             * @description The extension would exceed the maximum duration of the guest marker.
+             *     The account keeps its current expiry.
+             */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SamlError"];
+                };
+            };
+            500: components["responses"]["SamlServerError"];
         };
     };
     GnGetProfileIds: {

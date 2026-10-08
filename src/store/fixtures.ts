@@ -18,7 +18,8 @@ export type UserFixture = Omit<
     joinedAt: string
     exitedAt: string | null
   })[]
-  roles: (Omit<Schemas['SamlUserRole'], 'toType' | 'tags'> & {
+  roles: (Omit<Schemas['SamlUserRole'], 'toType' | 'tags' | 'expiresOn'> & {
+    expiresOn?: string | null
     tags: RoleTag[] | null
   })[]
   achievements: string[] | null
