@@ -14,7 +14,12 @@ export const BASE_PATH = '/sherpa/ws/m2m'
 
 /** Answers errors in the error format of the API the request went to. */
 const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
-  const invalid = err instanceof InvalidRequest ? err : undefined
+  const invalid =
+    err instanceof InvalidRequest
+      ? err
+      : err?.type === 'entity.parse.failed'
+        ? new InvalidRequest('malformed JSON body')
+        : undefined
   if (!invalid) console.error(err)
   const message = invalid?.message ?? 'internal server error'
 

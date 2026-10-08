@@ -47,6 +47,15 @@ describe('saml', () => {
       ])
     })
 
+    it('answers malformed JSON in its error format', async () => {
+      const res = await api
+        .post('/saml/party/list')
+        .set('content-type', 'application/json')
+        .send('{"partyIdList": [')
+      expectMatchesSpec('post', '/saml/party/list', res)
+      expect(res.status).toBe(500)
+    })
+
     it('rejects a missing id list', async () => {
       const res = await api.post('/saml/party/list', {})
       expectMatchesSpec('post', '/saml/party/list', res)

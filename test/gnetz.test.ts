@@ -196,6 +196,15 @@ describe('gnetz', () => {
     })
   })
 
+  it('answers malformed JSON in its error format', async () => {
+    const res = await api
+      .post('/gnetz/v2/profiles/list')
+      .set('content-type', 'application/json')
+      .send('{"userIds": [')
+    expectMatchesSpec('post', '/gnetz/v2/profiles/list', res)
+    expect(res.status).toBe(422)
+  })
+
   it('lists tags', async () => {
     const res = await api.get('/gnetz/v2/tags')
     expectMatchesSpec('get', '/gnetz/v2/tags', res)
