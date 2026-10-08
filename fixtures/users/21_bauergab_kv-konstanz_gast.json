@@ -1,0 +1,31 @@
+{
+  "id": "100021",
+  "personalId": "021",
+  "name1": "Gabi",
+  "name2": "Bauer",
+  "email": "gabi.bauer@example.com",
+  "ownerId": "2828",
+  "ownerIdentifier": "10102100",
+  "createdOn": "2025-06-01T12:00:00+0200",
+  "lastModifiedOn": "2025-06-01T12:00:00+0200",
+  "memberships": [],
+  "roles": [
+    {
+      "id": "21",
+      "ownerIdentifier": "10102100",
+      "tags": null,
+      "roleId": "90000001",
+      "delegatedByOrganizationIdentifier": null,
+      "expiresOn": "2026-12-31T23:59:59+0100"
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [
+      "gabi.bauer@example.com"
+    ],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}
