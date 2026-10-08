@@ -8,10 +8,8 @@
   "ownerIdentifier": "11500917",
   "createdOn": "2026-01-05T12:00:00+0100",
   "lastModifiedOn": "2026-01-05T12:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "20",
       "ownerIdentifier": "11500917",
       "memberOfStructureIdentifier": "11500917",
@@ -21,7 +19,6 @@
   ],
   "roles": [
     {
-      "toType": "SamlSynchronizationRoleAssignmentTO",
       "id": "20",
       "ownerIdentifier": "11500900",
       "tags": null,
@@ -35,5 +32,27 @@
     "phoneNumbers": [],
     "messengers": [],
     "socialMedia": []
+  },
+  "profile": {
+    "id": "7594dd4a-bb56-466c-9ea6-02015ba81bfb",
+    "username": "schneima",
+    "email": "maximilian.schneider@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88764",
+      "88796",
+      "88787",
+      "653",
+      "507",
+      "512"
+    ]
   }
 }

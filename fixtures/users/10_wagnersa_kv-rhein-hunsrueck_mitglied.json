@@ -8,10 +8,8 @@
   "ownerIdentifier": "11102700",
   "createdOn": "2025-12-16T12:00:00+0100",
   "lastModifiedOn": "2025-12-16T12:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "10",
       "ownerIdentifier": "11102700",
       "memberOfStructureIdentifier": "11102700",
@@ -26,5 +24,26 @@
     "phoneNumbers": [],
     "messengers": [],
     "socialMedia": []
+  },
+  "profile": {
+    "id": "6ba7b813-9dad-11d1-80b4-00c04fd430c8",
+    "username": "wagnsar",
+    "email": "sarah.wagner@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88764",
+      "88796",
+      "2643465",
+      "508",
+      "515"
+    ]
   }
 }

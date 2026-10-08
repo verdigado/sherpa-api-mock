@@ -8,10 +8,8 @@
   "ownerIdentifier": "10903700",
   "createdOn": "2024-01-01T12:33:41.123Z",
   "lastModifiedOn": "2024-11-01T13:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "1",
       "ownerIdentifier": "10903700",
       "memberOfStructureIdentifier": "10903700",
@@ -21,7 +19,6 @@
   ],
   "roles": [
     {
-      "toType": "SamlSynchronizationRoleAssignmentTO",
       "id": "1",
       "ownerIdentifier": "10903700",
       "tags": null,
@@ -56,6 +53,27 @@
         "type": "facebook",
         "url": "https://twitter.com/johndoe"
       }
+    ]
+  },
+  "profile": {
+    "id": "89015b5a-a4e9-435e-a137-6a21bff4b3e6",
+    "username": "doejohn",
+    "email": "john.doe@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88763",
+      "88787",
+      "88794",
+      "507",
+      "510"
     ]
   }
 }

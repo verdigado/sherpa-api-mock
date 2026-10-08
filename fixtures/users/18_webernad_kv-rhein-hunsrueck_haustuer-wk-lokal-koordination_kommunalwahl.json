@@ -8,10 +8,8 @@
   "ownerIdentifier": "11102700",
   "createdOn": "2026-01-05T12:00:00+0100",
   "lastModifiedOn": "2026-01-05T12:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "18",
       "ownerIdentifier": "11102700",
       "memberOfStructureIdentifier": "11102700",
@@ -21,7 +19,6 @@
   ],
   "roles": [
     {
-      "toType": "SamlSynchronizationRoleAssignmentTO",
       "id": "18",
       "ownerIdentifier": "11102700",
       "tags": null,
@@ -35,5 +32,25 @@
     "phoneNumbers": [],
     "messengers": [],
     "socialMedia": []
+  },
+  "profile": {
+    "id": "c079d244-9a69-4eee-81cd-40cd59778f84",
+    "username": "webernad",
+    "email": "nadine.weber@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "14013861",
+      "88802",
+      "12804520",
+      "504"
+    ]
   }
 }

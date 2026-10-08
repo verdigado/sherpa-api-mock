@@ -8,10 +8,8 @@
   "ownerIdentifier": "10102100",
   "createdOn": "2025-12-16T12:00:00+0100",
   "lastModifiedOn": "2025-12-16T12:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "6",
       "ownerIdentifier": "10102100",
       "memberOfStructureIdentifier": "10102100",
@@ -26,5 +24,26 @@
     "phoneNumbers": [],
     "messengers": [],
     "socialMedia": []
+  },
+  "profile": {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "username": "mullanna",
+    "email": "anna.mueller@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88779",
+      "88771",
+      "88776",
+      "502",
+      "506"
+    ]
   }
 }

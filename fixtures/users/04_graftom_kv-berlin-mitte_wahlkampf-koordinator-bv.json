@@ -8,10 +8,8 @@
   "ownerIdentifier": "10300100",
   "createdOn": "2020-01-01T12:00:00+0200",
   "lastModifiedOn": "2024-11-01T13:00:00+0100",
-  "toType": "SamlSynchronizationPartyTO",
   "memberships": [
     {
-      "toType": "SamlSynchronizationMembershipTO",
       "id": "4",
       "ownerIdentifier": "10300100",
       "memberOfStructureIdentifier": "10300100",
@@ -21,7 +19,6 @@
   ],
   "roles": [
     {
-      "toType": "SamlSynchronizationRoleAssignmentTO",
       "id": "4",
       "ownerIdentifier": "10000000",
       "tags": null,
@@ -35,5 +32,26 @@
     "phoneNumbers": [],
     "messengers": [],
     "socialMedia": []
+  },
+  "profile": {
+    "id": "cea17ecb-b5cd-4187-b036-a06b6e9a4f6b",
+    "username": "graftom",
+    "email": "tom.graf@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "14013856",
+      "88787",
+      "14013857",
+      "88790",
+      "514"
+    ]
   }
 }

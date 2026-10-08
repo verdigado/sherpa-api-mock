@@ -34,6 +34,8 @@ export type RoleAssignmentRow = {
   tags: string
 }
 
+export type RoleTag = Omit<Schemas['SamlUserRoleTag'], 'toType'>
+
 export type UserFilter = {
   ids?: string[]
   after?: string
@@ -122,7 +124,7 @@ export function toSamlUser(
       roleId: assignment.role_id,
       delegatedByOrganizationIdentifier:
         assignment.delegated_by_organization_identifier,
-      tags: JSON.parse(assignment.tags),
+      tags: parseTags(assignment.tags),
     })),
     memberships: getMemberships(db, user.id).map((membership) => ({
       toType: 'SamlSynchronizationMembershipTO',
@@ -131,4 +133,9 @@ export function toSamlUser(
       memberOfStructureIdentifier: membership.member_of_structure_identifier,
     })),
   }
+}
+
+function parseTags(json: string): Schemas['SamlUserRoleTag'][] | null {
+  const tags: RoleTag[] | null = JSON.parse(json)
+  return tags?.map((tag) => ({ toType: 'SamlGenericTagTO', ...tag })) ?? null
 }

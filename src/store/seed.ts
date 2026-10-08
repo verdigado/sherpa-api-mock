@@ -1,6 +1,6 @@
 import type { DatabaseSync } from 'node:sqlite'
 import { clearDatabase, transaction } from './db.ts'
-import { readProfileFixtures, readUserFixtures } from './fixtures.ts'
+import { readUserFixtures } from './fixtures.ts'
 import { insertProfile } from './profiles.ts'
 
 const toIso = (date: string) => new Date(date).toISOString()
@@ -70,7 +70,6 @@ function seed(db: DatabaseSync) {
         json(assignment.tags)
       )
     }
+    if (user.profile) insertProfile(db, { ...user.profile, userId: user.id })
   }
-
-  for (const profile of readProfileFixtures()) insertProfile(db, profile)
 }
