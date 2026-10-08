@@ -3,8 +3,14 @@ import { dirname } from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { readProfileFixtures, readUserFixtures } from './fixtures.ts'
 
-const SCHEMA = `
-  CREATE TABLE IF NOT EXISTS users (
+/**
+ * Schema changes, applied in order. The database stores how many it has run,
+ * so each one runs once and existing data survives. Never edit one that has
+ * shipped; add a new one instead.
+ */
+const MIGRATIONS = [
+  `
+  CREATE TABLE users (
     id TEXT PRIMARY KEY,
     personal_id TEXT NOT NULL,
     name1 TEXT NOT NULL,
@@ -17,7 +23,7 @@ const SCHEMA = `
     achievements TEXT,
     form_values TEXT NOT NULL
   );
-  CREATE TABLE IF NOT EXISTS memberships (
+  CREATE TABLE memberships (
     id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     owner_identifier TEXT NOT NULL,
@@ -25,7 +31,7 @@ const SCHEMA = `
     joined_at TEXT NOT NULL,
     exited_at TEXT
   );
-  CREATE TABLE IF NOT EXISTS role_assignments (
+  CREATE TABLE role_assignments (
     id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     owner_identifier TEXT NOT NULL,
@@ -33,7 +39,7 @@ const SCHEMA = `
     delegated_by_organization_identifier TEXT,
     tags TEXT
   );
-  CREATE TABLE IF NOT EXISTS profiles (
+  CREATE TABLE profiles (
     id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL UNIQUE REFERENCES users ON DELETE CASCADE,
     username TEXT NOT NULL,
@@ -46,18 +52,13 @@ const SCHEMA = `
     social_media TEXT NOT NULL,
     tags TEXT
   );
-  CREATE TABLE IF NOT EXISTS sequences (
+  CREATE TABLE sequences (
     name TEXT PRIMARY KEY,
     value INTEGER NOT NULL
   );
-`
-
-const TABLES = [
-  'profiles',
-  'role_assignments',
-  'memberships',
-  'users',
-  'sequences',
+  -- ids for phone numbers, messengers, social media and images added through the API
+  INSERT INTO sequences (name, value) VALUES ('profile_item', 1000000);
+  `,
 ]
 
 export const EMPTY_PRIVACY = {
@@ -70,7 +71,7 @@ export function openDatabase(path: string): DatabaseSync {
   if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true })
   const db = new DatabaseSync(path)
   db.exec('PRAGMA foreign_keys = ON')
-  db.exec(SCHEMA)
+  migrate(db)
   if (!db.prepare('SELECT 1 FROM users LIMIT 1').get()) {
     transaction(db, () => seed(db))
   }
@@ -78,10 +79,36 @@ export function openDatabase(path: string): DatabaseSync {
 }
 
 export function resetDatabase(db: DatabaseSync) {
+  const tables = db
+    .prepare(
+      "SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"
+    )
+    .all() as { name: string }[]
+  db.exec('PRAGMA foreign_keys = OFF')
+  try {
+    transaction(db, () => {
+      for (const { name } of tables) db.exec(`DROP TABLE ${name}`)
+      db.exec('PRAGMA user_version = 0')
+    })
+  } finally {
+    db.exec('PRAGMA foreign_keys = ON')
+  }
+  migrate(db)
+  transaction(db, () => seed(db))
+}
+
+function migrate(db: DatabaseSync) {
+  const { user_version: version } = db.prepare('PRAGMA user_version').get() as {
+    user_version: number
+  }
+  if (version > MIGRATIONS.length) {
+    throw new Error(
+      `database is at version ${version}, newer than this mock (${MIGRATIONS.length})`
+    )
+  }
   transaction(db, () => {
-    for (const table of TABLES) db.exec(`DROP TABLE IF EXISTS ${table}`)
-    db.exec(SCHEMA)
-    seed(db)
+    for (const migration of MIGRATIONS.slice(version)) db.exec(migration)
+    db.exec(`PRAGMA user_version = ${MIGRATIONS.length}`)
   })
 }
 
@@ -184,9 +211,4 @@ function seed(db: DatabaseSync) {
       json(profile.tags)
     )
   }
-
-  // Ids for phone numbers, messengers, social media and images added through the API
-  db.prepare(
-    "INSERT INTO sequences (name, value) VALUES ('profile_item', 1000000)"
-  ).run()
 }

@@ -28,4 +28,11 @@ describe('database', () => {
     })
     expect(reset.body).toHaveLength(1)
   })
+
+  it('refuses a database from a newer version of the mock', () => {
+    const db = openDatabase(path)
+    db.exec('PRAGMA user_version = 999')
+    db.close()
+    expect(() => openDatabase(path)).toThrow(/newer than this mock/)
+  })
 })
