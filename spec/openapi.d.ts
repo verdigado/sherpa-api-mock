@@ -388,6 +388,13 @@ export interface paths {
          *     grants access without a membership — does not qualify and is rejected
          *     with `409`.
          *
+         *     A person who is already an active guest gets `200` and the existing
+         *     record, with the expiry left as it is. That makes the call safe to retry:
+         *     if the response is lost after the guest marker was set, the retry returns
+         *     the account instead of a `409`, and no second id is used. The caller
+         *     reads the guest's division off the returned marker. An expired or revoked
+         *     marker counts as none, so the person is marked anew.
+         *
          *     The returned id comes from the same sequence as regular party records. It
          *     becomes the `uidNumber` in LDAP and is the primary user id across the
          *     Grünes Netz, so it has to be in the response body.
@@ -431,11 +438,10 @@ export interface paths {
          *     who keeps helping beyond the end of a campaign.
          *
          *     Repeating the creating call is not a way to renew. While the marker
-         *     holds, the person has access and no longer qualifies as a guest, so the
-         *     call would be rejected with `409`. Revoking and creating again is not
-         *     one either: it drops the existing role assignment along with its
-         *     history, restarts the deadlines towards anonymization, and lets the
-         *     maximum duration be sidestepped one default duration at a time.
+         *     holds, that call returns the record unchanged. Revoking and creating
+         *     again is not one either: it drops the existing role assignment along
+         *     with its history, restarts the deadlines towards anonymization, and lets
+         *     the maximum duration be sidestepped one default duration at a time.
          *
          *     The new expiry is Sherpa's to determine, the same way it is on creation,
          *     and is read off the returned record.
@@ -2616,8 +2622,8 @@ export interface operations {
         };
         responses: {
             /**
-             * @description An existing party record was found and marked as a guest. It keeps
-             *     its id.
+             * @description An existing party record was found and marked as a guest, or it is
+             *     already an active guest and is returned unchanged. It keeps its id.
              */
             200: {
                 headers: {
@@ -2659,7 +2665,8 @@ export interface operations {
             };
             /**
              * @description The person already has access to the Grünes Netz and cannot become a
-             *     guest.
+             *     guest: a member, or the holder of a role that grants access without
+             *     a membership.
              */
             409: {
                 headers: {

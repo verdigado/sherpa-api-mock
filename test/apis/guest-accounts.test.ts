@@ -61,12 +61,40 @@ describe('guest accounts', () => {
     it.each([
       ['a member', 'john.doe@example.com'],
       ['the holder of an access role', 'luz.may@example.com'],
-      ['an active guest', 'gabi.bauer@example.com'],
     ])('rejects %s', async (_, email) => {
       const api = setup()
       const res = await api.post(COLLECTION, invitation(email))
       expectMatchesSpec('post', COLLECTION, res)
       expect(res.status).toBe(409)
+    })
+
+    it('returns an active guest unchanged', async () => {
+      const api = setup()
+      const res = await api.post(
+        COLLECTION,
+        invitation('gabi.bauer@example.com')
+      )
+      expectMatchesSpec('post', COLLECTION, res)
+      expect(res.status).toBe(200)
+      expect(res.body.id).toBe('100021')
+      expect(res.body.roles).toHaveLength(1)
+      expect(Date.parse(guestMarker(res.body)!.expiresOn)).toBe(
+        Date.parse('2099-12-31T23:59:59+0100')
+      )
+    })
+
+    it('marks an expired guest anew', async () => {
+      const api = setup()
+      const res = await api.post(
+        COLLECTION,
+        invitation('olaf.lange@example.com')
+      )
+      expectMatchesSpec('post', COLLECTION, res)
+      expect(res.status).toBe(200)
+      expect(res.body.id).toBe('100025')
+      expect(res.body.roles).toHaveLength(1)
+      expect(guestMarker(res.body)?.ownerIdentifier).toBe('10903700')
+      expectExpiryIn90Days(guestMarker(res.body))
     })
 
     it('rejects an email shared by several records', async () => {
