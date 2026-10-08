@@ -32,6 +32,7 @@ export type RoleAssignmentRow = {
   owner_identifier: string
   role_id: string
   delegated_by_organization_identifier: string | null
+  expires_on: string | null
   tags: string
 }
 
@@ -126,6 +127,7 @@ export function toSamlUser(
       roleId: assignment.role_id,
       delegatedByOrganizationIdentifier:
         assignment.delegated_by_organization_identifier,
+      expiresOn: assignment.expires_on,
       tags: parseTags(assignment.tags),
     })),
     memberships: getMemberships(db, user.id).map((membership) => ({
