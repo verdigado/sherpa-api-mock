@@ -380,9 +380,8 @@ export interface paths {
          *
          *     The guest marker must carry an expiry from the start. There must be no
          *     point in time at which a guest account exists without one. How long that
-         *     expiry runs is Sherpa's to decide — the marker has a default and a
-         *     maximum duration — so the caller sends no duration and reads the
-         *     resulting date off the returned record.
+         *     expiry runs is Sherpa's to decide, so the caller sends no duration and
+         *     reads the resulting date off the returned record.
          *
          *     A person who already has access — a member, or the holder of a role that
          *     grants access without a membership — does not qualify and is rejected
@@ -433,18 +432,19 @@ export interface paths {
         head?: never;
         /**
          * Renew a guest account
-         * @description Extends the expiry of an existing guest marker and returns the updated
+         * @description Sets the expiry of an existing guest marker anew and returns the updated
          *     party record. Used while the account is still valid, e.g. for a guest
          *     who keeps helping beyond the end of a campaign.
+         *
+         *     The new expiry counts from the day of the renewal, the same way it does
+         *     on creation. It is not added to the current expiry. A marker can be
+         *     renewed any number of times. The new expiry is read off the returned
+         *     record.
          *
          *     Repeating the creating call is not a way to renew. While the marker
          *     holds, that call returns the record unchanged. Revoking and creating
          *     again is not one either: it drops the existing role assignment along
-         *     with its history, restarts the deadlines towards anonymization, and lets
-         *     the maximum duration be sidestepped one default duration at a time.
-         *
-         *     The new expiry is Sherpa's to determine, the same way it is on creation,
-         *     and is read off the returned record.
+         *     with its history and restarts the deadlines towards anonymization.
          */
         patch: operations["SamlRenewGuestAccount"];
         trace?: never;
@@ -2744,7 +2744,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description The guest marker was extended. */
+            /** @description The guest marker was renewed. */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -2764,18 +2764,6 @@ export interface operations {
             };
             /** @description No party record with a guest marker exists for the given id. */
             404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SamlError"];
-                };
-            };
-            /**
-             * @description The extension would exceed the maximum duration of the guest marker.
-             *     The account keeps its current expiry.
-             */
-            409: {
                 headers: {
                     [name: string]: unknown;
                 };
