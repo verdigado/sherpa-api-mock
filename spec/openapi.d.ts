@@ -383,16 +383,17 @@ export interface paths {
          *     expiry runs is Sherpa's to decide, so the caller sends no duration and
          *     reads the resulting date off the returned record.
          *
-         *     A person who already has access — a member, or the holder of a role that
-         *     grants access without a membership — does not qualify and is rejected
-         *     with `409`.
+         *     A person who already has access does not qualify and is rejected with
+         *     `409`. That covers members, holders of a role that grants access without
+         *     a membership, and active guests. An expired or revoked guest marker
+         *     counts as none, so the person is marked anew.
          *
-         *     A person who is already an active guest gets `200` and the existing
-         *     record, with the expiry left as it is. That makes the call safe to retry:
-         *     if the response is lost after the guest marker was set, the retry returns
-         *     the account instead of a `409`, and no second id is used. The caller
-         *     reads the guest's division off the returned marker. An expired or revoked
-         *     marker counts as none, so the person is marked anew.
+         *     Each call carries the id of the invitation it comes from. A repeated
+         *     call with an `invitationId` that already led to a guest account gets
+         *     `200` and that account, and the rest of the body is ignored. That makes
+         *     the call safe to retry: if the response is lost after the guest marker
+         *     was set, the retry returns the account instead of a `409`, and no second
+         *     id is used.
          *
          *     The returned id comes from the same sequence as regular party records. It
          *     becomes the `uidNumber` in LDAP and is the primary user id across the
@@ -442,9 +443,11 @@ export interface paths {
          *     record.
          *
          *     Repeating the creating call is not a way to renew. While the marker
-         *     holds, that call returns the record unchanged. Revoking and creating
-         *     again is not one either: it drops the existing role assignment along
-         *     with its history and restarts the deadlines towards anonymization.
+         *     holds, the person has access and that call is rejected with `409`. A
+         *     repeated `invitationId` only returns the record unchanged. Revoking and
+         *     creating again is not one either: it drops the existing role assignment
+         *     along with its history and restarts the deadlines towards
+         *     anonymization.
          */
         patch: operations["SamlRenewGuestAccount"];
         trace?: never;
@@ -1239,6 +1242,13 @@ export interface components {
              * @example 12345678
              */
             invitedByUserId?: string | null;
+            /**
+             * Format: uuid
+             * @description Id of the invitation in the Grüne API that the guest account is
+             *     created from.
+             * @example 3f2c9a6e-8b1d-4e57-a0c4-6d9e2b7f1a35
+             */
+            invitationId: string;
         };
         SamlUserMembership: {
             /** @example SamlSynchronizationMembershipTO */
@@ -2622,8 +2632,9 @@ export interface operations {
         };
         responses: {
             /**
-             * @description An existing party record was found and marked as a guest, or it is
-             *     already an active guest and is returned unchanged. It keeps its id.
+             * @description An existing party record was found and marked as a guest, or the
+             *     `invitationId` already led to a guest account, which is returned
+             *     unchanged. It keeps its id.
              */
             200: {
                 headers: {
@@ -2665,8 +2676,8 @@ export interface operations {
             };
             /**
              * @description The person already has access to the Grünes Netz and cannot become a
-             *     guest: a member, or the holder of a role that grants access without
-             *     a membership.
+             *     guest: a member, the holder of a role that grants access without a
+             *     membership, or an active guest.
              */
             409: {
                 headers: {

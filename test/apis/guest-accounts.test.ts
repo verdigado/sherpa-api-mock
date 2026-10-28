@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import { setup } from '../setup.ts'
 import { expectMatchesSpec } from '../spec.ts'
@@ -24,6 +25,7 @@ const invitation = (email: string) => ({
   email,
   birthDate: '1990-04-17',
   ownerIdentifier: '10903700',
+  invitationId: randomUUID(),
 })
 
 describe('guest accounts', () => {
@@ -61,6 +63,7 @@ describe('guest accounts', () => {
     it.each([
       ['a member', 'john.doe@example.com'],
       ['the holder of an access role', 'luz.may@example.com'],
+      ['an active guest', 'gabi.bauer@example.com'],
     ])('rejects %s', async (_, email) => {
       const api = setup()
       const res = await api.post(COLLECTION, invitation(email))
@@ -68,19 +71,14 @@ describe('guest accounts', () => {
       expect(res.status).toBe(409)
     })
 
-    it('returns an active guest unchanged', async () => {
+    it('returns the account of a repeated invitation id unchanged', async () => {
       const api = setup()
-      const res = await api.post(
-        COLLECTION,
-        invitation('gabi.bauer@example.com')
-      )
+      const body = invitation('jane.doe@example.com')
+      const first = await api.post(COLLECTION, body)
+      const res = await api.post(COLLECTION, { ...body, name1: 'Janet' })
       expectMatchesSpec('post', COLLECTION, res)
       expect(res.status).toBe(200)
-      expect(res.body.id).toBe('100021')
-      expect(res.body.roles).toHaveLength(1)
-      expect(Date.parse(guestMarker(res.body)!.expiresOn)).toBe(
-        Date.parse('2099-12-31T23:59:59+0100')
-      )
+      expect(res.body).toEqual(first.body)
     })
 
     it('marks an expired guest anew', async () => {
