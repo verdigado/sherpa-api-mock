@@ -39,6 +39,7 @@ export type NewGuestAccount = {
   email: string
   ownerIdentifier: string
   ownerId: string
+  invitationId: string
 }
 
 export type CreateGuestResult =
@@ -50,6 +51,12 @@ export function createGuestAccount(
   guest: NewGuestAccount
 ): CreateGuestResult {
   return transaction(db, () => {
+    const repeated = db
+      .prepare('SELECT user_id FROM guest_invitations WHERE invitation_id = ?')
+      .get(guest.invitationId) as { user_id: string } | undefined
+    if (repeated)
+      return { outcome: 'reused', user: getUser(db, repeated.user_id)! }
+
     const matches = db
       .prepare('SELECT * FROM users WHERE lower(email) = lower(?)')
       .all(guest.email) as UserRow[]
@@ -62,9 +69,8 @@ export function createGuestAccount(
       outcome = 'created'
       userId = insertUser(db, guest, now)
     } else {
-      if (hasAccess(db, userId, now)) return { outcome: 'has-access' }
-      if (hasActiveGuestMarker(db, userId, now)) {
-        return { outcome, user: getUser(db, userId)! }
+      if (hasAccess(db, userId, now) || hasActiveGuestMarker(db, userId, now)) {
+        return { outcome: 'has-access' }
       }
       db.prepare(
         'DELETE FROM role_assignments WHERE user_id = ? AND role_id = ?'
@@ -82,6 +88,9 @@ export function createGuestAccount(
       guestRole.id,
       expiryFrom(now)
     )
+    db.prepare(
+      'INSERT INTO guest_invitations (invitation_id, user_id) VALUES (?, ?)'
+    ).run(guest.invitationId, userId)
     touch(db, userId, now)
     return { outcome, user: getUser(db, userId)! }
   })
