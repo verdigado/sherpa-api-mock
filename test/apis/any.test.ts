@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { setup } from '../setup.ts'
 import { expectMatchesSpec } from '../spec.ts'
+import { guestRole } from '../../src/store/guests.ts'
 
 describe('any', () => {
   const api = setup()
@@ -14,7 +15,9 @@ describe('any', () => {
   it('lists roles', async () => {
     const res = await api.get('/any/v1/roles')
     expectMatchesSpec('get', '/any/v1/roles', res)
-    expect(res.body.length).toBeGreaterThan(0)
+    expect(res.body.map((role: { id: string }) => role.id)).toContain(
+      guestRole.id
+    )
   })
 
   it('reports alive', async () => {

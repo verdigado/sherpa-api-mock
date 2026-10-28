@@ -32,8 +32,8 @@ function seed(db: DatabaseSync) {
   `)
   const insertRoleAssignment = db.prepare(`
     INSERT INTO role_assignments (id, user_id, owner_identifier, role_id,
-      delegated_by_organization_identifier, tags)
-    VALUES (?, ?, ?, ?, ?, ?)
+      delegated_by_organization_identifier, expires_on, tags)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `)
 
   for (const user of readUserFixtures()) {
@@ -67,6 +67,7 @@ function seed(db: DatabaseSync) {
         assignment.ownerIdentifier,
         assignment.roleId,
         assignment.delegatedByOrganizationIdentifier,
+        toIsoOrNull(assignment.expiresOn ?? null),
         json(assignment.tags)
       )
     }

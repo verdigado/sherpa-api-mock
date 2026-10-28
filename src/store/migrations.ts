@@ -54,4 +54,16 @@ export const MIGRATIONS = [
   -- ids for phone numbers, messengers, social media and images added through the API
   INSERT INTO sequences (name, value) VALUES ('profile_item', 1000000);
   `,
+  `
+  ALTER TABLE role_assignments ADD COLUMN expires_on TEXT;
+  -- above the ids in the fixtures
+  INSERT INTO sequences (name, value) VALUES ('user', 200000);
+  INSERT INTO sequences (name, value) VALUES ('role_assignment', 1000000);
+  `,
+  `
+  CREATE TABLE guest_invitations (
+    invitation_id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users ON DELETE CASCADE
+  );
+  `,
 ]
