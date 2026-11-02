@@ -1,0 +1,57 @@
+{
+  "id": "100022",
+  "personalId": "122",
+  "name1": "Karl",
+  "name2": "Huber",
+  "email": "karl.huber@example.com",
+  "ownerId": "4731",
+  "ownerIdentifier": "10204800",
+  "createdOn": "2025-12-16T12:00:00+0100",
+  "lastModifiedOn": "2025-12-16T12:00:00+0100",
+  "memberships": [
+    {
+      "id": "22",
+      "ownerIdentifier": "10204800",
+      "memberOfStructureIdentifier": "10204800",
+      "joinedAt": "2025-12-16T12:00:00+0100",
+      "exitedAt": null
+    }
+  ],
+  "roles": [
+    {
+      "id": "22",
+      "ownerIdentifier": "10204800",
+      "tags": null,
+      "roleId": "585126",
+      "delegatedByOrganizationIdentifier": null
+    }
+  ],
+  "achievements": [],
+  "formValues": {
+    "emails": [],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  },
+  "profile": {
+    "id": "7e528aa8-fe11-5735-8a9c-3a6c801cea34",
+    "username": "huberkar",
+    "email": "karl.huber@example.com",
+    "privacy": {
+      "chatbegruenung": "public",
+      "email": "public",
+      "overall": "public"
+    },
+    "image": {},
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": [],
+    "tags": [
+      "88779",
+      "88771",
+      "88776",
+      "502",
+      "506"
+    ]
+  }
+}
