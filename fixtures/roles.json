@@ -73,24 +73,6 @@
         "tags": []
     },
     {
-        "id": "23583618",
-        "type": "R",
-        "label": "BAG Globale Entwicklung Kooptiertes Ersatzmitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "42",
-                "label": "BAG Globale Entwicklung",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
         "id": "12272402",
         "type": "R",
         "label": "LAG Regionaler Strukturwandel Mitarbeitende",
@@ -1080,7 +1062,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007596",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "37588548",
@@ -1683,6 +1671,12 @@
                         "label": "LAG Flucht, Integration und Antirassismus",
                         "divisionId": 6051,
                         "divisionKey": "10500000"
+                    },
+                    {
+                        "id": "1816",
+                        "label": "LAG Migration",
+                        "divisionId": 13260,
+                        "divisionKey": "11200000"
                     }
                 ]
             }
@@ -1735,6 +1729,12 @@
                 "label": "LAG Integration, Flucht, Migration Mitarbeitende",
                 "divisionId": 3782,
                 "divisionKey": "10200000"
+            },
+            {
+                "id": "1818",
+                "label": "LAG Migration Mitglied",
+                "divisionId": 13260,
+                "divisionKey": "11200000"
             }
         ],
         "tags": []
@@ -2209,7 +2209,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007597",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "13276841",
@@ -2651,6 +2657,109 @@
         "tags": []
     },
     {
+        "id": "23583618",
+        "type": "R",
+        "label": "BAG Globale Entwicklung Kooptiertes Ersatzmitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "42",
+                "label": "BAG Globale Entwicklung",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007598",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "4166674",
+        "type": "R",
+        "label": "BAG Kultur Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "17",
+                "label": "BAG Kultur",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007599",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "2452005",
+        "type": "R",
+        "label": "BAG Schwulenpolitik Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "33",
+                "label": "BAG Schwulenpolitik",
+                "aliases": [
+                    {
+                        "id": "655",
+                        "label": "BAG Schwulenpolitik",
+                        "divisionId": 3782,
+                        "divisionKey": "10200000"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007600",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "11940090",
+        "type": "R",
+        "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik Kooptiertes Ersatzmitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "18",
+                "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007601",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
         "id": "30670533",
         "type": "A",
         "label": "LAG OstGrün Stv. Sprecherin",
@@ -2797,31 +2906,6 @@
         "tags": []
     },
     {
-        "id": "15716552",
-        "type": "R",
-        "label": "BAG Frieden Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "40",
-                "label": "BAG Friedens- und Internationale Politik",
-                "aliases": [
-                    {
-                        "id": "574",
-                        "label": "AK Internationales (Partei)",
-                        "divisionId": 10891,
-                        "divisionKey": "11002600"
-                    }
-                ]
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
         "id": "16954537",
         "type": "R",
         "label": "BGKomm (Bundes-KPV) - Delegiertes Vorstandsmitglied",
@@ -2924,6 +3008,61 @@
         ],
         "aliases": [],
         "tags": []
+    },
+    {
+        "id": "15716552",
+        "type": "R",
+        "label": "BAG Frieden Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "40",
+                "label": "BAG Friedens- und Internationale Politik",
+                "aliases": [
+                    {
+                        "id": "574",
+                        "label": "AK Internationales (Partei)",
+                        "divisionId": 10891,
+                        "divisionKey": "11002600"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007602",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "3631774",
+        "type": "R",
+        "label": "BAG Tierschutzpolitik Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "23",
+                "label": "BAG Tierschutzpolitik",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007603",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "18665633",
@@ -3809,24 +3948,6 @@
         "tags": []
     },
     {
-        "id": "33497305",
-        "type": "R",
-        "label": "Grünes Netz - Datenschutz - Koordinatorin KV",
-        "hierarchy": "gr",
-        "level": "kv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "290",
-                "label": "Grünes Netz - Technische Rollen",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
         "id": "2698987",
         "type": "R",
         "label": "BAG Religionen Kooptiertes Mitglied (als Nichtmitglied)",
@@ -3838,6 +3959,30 @@
             {
                 "id": "29",
                 "label": "BAG Religionen",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007604",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "33497305",
+        "type": "R",
+        "label": "Grünes Netz - Datenschutz - Koordinatorin KV",
+        "hierarchy": "gr",
+        "level": "kv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "290",
+                "label": "Grünes Netz - Technische Rollen",
                 "aliases": []
             }
         ],
@@ -3958,7 +4103,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007605",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1946933",
@@ -3976,7 +4127,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007606",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "584828",
@@ -4662,7 +4819,7 @@
             },
             {
                 "id": "1777",
-                "label": "GRÜNER Frauenrat Hessen Ersatzdelegierte",
+                "label": "GRÜNER Landesfrauenrat Hessen Ersatzdelegierte",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
             }
@@ -6031,6 +6188,12 @@
                 "label": "LAG Abfallwirtschaft Stv. Sprecherin",
                 "divisionId": 8198,
                 "divisionKey": "10900000"
+            },
+            {
+                "id": "1811",
+                "label": "LAG Ressourcenwirtschaft Stv. Sprecherin",
+                "divisionId": 9641,
+                "divisionKey": "11000000"
             }
         ],
         "tags": []
@@ -8193,6 +8356,12 @@
                         "label": "LAG Flucht, Integration und Antirassismus",
                         "divisionId": 6051,
                         "divisionKey": "10500000"
+                    },
+                    {
+                        "id": "1816",
+                        "label": "LAG Migration",
+                        "divisionId": 13260,
+                        "divisionKey": "11200000"
                     }
                 ]
             }
@@ -8251,6 +8420,12 @@
                 "label": "LAG Flucht, Integration und Antirassimus Sprecherin",
                 "divisionId": 6051,
                 "divisionKey": "10500000"
+            },
+            {
+                "id": "1817",
+                "label": "LAG Migration Sprecherin",
+                "divisionId": 13260,
+                "divisionKey": "11200000"
             }
         ],
         "tags": []
@@ -8315,6 +8490,12 @@
                         "label": "LAG Flucht, Integration und Antirassismus",
                         "divisionId": 6051,
                         "divisionKey": "10500000"
+                    },
+                    {
+                        "id": "1816",
+                        "label": "LAG Migration",
+                        "divisionId": 13260,
+                        "divisionKey": "11200000"
                     }
                 ]
             }
@@ -10165,6 +10346,12 @@
                         "label": "LAG Mobilität und Verkehr (MoVe)",
                         "divisionId": 13260,
                         "divisionKey": "11200000"
+                    },
+                    {
+                        "id": "1815",
+                        "label": "LAG Mobilität",
+                        "divisionId": 12477,
+                        "divisionKey": "11100000"
                     }
                 ]
             }
@@ -10287,6 +10474,12 @@
                         "label": "LAG Mobilität und Verkehr (MoVe)",
                         "divisionId": 13260,
                         "divisionKey": "11200000"
+                    },
+                    {
+                        "id": "1815",
+                        "label": "LAG Mobilität",
+                        "divisionId": 12477,
+                        "divisionKey": "11100000"
                     }
                 ]
             }
@@ -13395,7 +13588,14 @@
                 ]
             }
         ],
-        "aliases": [],
+        "aliases": [
+            {
+                "id": "1814",
+                "label": "LAG Ressourcenwirtschaft Schatzmeisterin",
+                "divisionId": 9641,
+                "divisionKey": "11000000"
+            }
+        ],
         "tags": []
     },
     {
@@ -14551,7 +14751,14 @@
                 ]
             }
         ],
-        "aliases": [],
+        "aliases": [
+            {
+                "id": "1812",
+                "label": "LAG Ressourcenwirtschaft Beisitzerin im Vorstand",
+                "divisionId": 9641,
+                "divisionKey": "11000000"
+            }
+        ],
         "tags": []
     },
     {
@@ -14588,6 +14795,12 @@
                 "label": "LAG  Postwachstum und Gemeinwohl Nds. Sprecherin",
                 "divisionId": 8198,
                 "divisionKey": "10900000"
+            },
+            {
+                "id": "1810",
+                "label": "LAG Ressourcenwirtschaft Sprecherin",
+                "divisionId": 9641,
+                "divisionKey": "11000000"
             }
         ],
         "tags": []
@@ -16453,7 +16666,7 @@
         "aliases": [
             {
                 "id": "1775",
-                "label": "GRÜNER Frauenrat Hessen",
+                "label": "GRÜNER Landesfrauenrat Hessen",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
             }
@@ -17214,24 +17427,6 @@
             {
                 "id": "293",
                 "label": "Beziehungen Datensatz <-> Dublettendatensatz",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "584702",
-        "type": "R",
-        "label": "Europawahl Listenkandidatin",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 18,
-        "categories": [
-            {
-                "id": "12",
-                "label": "Listenkandidatin",
                 "aliases": []
             }
         ],
@@ -18055,7 +18250,7 @@
                 "aliases": [
                     {
                         "id": "1320",
-                        "label": "Bedenken gegen Mitgliedschaft",
+                        "label": "Ökofondsvergaberat Land",
                         "divisionId": 5912,
                         "divisionKey": "10300000"
                     }
@@ -18071,7 +18266,7 @@
             },
             {
                 "id": "1321",
-                "label": "Bedenken gegen Mitgliedschaft",
+                "label": "Ökofondsvergaberat Land",
                 "divisionId": 5912,
                 "divisionKey": "10300000"
             }
@@ -18166,6 +18361,12 @@
                 "label": "LAG Postwachstum",
                 "divisionId": 8198,
                 "divisionKey": "10900000"
+            },
+            {
+                "id": "1813",
+                "label": "LAG Ressourcenwirtschaft Mitarbeitende",
+                "divisionId": 9641,
+                "divisionKey": "11000000"
             }
         ],
         "tags": []
@@ -20086,17 +20287,17 @@
                         "label": "LAG Mobilität und Verkehr (MoVe)",
                         "divisionId": 13260,
                         "divisionKey": "11200000"
+                    },
+                    {
+                        "id": "1815",
+                        "label": "LAG Mobilität",
+                        "divisionId": 12477,
+                        "divisionKey": "11100000"
                     }
                 ]
             }
         ],
         "aliases": [
-            {
-                "id": "482",
-                "label": "LAG Verkehr",
-                "divisionId": 12477,
-                "divisionKey": "11100000"
-            },
             {
                 "id": "315",
                 "label": "LAG Verkehr und Siedlungswesen",
@@ -20126,6 +20327,12 @@
                 "label": "LAG Mobilität Mitarbeitende",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
+            },
+            {
+                "id": "482",
+                "label": "LAG Mobilität",
+                "divisionId": 12477,
+                "divisionKey": "11100000"
             },
             {
                 "id": "1041",
@@ -24006,6 +24213,12 @@
                         "label": "LAG Flucht, Integration und Antirassismus",
                         "divisionId": 6051,
                         "divisionKey": "10500000"
+                    },
+                    {
+                        "id": "1816",
+                        "label": "LAG Migration",
+                        "divisionId": 13260,
+                        "divisionKey": "11200000"
                     }
                 ]
             }
@@ -24080,6 +24293,12 @@
                         "label": "LAG Flucht, Integration und Antirassismus",
                         "divisionId": 6051,
                         "divisionKey": "10500000"
+                    },
+                    {
+                        "id": "1816",
+                        "label": "LAG Migration",
+                        "divisionId": 13260,
+                        "divisionKey": "11200000"
                     }
                 ]
             }
@@ -25301,6 +25520,12 @@
                         "label": "LAG Mobilität und Verkehr (MoVe)",
                         "divisionId": 13260,
                         "divisionKey": "11200000"
+                    },
+                    {
+                        "id": "1815",
+                        "label": "LAG Mobilität",
+                        "divisionId": 12477,
+                        "divisionKey": "11100000"
                     }
                 ]
             }
@@ -25381,6 +25606,12 @@
                         "label": "LAG Mobilität und Verkehr (MoVe)",
                         "divisionId": 13260,
                         "divisionKey": "11200000"
+                    },
+                    {
+                        "id": "1815",
+                        "label": "LAG Mobilität",
+                        "divisionId": 12477,
+                        "divisionKey": "11100000"
                     }
                 ]
             }
@@ -27350,7 +27581,7 @@
             },
             {
                 "id": "1776",
-                "label": "GRÜNER Frauenrat Hessen Delegierte",
+                "label": "GRÜNER Landesfrauenrat Hessen Delegierte",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
             }
@@ -27816,7 +28047,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007607",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964943",
@@ -27834,25 +28071,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "11940090",
-        "type": "R",
-        "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik Kooptiertes Ersatzmitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "18",
-                "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik",
-                "aliases": []
+                "id": "45007608",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "929471",
@@ -27922,24 +28147,6 @@
         "tags": []
     },
     {
-        "id": "11940097",
-        "type": "R",
-        "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "18",
-                "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
         "id": "584690",
         "type": "R",
         "label": "Campusgrün Bundesvorstand",
@@ -27980,7 +28187,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007609",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698896",
@@ -27998,7 +28211,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007610",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698898",
@@ -28016,7 +28235,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007611",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698901",
@@ -28041,7 +28266,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007612",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698902",
@@ -28066,7 +28297,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007613",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2437910",
@@ -28084,7 +28321,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007614",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2437913",
@@ -28102,32 +28345,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "2452005",
-        "type": "R",
-        "label": "BAG Schwulenpolitik Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "33",
-                "label": "BAG Schwulenpolitik",
-                "aliases": [
-                    {
-                        "id": "655",
-                        "label": "BAG Schwulenpolitik",
-                        "divisionId": 3782,
-                        "divisionKey": "10200000"
-                    }
-                ]
+                "id": "45007615",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "584865",
@@ -28141,24 +28365,6 @@
             {
                 "id": "44",
                 "label": "European Green Party Committee ",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "4180931",
-        "type": "R",
-        "label": "BAG Energie Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "21",
-                "label": "BAG Energie",
                 "aliases": []
             }
         ],
@@ -28181,43 +28387,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "4237753",
-        "type": "R",
-        "label": "BAG Kinder, Jugend und Familie Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "236",
-                "label": "BAG Kinder, Jugend und Familie",
-                "aliases": []
+                "id": "45007616",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "4166674",
-        "type": "R",
-        "label": "BAG Kultur Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "17",
-                "label": "BAG Kultur",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "5734933",
@@ -28235,25 +28411,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "3631774",
-        "type": "R",
-        "label": "BAG Tierschutzpolitik Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "23",
-                "label": "BAG Tierschutzpolitik",
-                "aliases": []
+                "id": "45007617",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "584862",
@@ -28391,6 +28555,78 @@
         "tags": []
     },
     {
+        "id": "4180931",
+        "type": "R",
+        "label": "BAG Energie Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "21",
+                "label": "BAG Energie",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007618",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "4237753",
+        "type": "R",
+        "label": "BAG Kinder, Jugend und Familie Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "236",
+                "label": "BAG Kinder, Jugend und Familie",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007619",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "11940097",
+        "type": "R",
+        "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "18",
+                "label": "BAG Wissenschafts- Hochschul- und Technologiepolitik",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007620",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
         "id": "8282205",
         "type": "R",
         "label": "KPV Vorstand Beisitzerin",
@@ -28460,7 +28696,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007621",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "966668",
@@ -28478,7 +28720,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007622",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964875",
@@ -28503,7 +28751,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007623",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "965002",
@@ -28528,7 +28782,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007624",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964879",
@@ -28546,7 +28806,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007625",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964877",
@@ -28564,7 +28830,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007626",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1113634",
@@ -28582,7 +28854,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007627",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "8456388",
@@ -28600,7 +28878,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007628",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1138638",
@@ -28625,7 +28909,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007629",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1137672",
@@ -28643,7 +28933,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007630",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1137388",
@@ -28661,7 +28957,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007631",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1727990",
@@ -28679,7 +28981,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007632",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1376270",
@@ -28697,7 +29005,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007633",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "584816",
@@ -28715,7 +29029,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007634",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "8456398",
@@ -28733,7 +29053,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007635",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "8456450",
@@ -28751,7 +29077,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007636",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "6177956",
@@ -28776,7 +29108,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007637",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1767614",
@@ -28801,7 +29139,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007638",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2437892",
@@ -28826,7 +29170,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007639",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698946",
@@ -28844,7 +29194,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007640",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1115243",
@@ -28862,7 +29218,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007641",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1138639",
@@ -28887,7 +29249,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007642",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2698905",
@@ -28905,25 +29273,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "2446634",
-        "type": "R",
-        "label": "BAG Globale Entwicklung Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "42",
-                "label": "BAG Globale Entwicklung",
-                "aliases": []
+                "id": "45007643",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "5104654",
@@ -28959,43 +29315,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "5715065",
-        "type": "R",
-        "label": "BAG Frauenpolitik Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "35",
-                "label": "BAG Frauenpolitik",
-                "aliases": []
+                "id": "45007644",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "5734939",
-        "type": "R",
-        "label": "BAG Säkulare Grüne Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "248",
-                "label": "BAG Säkulare Grüne",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "7051058",
@@ -29041,6 +29367,78 @@
         "tags": []
     },
     {
+        "id": "5715065",
+        "type": "R",
+        "label": "BAG Frauenpolitik Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "35",
+                "label": "BAG Frauenpolitik",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007645",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "2446634",
+        "type": "R",
+        "label": "BAG Globale Entwicklung Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "42",
+                "label": "BAG Globale Entwicklung",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007646",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "5734939",
+        "type": "R",
+        "label": "BAG Säkulare Grüne Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "248",
+                "label": "BAG Säkulare Grüne",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007647",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
         "id": "964942",
         "type": "R",
         "label": "BAG Wirtschaft und Finanzen Delegierte (als Nichtmitglied)",
@@ -29063,7 +29461,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007648",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "12411082",
@@ -29394,7 +29798,7 @@
         "aliases": [
             {
                 "id": "1778",
-                "label": "GRÜNER Frauenrat Hessen Präsidium",
+                "label": "GRÜNER Landesfrauenrat Hessen Präsidium",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
             }
@@ -29611,7 +30015,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007649",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1121375",
@@ -29629,7 +30039,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007650",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964918",
@@ -29647,7 +30063,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007651",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964986",
@@ -29672,7 +30094,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007652",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "584863",
@@ -29726,7 +30154,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007653",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2503405",
@@ -29744,7 +30178,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007654",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1733986",
@@ -29762,7 +30202,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007655",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "2503410",
@@ -29780,7 +30226,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007656",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "4237750",
@@ -29798,7 +30250,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007657",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "1756190",
@@ -29816,7 +30274,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007658",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "964838",
@@ -29834,25 +30298,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "6152293",
-        "type": "R",
-        "label": "BAG Migration & Flucht Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "31",
-                "label": "BAG Migration & Flucht",
-                "aliases": []
+                "id": "45007659",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "5734932",
@@ -29870,7 +30322,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007660",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "6765228",
@@ -29913,57 +30371,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "2445978",
-        "type": "R",
-        "label": "BAG Planen Bauen Wohnen Kooptiertes Ersatzmitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
+        "tags": [
             {
-                "id": "20",
-                "label": "BAG Planen Bauen Wohnen",
-                "aliases": [
-                    {
-                        "id": "766",
-                        "label": "symp",
-                        "divisionId": 2847,
-                        "divisionKey": "10102200"
-                    }
-                ]
+                "id": "45007661",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
             }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "2446145",
-        "type": "R",
-        "label": "BAG Planen Bauen Wohnen Kooptiertes Mitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "20",
-                "label": "BAG Planen Bauen Wohnen",
-                "aliases": [
-                    {
-                        "id": "766",
-                        "label": "symp",
-                        "divisionId": 2847,
-                        "divisionKey": "10102200"
-                    }
-                ]
-            }
-        ],
-        "aliases": [],
-        "tags": []
+        ]
     },
     {
         "id": "8517421",
@@ -29978,49 +30392,6 @@
                 "id": "296",
                 "label": "Rechtsextremismuskommission",
                 "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "9588352",
-        "type": "R",
-        "label": "BAG Säkulare Grüne Kooptiertes Ersatzmitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "248",
-                "label": "BAG Säkulare Grüne",
-                "aliases": []
-            }
-        ],
-        "aliases": [],
-        "tags": []
-    },
-    {
-        "id": "9709714",
-        "type": "R",
-        "label": "BAG Wirtschaft und Finanzen Kooptiertes Ersatzmitglied (als Nichtmitglied)",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 0,
-        "categories": [
-            {
-                "id": "26",
-                "label": "BAG Wirtschaft und Finanzen",
-                "aliases": [
-                    {
-                        "id": "588",
-                        "label": "AK Finanzen und Verwaltung (Fraktion)",
-                        "divisionId": 10891,
-                        "divisionKey": "11002600"
-                    }
-                ]
             }
         ],
         "aliases": [],
@@ -30049,7 +30420,13 @@
             }
         ],
         "aliases": [],
-        "tags": []
+        "tags": [
+            {
+                "id": "45007662",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "584701",
@@ -30086,6 +30463,147 @@
         ],
         "aliases": [],
         "tags": []
+    },
+    {
+        "id": "6152293",
+        "type": "R",
+        "label": "BAG Migration & Flucht Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "31",
+                "label": "BAG Migration & Flucht",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007663",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "2445978",
+        "type": "R",
+        "label": "BAG Planen Bauen Wohnen Kooptiertes Ersatzmitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "20",
+                "label": "BAG Planen Bauen Wohnen",
+                "aliases": [
+                    {
+                        "id": "766",
+                        "label": "symp",
+                        "divisionId": 2847,
+                        "divisionKey": "10102200"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007664",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "2446145",
+        "type": "R",
+        "label": "BAG Planen Bauen Wohnen Kooptiertes Mitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "20",
+                "label": "BAG Planen Bauen Wohnen",
+                "aliases": [
+                    {
+                        "id": "766",
+                        "label": "symp",
+                        "divisionId": 2847,
+                        "divisionKey": "10102200"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007665",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "9588352",
+        "type": "R",
+        "label": "BAG Säkulare Grüne Kooptiertes Ersatzmitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "248",
+                "label": "BAG Säkulare Grüne",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007666",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
+    },
+    {
+        "id": "9709714",
+        "type": "R",
+        "label": "BAG Wirtschaft und Finanzen Kooptiertes Ersatzmitglied (als Nichtmitglied)",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "26",
+                "label": "BAG Wirtschaft und Finanzen",
+                "aliases": [
+                    {
+                        "id": "588",
+                        "label": "AK Finanzen und Verwaltung (Fraktion)",
+                        "divisionId": 10891,
+                        "divisionKey": "11002600"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": [
+            {
+                "id": "45007667",
+                "tagId": "45006442",
+                "name": "Nichtmitglieder mit BAG-Rolle"
+            }
+        ]
     },
     {
         "id": "9906153",
@@ -33209,6 +33727,12 @@
                 "divisionKey": "11102100"
             },
             {
+                "id": "1523",
+                "label": "Ratsfraktion - Fraktionsgeschäftsstelle",
+                "divisionId": 9762,
+                "divisionKey": "11000401"
+            },
+            {
                 "id": "1344",
                 "label": "Bezirksverordnetenversammlung - Fraktionsgeschäftsstelle",
                 "divisionId": 5912,
@@ -33219,12 +33743,6 @@
                 "label": "Fraktionsgeschäftsstelle",
                 "divisionId": 9755,
                 "divisionKey": "11000400"
-            },
-            {
-                "id": "1523",
-                "label": "Ratsfraktion - Fraktionsgeschäftsstelle",
-                "divisionId": 9762,
-                "divisionKey": "11000401"
             },
             {
                 "id": "1638",
@@ -33557,38 +34075,6 @@
         "tags": []
     },
     {
-        "id": "584977",
-        "type": "R",
-        "label": "Bundestagswahl Direktkandidatin",
-        "hierarchy": "gr",
-        "level": "bv",
-        "maxAge": 99,
-        "minAge": 18,
-        "categories": [
-            {
-                "id": "69",
-                "label": "Direktkandidatin",
-                "aliases": [
-                    {
-                        "id": "1181",
-                        "label": "Direktkandidatin",
-                        "divisionId": 1065807,
-                        "divisionKey": "11304900"
-                    }
-                ]
-            }
-        ],
-        "aliases": [
-            {
-                "id": "1164",
-                "label": "Bundestagswahl-Direktkandidatin",
-                "divisionId": 11168,
-                "divisionKey": "11003100"
-            }
-        ],
-        "tags": []
-    },
-    {
         "id": "585117",
         "type": "R",
         "label": "LTF - Wahlkreisbüro MdL - Mitarbeiterin",
@@ -33854,37 +34340,6 @@
         "tags": []
     },
     {
-        "id": "1110898",
-        "type": "R",
-        "label": "Bundestagswahl Listenkandidatin",
-        "hierarchy": "gr",
-        "level": "lv",
-        "maxAge": 99,
-        "minAge": 18,
-        "categories": [
-            {
-                "id": "12",
-                "label": "Listenkandidatin",
-                "aliases": []
-            }
-        ],
-        "aliases": [
-            {
-                "id": "601",
-                "label": "Bundestagswahl ListenkandidatiIn (LV)",
-                "divisionId": 6051,
-                "divisionKey": "10500000"
-            },
-            {
-                "id": "1124",
-                "label": "Bundestagswahl Listenkandidat",
-                "divisionId": 2092,
-                "divisionKey": "10100000"
-            }
-        ],
-        "tags": []
-    },
-    {
         "id": "584979",
         "type": "R",
         "label": "Landtagswahl Direktkandidatin",
@@ -33981,31 +34436,6 @@
                 "label": "Stadtverordnetenversammlung/Gemeindevertretung Listenkandidatin",
                 "divisionId": 6365,
                 "divisionKey": "10700000"
-            }
-        ],
-        "tags": []
-    },
-    {
-        "id": "584978",
-        "type": "R",
-        "label": "Landtagswahl Listenkandidatin",
-        "hierarchy": "gr",
-        "level": "lv",
-        "maxAge": 99,
-        "minAge": 18,
-        "categories": [
-            {
-                "id": "12",
-                "label": "Listenkandidatin",
-                "aliases": []
-            }
-        ],
-        "aliases": [
-            {
-                "id": "732",
-                "label": "Landtagswahl Listenkandidatin",
-                "divisionId": 2092,
-                "divisionKey": "10100000"
             }
         ],
         "tags": []
@@ -34282,6 +34712,81 @@
                 "divisionKey": "10700000"
             }
         ],
+        "tags": []
+    },
+    {
+        "id": "584977",
+        "type": "R",
+        "label": "Bundestagswahl Direktkandidatin",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 18,
+        "categories": [
+            {
+                "id": "69",
+                "label": "Direktkandidatin",
+                "aliases": [
+                    {
+                        "id": "1181",
+                        "label": "Direktkandidatin",
+                        "divisionId": 1065807,
+                        "divisionKey": "11304900"
+                    }
+                ]
+            }
+        ],
+        "aliases": [
+            {
+                "id": "1164",
+                "label": "Bundestagswahl-Direktkandidatin",
+                "divisionId": 11168,
+                "divisionKey": "11003100"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "id": "46455540",
+        "type": "R",
+        "label": "Bundesverband GR - Beauftragte gegen sexuelle Belästigung",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "2",
+                "label": "Bundesgeschäftsstelle GR",
+                "aliases": [
+                    {
+                        "id": "1334",
+                        "label": "Bundesverband GR",
+                        "divisionId": 2084,
+                        "divisionKey": "10000000"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": []
+    },
+    {
+        "id": "584702",
+        "type": "R",
+        "label": "Europawahl Listenkandidatin",
+        "hierarchy": "gr",
+        "level": "bv",
+        "maxAge": 99,
+        "minAge": 18,
+        "categories": [
+            {
+                "id": "12",
+                "label": "Listenkandidatin",
+                "aliases": []
+            }
+        ],
+        "aliases": [],
         "tags": []
     },
     {
@@ -40917,5 +41422,111 @@
                 "name": "eShop Rolle"
             }
         ]
+    },
+    {
+        "id": "584978",
+        "type": "R",
+        "label": "Landtagswahl Listenkandidatin",
+        "hierarchy": "gr",
+        "level": "lv",
+        "maxAge": 99,
+        "minAge": 18,
+        "categories": [
+            {
+                "id": "12",
+                "label": "Listenkandidatin",
+                "aliases": []
+            }
+        ],
+        "aliases": [
+            {
+                "id": "732",
+                "label": "Landtagswahl Listenkandidatin",
+                "divisionId": 2092,
+                "divisionKey": "10100000"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "id": "1110898",
+        "type": "R",
+        "label": "Bundestagswahl Listenkandidatin",
+        "hierarchy": "gr",
+        "level": "lv",
+        "maxAge": 99,
+        "minAge": 18,
+        "categories": [
+            {
+                "id": "12",
+                "label": "Listenkandidatin",
+                "aliases": []
+            }
+        ],
+        "aliases": [
+            {
+                "id": "601",
+                "label": "Bundestagswahl ListenkandidatiIn (LV)",
+                "divisionId": 6051,
+                "divisionKey": "10500000"
+            },
+            {
+                "id": "1124",
+                "label": "Bundestagswahl Listenkandidat",
+                "divisionId": 2092,
+                "divisionKey": "10100000"
+            }
+        ],
+        "tags": []
+    },
+    {
+        "id": "46450400",
+        "type": "R",
+        "label": "Landesverband GR - Anlaufstelle gegen sexuelle Belästigung - Ansprechperson",
+        "hierarchy": "gr",
+        "level": "lv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "59",
+                "label": "Landesgeschäftsstelle GR",
+                "aliases": [
+                    {
+                        "id": "1336",
+                        "label": "Landesverband GR",
+                        "divisionId": 2084,
+                        "divisionKey": "10000000"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": []
+    },
+    {
+        "id": "46450415",
+        "type": "R",
+        "label": "Landesverband GR - Beschwerdestelle gegen sexuelle Belästigung - Vertrauensperson",
+        "hierarchy": "gr",
+        "level": "lv",
+        "maxAge": 99,
+        "minAge": 0,
+        "categories": [
+            {
+                "id": "59",
+                "label": "Landesgeschäftsstelle GR",
+                "aliases": [
+                    {
+                        "id": "1336",
+                        "label": "Landesverband GR",
+                        "divisionId": 2084,
+                        "divisionKey": "10000000"
+                    }
+                ]
+            }
+        ],
+        "aliases": [],
+        "tags": []
     }
 ]
