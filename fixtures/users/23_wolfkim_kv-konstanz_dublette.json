@@ -1,0 +1,22 @@
+{
+  "id": "100023",
+  "personalId": "023",
+  "name1": "Kim",
+  "name2": "Wolf",
+  "email": "Kim.Wolf@example.com",
+  "ownerId": "2828",
+  "ownerIdentifier": "10102100",
+  "createdOn": "2025-06-01T12:00:00+0200",
+  "lastModifiedOn": "2025-06-01T12:00:00+0200",
+  "memberships": [],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [
+      "Kim.Wolf@example.com"
+    ],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

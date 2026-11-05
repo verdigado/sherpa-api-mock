@@ -1,0 +1,30 @@
+{
+  "id": "100022",
+  "personalId": "022",
+  "name1": "Lukas",
+  "name2": "Kaiser",
+  "email": "lukas.kaiser@example.com",
+  "ownerId": "2828",
+  "ownerIdentifier": "10102100",
+  "createdOn": "2025-06-01T12:00:00+0200",
+  "lastModifiedOn": "2025-06-01T12:00:00+0200",
+  "memberships": [
+    {
+      "id": "21",
+      "ownerIdentifier": "10102100",
+      "memberOfStructureIdentifier": "10102100",
+      "joinedAt": "2019-03-01T12:00:00+0100",
+      "exitedAt": "2024-12-31T12:00:00+0100"
+    }
+  ],
+  "roles": [],
+  "achievements": [],
+  "formValues": {
+    "emails": [
+      "lukas.kaiser@example.com"
+    ],
+    "phoneNumbers": [],
+    "messengers": [],
+    "socialMedia": []
+  }
+}

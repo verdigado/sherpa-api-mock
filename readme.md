@@ -12,9 +12,9 @@ docker run -d -p 5000:5000 -v ./sherpa-data:/app/data ghcr.io/verdigado/sherpa-a
 
 The API lives under `/sherpa/ws/m2m`, like Sherpa's. Mount `/app/data` to keep the data across container restarts.
 
-| Variable        | Default          | Purpose                     |
-| --------------- | ---------------- | --------------------------- |
-| `APP_PORT`      | `5000`           | Port to listen on           |
+| Variable        | Default          | Purpose                      |
+| --------------- | ---------------- | ---------------------------- |
+| `APP_PORT`      | `5000`           | Port to listen on            |
 | `DATABASE_PATH` | `data/sherpa.db` | Where the database is stored |
 
 ## Data
@@ -22,7 +22,7 @@ The API lives under `/sherpa/ws/m2m`, like Sherpa's. Mount `/app/data` to keep t
 On its first start, with an empty database, the mock seeds itself from the fixtures in the repo:
 
 - divisions, roles and gnetz tags: real Sherpa data with sensitive details replaced. These are read-only.
-- 20 example users with memberships, roles and gnetz profiles
+- example users with memberships, roles and gnetz profiles, including one per case the guest account endpoints tell apart
 
 To change the data, either edit the fixtures and reset, or change it through the API. A reset wipes the database and seeds it again:
 
@@ -44,6 +44,7 @@ npm run spec:update -- <ref>
 - `GET /any/v1/divisions`, `/any/v1/roles`, `/any/v1/alive`
 - `POST /saml/party/newusers`, `/saml/party/list`
 - `GET /saml/v1/users`
+- `POST /saml/v1/guest-accounts`, `PATCH` and `DELETE /saml/v1/guest-accounts/{userId}`
 - `GET /gnetz/v2/profiles/ids`, `/gnetz/v2/profiles/{profileId}/form-values`, `/gnetz/v2/tags`
 - `POST /gnetz/v2/profiles`, `/gnetz/v2/profiles/list`, `/gnetz/v2/profiles/delete`
 - `PUT /gnetz/v2/profiles/{profileId}`

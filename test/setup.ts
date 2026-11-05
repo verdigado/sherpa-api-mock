@@ -20,5 +20,7 @@ export function setup(
       request(app)
         .put(BASE_PATH + path)
         .send(body),
+    patch: (path: string) => request(app).patch(BASE_PATH + path),
+    delete: (path: string) => request(app).delete(BASE_PATH + path),
   }
 }
