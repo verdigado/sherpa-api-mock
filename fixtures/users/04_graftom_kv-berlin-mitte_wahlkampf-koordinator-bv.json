@@ -4,6 +4,7 @@
   "name1": "Tom",
   "name2": "Graf",
   "email": "tom.graf@example.com",
+  "emailConfirmed": true,
   "ownerId": "5919",
   "ownerIdentifier": "10300100",
   "createdOn": "2020-01-01T12:00:00+0200",
