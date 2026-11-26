@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { serverInfo } from '../server-info.ts'
 import { divisions, roles } from '../../store/fixtures.ts'
+import { guestRole } from '../../store/guests.ts'
 import type { Schemas } from '../../types.ts'
 
 export function anyRouter() {
@@ -11,7 +12,7 @@ export function anyRouter() {
   })
 
   router.get('/any/v1/roles', (_req, res) => {
-    res.json(roles)
+    res.json([...roles, guestRole])
   })
 
   router.get('/any/v1/alive', (_req, res) => {
