@@ -21,9 +21,9 @@ export function resetDatabase(db: DatabaseSync) {
 
 function seed(db: DatabaseSync) {
   const insertUser = db.prepare(`
-    INSERT INTO users (id, personal_id, name1, name2, email, owner_id, owner_identifier,
+    INSERT INTO users (id, personal_id, name1, name2, email, email_confirmed, owner_id, owner_identifier,
       created_on, last_modified_on, achievements, form_values)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `)
   const insertMembership = db.prepare(`
     INSERT INTO memberships (id, user_id, owner_identifier, member_of_structure_identifier,
@@ -43,6 +43,7 @@ function seed(db: DatabaseSync) {
       user.name1,
       user.name2,
       user.email,
+      Number(user.emailConfirmed),
       user.ownerId,
       user.ownerIdentifier,
       toIso(user.createdOn),

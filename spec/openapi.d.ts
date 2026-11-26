@@ -1079,6 +1079,8 @@ export interface components {
              * @example john.doe@example.com
              */
             email: string | null;
+            /** @description Whether the email address has been verified as belonging to the user. */
+            emailConfirmed: boolean;
             /** @description Sperrvermerk in sherpa. Flag to indicate that user should not receive any emails. */
             blockingNotice?: boolean;
             roles: components["schemas"]["SamlUserRole"][];

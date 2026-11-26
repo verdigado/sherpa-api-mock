@@ -8,6 +8,7 @@ export type UserRow = {
   name1: string
   name2: string
   email: string | null
+  email_confirmed: number
   owner_id: string
   owner_identifier: string
   created_on: string
@@ -117,6 +118,7 @@ export function toSamlUser(
     name1: user.name1,
     name2: user.name2,
     email: user.email,
+    emailConfirmed: Boolean(user.email_confirmed),
     roles: getRoleAssignments(db, user.id).map((assignment) => ({
       toType: 'SamlSynchronizationRoleAssignmentTO',
       id: assignment.id,

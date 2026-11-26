@@ -2064,6 +2064,9 @@ components:
           type: [string, 'null']
           format: email
           example: john.doe@example.com
+        emailConfirmed:
+          description: Whether the email address has been verified as belonging to the user.
+          type: boolean
         blockingNotice:
           description: Sperrvermerk in sherpa. Flag to indicate that user should not receive any emails.
           type: boolean
@@ -2085,6 +2088,7 @@ components:
         - name1
         - name2
         - email
+        - emailConfirmed
         - roles
         - memberships
 

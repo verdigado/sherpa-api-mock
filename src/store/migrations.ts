@@ -11,6 +11,7 @@ export const MIGRATIONS = [
     name1 TEXT NOT NULL,
     name2 TEXT NOT NULL,
     email TEXT,
+    email_confirmed INTEGER NOT NULL,
     owner_id TEXT NOT NULL,
     owner_identifier TEXT NOT NULL,
     created_on TEXT NOT NULL,
